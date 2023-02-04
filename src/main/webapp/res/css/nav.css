@@ -1,29 +1,27 @@
-@charset "ISO-8859-1";
-
 body{
-	margin: 0;
+	height: 1000px
 }
 
-nav{
-	height: 80px; 
-	background-color: #000 !important;
-	font-family: montserrat-light !important;
-	display: block;
+.nav-link{
+	transition: 300ms;
 }
 
-.img-logo{
-	height: 100px;
-	width: 100px;
-	display: inline-block;
-    vertical-align: middle;
+.nav-link:hover{
+	color: #e74c3c !important;
 }
 
-.nav-links{
-	margin: 0;
-	list-style-type: none;
+.login{
+	border-radius: 30px;
+	background-color: #e74c3c;
+	color: white !important;
+	height: 30px;
+    width: 100px;
+    padding-top: 2px;
+    text-align: center;
+    display: inline-block;
+    transition: 300ms;
 }
 
-.nav-link a{
-	text-decoration: none;
-    color: white;
+.login:hover{
+	background-color: #da2e1b;
 }
