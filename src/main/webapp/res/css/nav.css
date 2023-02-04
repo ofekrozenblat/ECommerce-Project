@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+
+body{
+	margin: 0;
+}
+
+nav{
+	height: 80px; 
+	background-color: #000 !important;
+	font-family: montserrat-light !important;
+	display: block;
+}
+
+.img-logo{
+	height: 100px;
+	width: 100px;
+	display: inline-block;
+    vertical-align: middle;
+}
+
+.nav-links{
+	margin: 0;
+	list-style-type: none;
+}
+
+.nav-link a{
+	text-decoration: none;
+    color: white;
+}
