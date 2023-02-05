@@ -10,7 +10,7 @@ body{
 	color: #e74c3c !important;
 }
 
-.login{
+.sign-up{
 	border-radius: 30px;
 	background-color: #e74c3c;
 	color: white !important;
@@ -22,6 +22,25 @@ body{
     transition: 300ms;
 }
 
-.login:hover{
+.sign-up:hover{
 	background-color: #da2e1b;
+}
+
+.login{
+	border-radius: 30px;
+	border: 1px solid #e74c3c;
+	height: 30px;
+    width: 100px;
+    padding-top: 2px;
+    text-align: center;
+    display: inline-block;
+}
+
+.search-bar{
+	max-width: 300px;
+}
+
+.search-bar span{
+	background-color: #e74c3c !important;
+    border: solid #e74c3c;
 }
