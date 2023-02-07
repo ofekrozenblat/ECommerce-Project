@@ -1,0 +1,51 @@
+@charset "ISO-8859-1";
+
+.home-header{
+	position: relative;
+	width: 100vw !important;
+	height: 520px;
+	border: none !important;
+}
+.home-header-buttons{
+	position: absolute;
+	top: 60%;
+  	left: 5%;
+  	display: flex;
+  	flex-direction: row;
+  	width: 100%;
+}
+.home-header-button{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  	height: 60px;
+  	width: 325px;
+  	background: rgba(255,51,56,1.00);
+  	border-color: rgba(255,51,56,1.00);
+  	border-style: solid;
+  	cursor: pointer;
+  	transition: 300ms;
+  	margin-left: 10px;
+  	font-size: 18px;
+}
+
+.home-header-button:hover{
+	background: white;
+	border-color: white;
+	color: rgba(255,51,56,1.00);
+}
+
+
+@media (max-width: 800px) {
+	.home-header-buttons{
+		 top: 50%;
+  		 left: 50%;
+  	     transform: translate(-50%, -50%);
+	}
+	
+	.home-header-button{
+  	     height: 50px;
+  		 width: 300px;
+  		 font-size: 15px;
+	}
+}
