@@ -1,10 +1,17 @@
 @charset "ISO-8859-1";
-
+.page-wrapper{
+	background-color: #e2e0e6;
+}
 .home-header{
 	position: relative;
 	width: 100vw !important;
-	height: 520px;
+	height: max-content;
+	max-height: 520px;
 	border: none !important;
+	overflow: hidden;
+}
+.home-header img{
+	height: auto;
 }
 .home-header-buttons{
 	position: absolute;
@@ -35,8 +42,31 @@
 	color: rgba(255,51,56,1.00);
 }
 
+.main-content{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 90%;
+	margin: auto;
+}
 
-@media (max-width: 800px) {
+.content-section{
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.content-section-title{
+	font-size: 34px;
+	font-weight: 700;
+	margin-bottom: 3px;
+	text-align: center;
+}
+
+@media (max-width: 990px) {
 	.home-header-buttons{
 		 top: 50%;
   		 left: 50%;

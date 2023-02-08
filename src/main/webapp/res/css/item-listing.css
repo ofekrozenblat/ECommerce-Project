@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+
+.item{
+	width: 31% !important;
+	transition: 300ms;
+	cursor: pointer;
+}
+
+.item:hover{
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0 21px rgba(33,33,33,.2); 
+}
