@@ -5,7 +5,7 @@
 	int list_amount = Integer.parseInt(request.getParameter("list_amount"));
 	for(int i = 0; i < list_amount; i++)
 	{%>
-		<jsp:include page="item.jsp" />
+		<jsp:include page="listed-item.jsp" />
 	<%}
 %>
 
