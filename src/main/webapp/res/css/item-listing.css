@@ -1,7 +1,7 @@
 @charset "ISO-8859-1";
 
 .item{
-	width: 31% !important;
+	width: 24% !important;
 	transition: 300ms;
 	cursor: pointer;
 }
