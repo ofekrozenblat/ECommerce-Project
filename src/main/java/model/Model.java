@@ -22,6 +22,10 @@ public abstract class Model {
 		dao.save(this);
 	}
 	
+	public void delete() {
+		dao.delete(this);
+	}
+	
 	public int getId() {
 		return this.id;
 	}

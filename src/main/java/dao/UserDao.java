@@ -30,4 +30,6 @@ public class UserDao extends Dao {
 		return user;
 	}
 	
+	// Can create other specific methods such as getAllUsers(), getUsersBy(...), etc..
+	
 }

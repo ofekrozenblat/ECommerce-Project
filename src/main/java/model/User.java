@@ -4,13 +4,9 @@ import dao.UserDao;
 
 // Models the User table in the database
 public class User extends Model {
-
-	private final UserDao dao;
 	
 	public User(UserDao dao, int id, String[] attributeValues) {
 		super(dao, id, attributeValues);
-		
-		this.dao = dao;
 	}
 	
 	public static User get(int id) {
@@ -20,5 +16,9 @@ public class User extends Model {
 	
 	protected String[] getAttributeNames() {
 		return new String[] {"first_name"};
+	}
+	
+	public String getFirstName() {
+		return attributes.get("first_name");
 	}
 }
