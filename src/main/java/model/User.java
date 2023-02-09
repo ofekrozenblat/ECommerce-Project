@@ -21,18 +21,18 @@ public class User extends Model {
 		return dao.get(id);
 	}
 	
-	protected Dao getDao() {
-		return UserDao.getUserDao();
-	}
-	
-	protected String[] getAttributeNames() {
-		return new String[] {"first_name"};
-	}
-	
 	public String getTable() {
 		return "Users";
 	}
 	
+	protected Dao getDao() {
+		return UserDao.getUserDao();
+	}
+
+	protected String[] getAttributeNames() {
+		return new String[] {"first_name"};
+	}
+
 	public String getFirstName() {
 		return attributes.get("first_name");
 	}

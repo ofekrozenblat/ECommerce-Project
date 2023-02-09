@@ -17,9 +17,8 @@ public abstract class Model {
 	// Constructor if Model created inside application and not yet in database
 	public Model(String[] attributeValues) {
 		this.dao = getDao();
+		this.id = -1;
 		createAttributeMap(attributeValues);
-		
-		// Get dao to store newly created model in the DB and return its ID
 	}
 	
 	// Constructor if Model created from an already existing database row
@@ -30,7 +29,15 @@ public abstract class Model {
 	}
 	
 	public void save() {
-		dao.save(this);
+		// Possibly also check if model is dirty or not
+		
+		// Check to see if this model is in the database or not based on its id
+		if (id == -1) {
+			// Get dao to store newly created model in the DB and return its ID
+			id = dao.create(this);
+		}else {
+			dao.save(this);
+		}
 	}
 	
 	public void delete() {
@@ -45,12 +52,12 @@ public abstract class Model {
 		return attributes;
 	}
 	
+	public abstract String getTable();
+
 	// Force child to connect to a Dao object
 	protected abstract Dao getDao();
-	
+
 	protected abstract String[] getAttributeNames();
-	
-	public abstract String getTable();
 
 	private void createAttributeMap(String[] attributeValues) {
 		attributes = new HashMap<String, String>();

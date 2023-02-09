@@ -32,7 +32,8 @@ public abstract class Dao {
 		}
 	}
 	
-	public void create() {
-		// Insert new row in the database table
+	public int create(Model model) {
+		// Insert new row in the database table and return the primary key of the row
+		return -1;
 	}
 }
