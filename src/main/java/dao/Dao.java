@@ -31,4 +31,8 @@ public abstract class Dao {
 			// construct delete query
 		}
 	}
+	
+	public void create() {
+		// Insert new row in the database table
+	}
 }
