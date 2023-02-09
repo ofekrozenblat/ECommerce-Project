@@ -4,17 +4,23 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>REAGAIL</title>
-<jsp:include page="main-layout/head.html"/>
+<title>Page Template</title>
+
+<%@ include file="/views/main-layout/head.html" %>
+
+<link rel="StyleSheet" href="res/css/home.css" type="text/css"></link>
+<link rel="StyleSheet" href="res/css/item-listing.css" type="text/css"></link>
+
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-<jsp:include page="main-layout/nav.html" />
+<%@ include file="/views/main-layout/nav.html" %>
+
 
 <div class="page-wrapper overflow-hidden">
 </div>
 
-<jsp:include page="main-layout/footer.html" />
+<%@ include file="/views/main-layout/footer.html" %>
 
 </body>
 </html>
