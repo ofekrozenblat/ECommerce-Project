@@ -40,7 +40,7 @@
 			
 			<div class="d-flex flex-row w-100">
 				<div class="w-25 ms-5 me-3 d-flex flex-column text-start">
-					<h3>Filters</h3>
+					<h3 class="filter-title">Filters</h3>
 				</div>
 				<div class="w-75 me-5 ms-auto text-center">
 					<jsp:include page="item/item-listing.jsp">
