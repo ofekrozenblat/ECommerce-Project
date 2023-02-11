@@ -20,12 +20,12 @@
 			<div class="form-floating">
 				<input type="text" class="form-control" id="firstNameInput"
 					placeholder="First name" required> <label for="firstNameInput">First
-					Name</label>
+					name</label>
 			</div>
 			<div class="form-floating">
 				<input type="text" class="form-control" id="lastNameInput"
 					placeholder="Last name" required> <label for="lastNameInput">Last
-					Name</label>
+					name</label>
 			</div>
 		</div>
 		<div class="form-floating mt-3">
