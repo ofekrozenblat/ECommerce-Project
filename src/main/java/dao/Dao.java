@@ -7,7 +7,7 @@ import model.Model;
 public abstract class Dao {
 	protected Object connection; // Change type to actual component when created
 	
-	protected void init() {
+	protected Dao() {
 		// gets the DB connection from connection component
 		// and stores it in the connection variable
 	}

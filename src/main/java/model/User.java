@@ -6,8 +6,15 @@ import dao.UserDao;
 // Models the User table in the database
 public class User extends Model {
 	
+	private String[] attributeNames = {"first_name"};
+	private String table = "Users";
+	
 	// onCreate: E.g. User = new User(...) when User is created in the application
 	// and should be stored in the DB
+	public User(String firstName) {
+		this(new String[] {firstName});
+	}
+	
 	public User(String[] attributeValues) {
 		super(attributeValues);
 	}
@@ -22,7 +29,7 @@ public class User extends Model {
 	}
 	
 	public String getTable() {
-		return "Users";
+		return table;
 	}
 	
 	protected Dao getDao() {
@@ -30,9 +37,19 @@ public class User extends Model {
 	}
 
 	protected String[] getAttributeNames() {
-		return new String[] {"first_name"};
+		return attributeNames;
 	}
 
+	// Getters & Setters
+	
+	public void setFirstName(String firstName) {
+		// Check to make sure method is not used to insert 
+		// an attribute not declared in attributeNames
+		if (attributes.containsKey("first_name")) {
+			attributes.put("first_name", firstName);
+		}
+	}
+	
 	public String getFirstName() {
 		return attributes.get("first_name");
 	}

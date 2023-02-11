@@ -15,10 +15,6 @@ public class UserDao extends Dao {
 		return instance;
 	}
 	
-	private UserDao() {
-		super.init();
-	}
-
 	@Override
 	public User get(int id) {
 		// gets the user from DB based on primary key
