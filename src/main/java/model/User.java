@@ -6,9 +6,6 @@ import dao.UserDao;
 // Models the User table in the database
 public class User extends Model {
 	
-	private String[] attributeNames = {"first_name"};
-	private String table = "Users";
-	
 	// onCreate: E.g. User = new User(...) when User is created in the application
 	// and should be stored in the DB
 	public User(String firstName) {
@@ -29,7 +26,7 @@ public class User extends Model {
 	}
 	
 	public String getTable() {
-		return table;
+		return "user";
 	}
 	
 	protected Dao getDao() {
@@ -37,7 +34,7 @@ public class User extends Model {
 	}
 
 	protected String[] getAttributeNames() {
-		return attributeNames;
+		return new String[] {"first_name"};
 	}
 
 	// Getters & Setters
