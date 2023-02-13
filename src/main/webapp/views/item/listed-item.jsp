@@ -8,6 +8,6 @@
     	<h5>$999</h5>
     </div>
     <p class="card-text">Some extra info / description</p>
-    <a href="#" class="btn btn-danger w-100">Try On</a>
+    <a href="#" class="btn btn-custom w-100">Try On</a>
   </div>
 </div>
