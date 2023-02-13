@@ -9,16 +9,6 @@
 	flex-direction: row;
 }
 
-.add-to-cart-btn{
-	background-color: #e74c3c;
-	color: white !important;
-	border-radius: 20px;
-    transition: 300ms;
-}
-
-.add-to-cart-btn:hover{
-	background-color: #da2e1b;
-}
 .rating-count{
 	font-size: medium;
 	padding-top: 2px;

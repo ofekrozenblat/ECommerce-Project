@@ -34,7 +34,7 @@
 								<span class="rating-count">(${review_count} Reviews)</span>
 							</div>
 							<h4 class="card-title mb-5 fw-bold ps-1">$999</h4>
-							<a href="" class="btn add-to-cart-btn w-50 mx-auto">
+							<a href="" class="btn btn-custom w-50 mx-auto">
 								Add to Cart
 							</a>
 						</div>
@@ -47,7 +47,7 @@
 				Luxury glasses are high-end eyewear that are crafted from premium materials and designed with meticulous attention to detail. 
 				These glasses are often adorned with exquisite embellishments such as precious metals, Swarovski crystals, or intricate engraving.
 				</p>
-				<a href="" class="btn add-to-cart-btn w-25 mx-auto">Try them on!</a>
+				<a href="" class="btn btn-custom w-25 mx-auto">Try them on!</a>
 				
 				<hr></hr>
 				<h4 class="mb-2 fw-bold ms-2">REVIEWS</h4>
@@ -62,6 +62,7 @@
 						<%}
 					%>
 				</div>
+				<button class="btn btn-custom mt-3 mb-3 mx-auto w-25">Show more reviews</button>
 				
 				<hr></hr>
 				<h5 class="mb-2 fw-bold ms-2">Customers also viewed</h5>
