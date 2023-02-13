@@ -1,0 +1,34 @@
+@charset "ISO-8859-1";
+
+.page-wrapper{
+	font-family: 'Roboto', sans-serif;
+}
+
+.info-container{
+	display:flex;
+	flex-direction: row;
+}
+
+.add-to-cart-btn{
+	background-color: #e74c3c;
+	color: white !important;
+	border-radius: 20px;
+    transition: 300ms;
+}
+
+.add-to-cart-btn:hover{
+	background-color: #da2e1b;
+}
+.rating-count{
+	font-size: medium;
+	padding-top: 2px;
+	padding-left: 10px;
+	font-size: 14px;
+    color: #0046be;
+}
+
+@media (max-width: 1200px) {
+	.info-container{
+		flex-direction: column;
+	}
+}
