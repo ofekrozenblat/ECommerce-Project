@@ -12,9 +12,9 @@ import javax.sql.DataSource;
 
 public class ConnectionManager {
 	private DataSource ds; // TODO: look into pooledconnections
-	
+
 	private final String INSERT_INTO = "INSERT INTO";
-	
+
 	public ConnectionManager() {
 		try {
 			// TODO: Change lookup path if working on development or production environments
@@ -23,14 +23,31 @@ public class ConnectionManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// Insert INTO
 	public void executeUpdate(String table, Map<String, String> valueMap) {
-		String query = INSERT_INTO + " " + table + " (";
+		Connection con;
+		try {
+			con = this.ds.getConnection();
+			PreparedStatement preparedStatement = constructPreparedStatement(con, INSERT_INTO, 
+					table, valueMap);
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private PreparedStatement constructPreparedStatement(Connection con, String operation, String table,
+			Map<String, String> valueMap) {
+		String query = operation + " " + table + " (";
 		String valuesAddOn = " VALUES (";
 		Iterator<String> it = valueMap.keySet().iterator();
-		
-		while(it.hasNext()) {
+
+		while (it.hasNext()) {
 			String valueName = it.next();
 			query += valueName;
 			valuesAddOn += "?";
@@ -39,28 +56,25 @@ public class ConnectionManager {
 				valuesAddOn += ",";
 			}
 		}
-		
+
 		valuesAddOn += ")";
 		query += ")";
 		query += valuesAddOn;
 		System.out.println(query);
-		Connection con;
+		PreparedStatement preparedStatement = null;
 		try {
 			con = this.ds.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement(query);
+			preparedStatement = con.prepareStatement(query);
 			int i = 1;
-			for(String valueName : valueMap.keySet()) {
+			for (String valueName : valueMap.keySet()) {
 				preparedStatement.setString(i, valueMap.get(valueName));
 				i++;
 			}
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		return preparedStatement;
 	}
-	
+
 }
