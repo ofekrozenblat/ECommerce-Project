@@ -31,6 +31,10 @@ public class ItemDetailController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String item_id = request.getParameter("item_id");
 		String target = "/views/item/item-detail.jsp";
+		
+		request.setAttribute("rating", 3);
+		request.setAttribute("review_count", 123);
+		
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 

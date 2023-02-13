@@ -8,6 +8,7 @@
 
 <%@ include file="/views/main-layout/head.html"%>
 <link rel="StyleSheet" href="res/css/item-detail.css" type="text/css"></link>
+<link rel="StyleSheet" href="res/css/item-listing.css" type="text/css"></link>
 
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -27,10 +28,10 @@
 							<p class="card-text text-muted">Bold and colorful, these glasses are sure to make a statement.</p>
 							
 							<div class="d-flex flex-row flex-wrap align-items-center mb-2">
-								<jsp:include page="item-rating.jsp">
-									<jsp:param name="rating" value="3" />
+								<jsp:include page="star-rating.jsp">
+									<jsp:param name="rating" value="${rating}" />
 								</jsp:include> 
-								<span class="rating-count">(123 Ratings)</span>
+								<span class="rating-count">(${review_count} Reviews)</span>
 							</div>
 							<h4 class="card-title mb-5 fw-bold ps-1">$999</h4>
 							<a href="" class="btn add-to-cart-btn w-50 mx-auto">
@@ -46,9 +47,30 @@
 				Luxury glasses are high-end eyewear that are crafted from premium materials and designed with meticulous attention to detail. 
 				These glasses are often adorned with exquisite embellishments such as precious metals, Swarovski crystals, or intricate engraving.
 				</p>
+				<a href="" class="btn add-to-cart-btn w-25 mx-auto">Try them on!</a>
 				
 				<hr></hr>
-				<h4 class="mb-1 fw-bold ms-2">REVIEWS</h4>
+				<h4 class="mb-2 fw-bold ms-2">REVIEWS</h4>
+				<div class="d-flex flex-row flex-wrap justify-content-evenly">
+					<%
+						for(int i = 0; i < 6; i++)
+						{%>
+							<jsp:include page="item-review.jsp">
+								<jsp:param name="rating" value="3" />
+								<jsp:param name="date" value="02/13/2023" />
+							</jsp:include>
+						<%}
+					%>
+				</div>
+				
+				<hr></hr>
+				<h5 class="mb-2 fw-bold ms-2">Customers also viewed</h5>
+				<div class="text-center">
+					<jsp:include page="item-listing.jsp">
+						<jsp:param name="list_amount" value="4" />
+					</jsp:include>
+				</div>
+				
 			</div>
 		</div>
 	</div>
