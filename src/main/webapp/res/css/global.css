@@ -1,0 +1,19 @@
+@charset "ISO-8859-1";
+
+.btn-custom{
+	background-color: rgba(255,51,56,1.00) !important;
+	color: white !important;
+    transition: 300ms;
+}
+
+.btn-custom-round{
+	background-color: rgba(255,51,56,1.00) !important;
+	color: white !important;
+	border-radius: 20px !important;
+    transition: 300ms;
+}
+
+.btn-custom:hover,
+.btn-custom-round:hover{
+	background-color: #da2e1b !important;
+}

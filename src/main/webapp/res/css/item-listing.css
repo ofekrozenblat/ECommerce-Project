@@ -4,8 +4,11 @@
 	width: 24% !important;
 	transition: 300ms;
 	cursor: pointer;
+	font-family: 'Roboto', sans-serif;
 }
-
+.listed-item h5{
+	font-weight: 600;
+}
 .listed-item:hover{
 	transform: translateY(-0.5rem);
 	box-shadow: 0 0 21px rgba(33,33,33,.2); 

@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+.catalog-container{
+	font-family: 'Roboto', sans-serif;
+}
+
+.sort{
+	text-align: center;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.sort span{
+	width: 100%;
+	margin-right:10px;
+	font-weight:600;
+	white-space:nowrap;
+}
+
+.form-select{
+	width: fit-content;
+}
+
+.filter-title{
+	font-weight:600;
+}
