@@ -4,7 +4,7 @@
 	<Manager pathname="" />
 	<Resource name="jdbc/reagailDB" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
 		type="javax.sql.DataSource"
-		driverClassName="com.mysql.jdbc.Driver"
+		driverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://localhost:3306/reagail" 
 		username="root"
 		password="6rb9"
