@@ -3,7 +3,7 @@ package dao;
 import model.User;
 
 /**
- * The {@code UserDao} class is in charge of providing the interfaces of the {@link model.User} model
+ * The {@code UserDao} class is in charge of providing the interfaces for the {@link model.User} model
  * to communicate with the database and any additional database operations related to this model.
  * 
  * @author ofekr

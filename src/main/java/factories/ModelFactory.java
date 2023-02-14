@@ -4,7 +4,7 @@ import dao.UserDao;
 import model.*;
 
 /**
- * This factory class is in chage of the creation and initilization of all classes implementing
+ * This factory class is in charge of the creation and initialization of all classes implementing
  * {@link Model}.
  * 
  * @author ofekr
