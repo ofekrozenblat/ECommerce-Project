@@ -2,17 +2,19 @@ package dao;
 
 import model.User;
 
-// Handles CRUD operations related to User model
+/**
+ * The {@code UserDao} class is in charge of providing the interfaces of the {@link model.User} model
+ * to communicate with the database and any additional database operations related to this model.
+ * 
+ * @author ofekr
+ * @see model.User
+ * @see Dao
+ *
+ */
 public class UserDao extends Dao {
-
-	private static UserDao instance;
 	
-	public static UserDao getUserDao() {
-		if (instance == null) {
-			instance = new UserDao();
-		}
+	public UserDao() {
 		
-		return instance;
 	}
 	
 	@Override
@@ -20,7 +22,7 @@ public class UserDao extends Dao {
 		// gets the user from DB based on primary key
 		
 		// Creates the user
-		User user = new User(this, id, new String[] {"Bob"});
+		User user = new User(this, id);
 		
 		// sets the user attributes here
 		return user;
