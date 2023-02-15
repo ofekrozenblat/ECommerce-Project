@@ -59,3 +59,35 @@
 		margin-bottom:10px;
 	}
 }
+
+.icon-nav-item{
+	display: flex !important;
+    align-items: center;
+    margin-right: 10px;
+}
+.icon-nav-item-text{
+	font-size: 17px;
+    font-weight: 600;
+    align-self: end;
+}
+.icon-30{
+	font-size: 30px !important;
+	margin-right: 3px;
+}
+
+.icon-22{
+	font-size: 22px !important;
+    vertical-align: bottom;
+}
+
+.custom-badge{
+	position: absolute;
+    top: 0;
+    transform: translate(14px, 3px);
+    border-radius: 50px;
+    color: white;
+    background-color: #e74c3c;
+    font-size: 12px;
+    width: 19px;
+    text-align: center;
+}
