@@ -24,13 +24,13 @@ public abstract class Model {
 	/** Primary key **/
 	protected int id;
 	
-	/** Attribute map with key=column name in database, value=value in column **/
-	protected Map<String, String> attributes;
-	
 	/** Data access object in charge of this model's relationship to the database **/
 	protected Dao dao;
 	
-	 
+	/** Attribute map with key=column name in database, value=value in column **/
+	private Map<String, String> attributes;
+
+
 	/**
 	 * Creates a model inside the application that is not yet in database.
 	 * <br>
@@ -102,6 +102,32 @@ public abstract class Model {
 	public abstract String getTable();
 
 	/**
+	 * Assigns a value to the attribute with a given name only if the attribute
+	 * exists as part of the attributes declared by the child.
+	 * 
+	 * @param attributeName attribute name to modify
+	 * @param value to assign to the attribute
+	 */
+	protected void setAttribute(String attributeName, String value) {
+		// Check to make sure method is not used to insert 
+		// an attribute not declared in attributeNames
+		if (attributes.containsKey(attributeName)) {
+			attributes.put(attributeName, value);
+		}
+	}
+	
+	/**
+	 * Retrieves the value of the attribute with the given name or null if the attribute
+	 * does not exist.
+	 * 
+	 * @param attributeName attribute name to retrieve
+	 * @return value of attribute if it exists, {@code null} otherwise
+	 */
+	protected String getAttribute(String attributeName) {
+		return attributes.get(attributeName);
+	}
+
+	/**
 	 * Retrieves the attribute names related to this model. The attribute names must be
 	 * the same as the column names of this model in the database and in the same order.
 	 * 
@@ -112,6 +138,8 @@ public abstract class Model {
 	/**
 	 * Creates the attribute map of this model. Sets all the attribute values to an empty
 	 * string by default. To set the attribute values the child must implement setters.
+	 * 
+	 * @see Model#setAttribute(String, String)
 	 */
 	private void createAttributeMap() {
 		attributes = new HashMap<String, String>();

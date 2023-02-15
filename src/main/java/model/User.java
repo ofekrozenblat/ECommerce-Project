@@ -29,14 +29,10 @@ public class User extends Model {
 
 	// Getters & Setters
 	public void setFirstName(String firstName) {
-		// Check to make sure method is not used to insert 
-		// an attribute not declared in attributeNames
-		if (attributes.containsKey("first_name")) {
-			attributes.put("first_name", firstName);
-		}
+		setAttribute("first_name", firstName);
 	}
 	
 	public String getFirstName() {
-		return attributes.get("first_name");
+		return getAttribute("first_name");
 	}
 }
