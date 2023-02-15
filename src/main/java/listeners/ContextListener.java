@@ -15,5 +15,10 @@ public class ContextListener implements ServletContextListener{
 	  @Override
 	  public void contextInitialized(ServletContextEvent arg0) {
 		  // Do stuff on server start up
+		  
+		  // TESTING
+//		  User user = ModelFactory.createUser();
+//		  user.setFirstName("Goerge");
+//		  user.save();
 	  }
 }
