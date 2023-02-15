@@ -13,7 +13,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-	<%@ include file="/views/main-layout/nav.html"%>
+	<jsp:include page="/views/main-layout/nav.jsp"/>
 	<jsp:include page="item-write-review.jsp"/>
 
 	<div class="page-wrapper overflow-hidden d-flex flex-column">
