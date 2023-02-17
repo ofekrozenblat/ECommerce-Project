@@ -37,7 +37,7 @@
 		</div>
 		<div class="d-flex flex-row justify-content-between mb-3 mx-3">
 			<a href="Catalog" class="btn btn-custom"> &#8592 Continue Shopping</a>
-			<a href="" class="btn btn-custom"> Checkout</a>
+			<a href="Checkout" class="btn btn-custom"> Checkout</a>
 		</div>
 	</div>
 	
@@ -61,7 +61,7 @@
                   <span><strong>$999.99</strong></span>
                 </li>
               </ul>
-		    <a href="#" class="btn btn-custom ms-auto">Continue to Checkout</a>
+		    <a href="Checkout" class="btn btn-custom ms-auto">Continue to Checkout</a>
 		  </div>
 		</div>
 	</div>
