@@ -17,7 +17,7 @@ import model.Model;
  */
 public abstract class Dao {
 	
-	/** Handles the connection management with the database **/
+	/** Handles the connection management with the database. **/
 	protected ConnectionManager connection;
 	
 	/**
