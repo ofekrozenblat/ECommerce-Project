@@ -1,5 +1,7 @@
 package listeners;
 
+import java.sql.SQLException;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -19,12 +21,26 @@ public class ContextListener implements ServletContextListener{
 		  
 		  // TESTING
 //		  User user = ModelFactory.createUser();
-//		  user.setFirstName("Goerge");
-//		  user.save();
+//		  user.setFirstName("Yummy2");
+//		  try {
+//			user.save();
+//			System.out.println("ID: " + user.getId());
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		  
-//		  UserDao userDao = new UserDao();
-//		  User user = userDao.get(1);
-//		  System.out.println("RETRIEVED: " + user.getFirstName());
+		  UserDao userDao = new UserDao();
+		  User user = userDao.get(15);
+		  System.out.println("RETRIEVED: " + user.getFirstName());
+		  user.setFirstName("Yummy3");
+		  try {
+			user.save();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  
 		  
 	  }
 }

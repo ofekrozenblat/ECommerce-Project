@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +21,9 @@ public abstract class Model {
 	
 	/** Table of the model in the database **/
 	protected String table;
+	
+	/** Primary key column name. Defaults to 'id'. **/
+	protected String primaryKeyColumnName = "id";
 	
 	/** Primary key value **/
 	protected int id;
@@ -54,8 +58,9 @@ public abstract class Model {
 	
 	/**
 	 * Saves the model in the database.
+	 * @throws SQLException if the save fails
 	 */
-	public void save() {
+	public void save() throws SQLException {
 		// Possibly also check if model is dirty or not
 		
 		// Check to see if this model is in the database or not based on its id
@@ -81,6 +86,15 @@ public abstract class Model {
 	 */
 	public int getId() {
 		return this.id;
+	}
+	
+	/**
+	 * Retrieves the name of the primary key column name.
+	 * 
+	 * @return primary key column name
+	 */
+	public String getPrimaryKeyColumnName() {
+		return this.primaryKeyColumnName;
 	}
 	
 	/**

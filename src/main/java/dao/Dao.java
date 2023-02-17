@@ -1,5 +1,7 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 
 import database.ConnectionManager;
@@ -48,6 +50,9 @@ public abstract class Dao {
 		Map<String, String> attributes = model.getAttributeMap();
 		String table = model.getTable();
 		// construct save query
+		String primaryKeyColumn = model.getPrimaryKeyColumnName();
+		String primaryKeyValue = String.valueOf(model.getId());
+		connection.executeSingleUpdate(table, primaryKeyColumn, primaryKeyValue, attributes);
 	}
 	
 	/**
@@ -66,15 +71,19 @@ public abstract class Dao {
 	 * 
 	 * @param model {@link Model} object to be saved
 	 * @return primary key of the model
+	 * @throws SQLException 
 	 */
-	public int create(Model model) {
+	public int create(Model model) throws SQLException {
 		// Insert new row in the database table and return the primary key of the row
 		Map<String, String> attributes = model.getAttributeMap();
 		String table = model.getTable();
+		String primaryKeyColumn = model.getPrimaryKeyColumnName();
 		connection.executeInsert(table, attributes);
 		
 		// Execute query to get ID of new user and return it
+		ResultSet result = connection.executeSelectLast(table, primaryKeyColumn);
+		result.next();
 		
-		return 1;
+		return result.getInt(primaryKeyColumn);
 	}
 }

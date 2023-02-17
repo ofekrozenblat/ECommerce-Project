@@ -27,13 +27,26 @@ public class QueryBuilder {
 	}
 	
 	/**
+	 * Creates a SELECT statement to return the last row of the table.
+	 * 
+	 * @param table to select
+	 * @param primaryKeyColumn the primary key column name
+	 * @return SELECT last row from table query
+	 */
+	public String createSelectLast(String table, String primaryKeyColumn) {	
+		String query = createSelect(table);
+		query = addRAW(query, "ORDER BY " + primaryKeyColumn + " DESC LIMIT 1");
+		
+		return query;
+	}
+	/**
 	 * Creates a SELECT statement for all columns in a table.
 	 * 
 	 * @param table to select
 	 * @return SELECT ALL from table query
 	 */
-	public String createSELECT(String table) {
-		return createSELECT(table, null);
+	public String createSelect(String table) {
+		return createSelect(table, null);
 	}
 	
 	/**
@@ -43,7 +56,7 @@ public class QueryBuilder {
 	 * @param columns the specific column tables to select
 	 * @return SELECT from table only specific columns query
 	 */
-	public String createSELECT(String table, String[] columns) {
+	public String createSelect(String table, String[] columns) {
 		String query = OPERATION.SELECT.toString() + " ";
 		if (columns == null) {
 			query += "* ";
@@ -68,7 +81,7 @@ public class QueryBuilder {
 	 * @param columns the specific column tables to insert into
 	 * @return INSERT INTO table for only specific columns query
 	 */
-	public String createINSERT(String table, String[] columns) {
+	public String createInsert(String table, String[] columns) {
 		String query = OPERATION.INSERT.toString() + " ";
 		String values = " VALUES (";
 		query += table + " (";
@@ -91,9 +104,40 @@ public class QueryBuilder {
 	}
 	
 	/**
+	 * Creates a INSERT INTO statement for only certain columns in a table.
+	 * 
+	 * @param table to select
+	 * @param columns the specific column tables to insert into
+	 * @param conditions which will be placed in the WHERE clause, concatenated with an AND
+	 * @return INSERT INTO table for only specific columns query
+	 */
+	public String createUpdate(String table, String[] columns, String[] conditions) {
+		if (conditions == null || conditions.length < 1) {
+			// Throw exception, avoid updating every record in the table
+		}
+		
+		String query = OPERATION.UPDATE.toString() + " ";
+		String setClause = " SET ";
+		query += table;
+		
+		for(int i = 0; i < columns.length; i++) {
+			setClause += columns[i] + " = ?";
+			
+			if (i+1 != columns.length) {
+				setClause += ", ";
+			}
+		}
+		
+		query += setClause;
+		query = addWHERE(query, conditions);
+		
+		return query;
+	}
+	
+	/**
 	 * Adds a WHERE clause to the query with the given conditions
 	 * 
-	 * @param query
+	 * @param query to modify
 	 * @param conditions which will be placed in the WHERE clause, concatenated with an AND
 	 * @return query string with the added WHERE clause
 	 */
@@ -113,6 +157,17 @@ public class QueryBuilder {
 		}
 		
 		return modifiedQuery;
+	}
+	
+	/**
+	 * Adds a raw SQL clause to the query.
+	 * 
+	 * @param query to modify
+	 * @param rawAddOn the SQL clause to add to the query
+	 * @return modified query with the added clause
+	 */
+	public String addRAW(String query, String rawAddOn) {
+		return query += " " + rawAddOn;
 	}
 	
 }

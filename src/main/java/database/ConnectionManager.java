@@ -34,6 +34,31 @@ public class ConnectionManager {
 	}
 	
 	/**
+	 * Executes a SELECT operation on the database which will select the last row of the table.
+	 * 
+	 * @param table to execute this operation on
+	 * @param primaryKeyColumn name of the primary key column
+	 * @return {@link ResultSet}
+	 */
+	public ResultSet executeSelectLast(String table, String primaryKeyColumn) {
+		Connection con;
+		ResultSet result = null;
+		
+		String query = queryBuilder.createSelectLast(table, primaryKeyColumn);
+		System.out.println("QUERY LAST: " + query);
+		try {
+			con = ds.getConnection();
+			Statement statement = con.createStatement();
+			result = statement.executeQuery(query);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * Executes a SELECT operation on the database. If the {@code columns} parameter is {@code null}
 	 * the SELECT statement is taken to be a SELECT * statement and will return all columns.
 	 * 
@@ -46,7 +71,7 @@ public class ConnectionManager {
 		Connection con;
 		ResultSet result = null;
 		
-		String query = queryBuilder.createSELECT(table, columns);
+		String query = queryBuilder.createSelect(table, columns);
 		query = queryBuilder.addWHERE(query, conditions);
 		
 		try {
@@ -72,7 +97,34 @@ public class ConnectionManager {
 		Connection con;
 		String[] columns = extractColumnNames(valueMap);
 		
-		String query = queryBuilder.createINSERT(table, columns);
+		String query = queryBuilder.createInsert(table, columns);
+		try {
+			con = this.ds.getConnection();
+			PreparedStatement preparedStatement = constructPreparedStatement(con, query, valueMap);
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Executes an UPDATE operation on a single row in the database.
+	 * 
+	 * @param table to execute this operation on
+	 * @param primaryKeyColumn the primary key column name
+	 * @param primaryKeyValue the primary key value of the row to update
+	 * @param valueMap the map containing the row values to update, each (key,value) pair
+	 * mapping to a column name and its value
+	 */
+	public void executeSingleUpdate(String table, String primaryKeyColumn, String primaryKeyValue, 
+			Map<String, String> valueMap) {
+		Connection con;
+		String[] columns = extractColumnNames(valueMap);
+		String[] conditions = {primaryKeyColumn + "=" + primaryKeyValue};
+		String query = queryBuilder.createUpdate(table, columns, conditions);
+		
 		try {
 			con = this.ds.getConnection();
 			PreparedStatement preparedStatement = constructPreparedStatement(con, query, valueMap);
