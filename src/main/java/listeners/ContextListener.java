@@ -3,6 +3,7 @@ package listeners;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import dao.UserDao;
 import factories.ModelFactory;
 import model.User;
 
@@ -20,5 +21,10 @@ public class ContextListener implements ServletContextListener{
 //		  User user = ModelFactory.createUser();
 //		  user.setFirstName("Goerge");
 //		  user.save();
+		  
+//		  UserDao userDao = new UserDao();
+//		  User user = userDao.get(1);
+//		  System.out.println("RETRIEVED: " + user.getFirstName());
+		  
 	  }
 }

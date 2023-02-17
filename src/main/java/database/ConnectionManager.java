@@ -2,7 +2,9 @@ package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -31,19 +33,37 @@ public class ConnectionManager {
 		}
 	}
 	
-	// TESTING NEEDS MORE WORK
-	public void executeSingleSelect(String table, int id) {
-		String query = queryBuilder.createSELECT(table);
-		String condition = "id = " + id;
-		String[] conditions = {condition};
+	/**
+	 * Executes a SELECT operation on the database. If the {@code columns} parameter is {@code null}
+	 * the SELECT statement is taken to be a SELECT * statement and will return all columns.
+	 * 
+	 * @param table to execute this operation on
+	 * @param columns to select from the table
+	 * @param conditions enforced on this statement
+	 * @return {@link ResultSet}
+	 */
+	public ResultSet executeSelect(String table, String[] columns, String[] conditions) {
+		Connection con;
+		ResultSet result = null;
+		
+		String query = queryBuilder.createSELECT(table, columns);
 		query = queryBuilder.addWHERE(query, conditions);
-		System.out.println(query);
+		
+		try {
+			con = ds.getConnection();
+			Statement statement = con.createStatement();
+			result = statement.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 	/**
 	 * Executes an INSERT INTO operation into the database.
 	 * 
-	 * @param table the table to execute this operation on
+	 * @param table to execute this operation on
 	 * @param valueMap the map containing the row to insert, each (key,value) pair
 	 * mapping to a column name and its value
 	 */

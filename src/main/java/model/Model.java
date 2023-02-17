@@ -21,7 +21,7 @@ public abstract class Model {
 	/** Table of the model in the database **/
 	protected String table;
 	
-	/** Primary key **/
+	/** Primary key value **/
 	protected int id;
 	
 	/** Data access object in charge of this model's relationship to the database **/
@@ -37,9 +37,7 @@ public abstract class Model {
 	 * Use {@link #save()} to save Model in the databse.
 	 */
 	public Model(Dao dao) {
-		this.dao = dao;
-		this.id = -1;
-		createAttributeMap();
+		this(dao, -1);
 	}
 	
 	/**

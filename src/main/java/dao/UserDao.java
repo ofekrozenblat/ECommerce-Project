@@ -1,5 +1,9 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import factories.ModelFactory;
 import model.User;
 
 /**
@@ -19,12 +23,27 @@ public class UserDao extends Dao {
 	
 	@Override
 	public User get(int id) {
-		// gets the user from DB based on primary key
-		
 		// Creates the user
 		User user = new User(this, id);
+				
+		// Gets the user from DB based on primary key
+		String table = user.getTable();
+		String condition = "id=" + id;
+		String[] conditions = {condition};
+		ResultSet resultSet = connection.executeSelect(table, null, conditions);
 		
-		// sets the user attributes here
+		// Sets the user attributes here
+		String firstName = "";
+		try {
+			while(resultSet.next()) {
+				firstName = resultSet.getString("first_name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		user.setFirstName(firstName);
+		
 		return user;
 	}
 	
