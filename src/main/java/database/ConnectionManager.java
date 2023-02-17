@@ -53,6 +53,7 @@ public class ConnectionManager {
 			con = ds.getConnection();
 			Statement statement = con.createStatement();
 			result = statement.executeQuery(query);
+			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
