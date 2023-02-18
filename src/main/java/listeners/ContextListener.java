@@ -31,8 +31,15 @@ public class ContextListener implements ServletContextListener{
 //		}
 		  
 		  UserDao userDao = new UserDao();
-		  User user = userDao.get(15);
-		  user.delete();
+		  User user;
+		try {
+			user = userDao.get(15);
+			user.delete();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  
 		  
 		  
 	  }

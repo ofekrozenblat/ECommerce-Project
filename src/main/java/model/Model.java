@@ -58,6 +58,7 @@ public abstract class Model {
 	
 	/**
 	 * Saves the model in the database.
+	 * 
 	 * @throws SQLException if the save fails
 	 */
 	public void save() throws SQLException {
@@ -74,8 +75,10 @@ public abstract class Model {
 	
 	/**
 	 * Deletes the model from the database.
+	 * 
+	 * @throws SQLException if deleting the model fails
 	 */
-	public void delete() {
+	public void delete() throws SQLException{
 		dao.delete(this);
 	}
 	

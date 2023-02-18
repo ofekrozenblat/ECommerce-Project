@@ -37,15 +37,17 @@ public abstract class Dao {
 	 * 
 	 * @param id primary key of the model to retrieve
 	 * @return {@link Model} object
+	 * @throws SQLException if the retrieval failed
 	 */
-	public abstract Model get(int id);
+	public abstract Model get(int id) throws SQLException;
 	
 	/**
 	 * Saves the model in the database.
 	 * 
 	 * @param model {@link Model} object to be saved
+	 * @throws SQLException if the saving failed
 	 */
-	public void save(Model model) {
+	public void save(Model model) throws SQLException {
 		Map<String, String> attributes = model.getAttributeMap();
 		String table = model.getTable();
 		String primaryKeyColumn = model.getPrimaryKeyColumnName();
@@ -58,8 +60,9 @@ public abstract class Dao {
 	 * Deletes the model in the database.
 	 * 
 	 * @param model {@link Model} object to be deleted
+	 * @throws SQLException if deleting failed
 	 */
-	public void delete(Model model) {
+	public void delete(Model model) throws SQLException {
 		String table = model.getTable();
 		String primaryKeyColumn = model.getPrimaryKeyColumnName();
 		String primaryKeyValue = String.valueOf(model.getId());
@@ -72,7 +75,7 @@ public abstract class Dao {
 	 * 
 	 * @param model {@link Model} object to be saved
 	 * @return primary key of the model
-	 * @throws SQLException 
+	 * @throws SQLException if the creation failed or failed to retrieve the primary key
 	 */
 	public int create(Model model) throws SQLException {
 		// Insert new row in the database table and return the primary key of the row
@@ -84,8 +87,15 @@ public abstract class Dao {
 		
 		// Execute query to get ID of new user and return it
 		ResultSet result = connection.executeSelectLast(table, primaryKeyColumn);
-		result.next();
 		
-		return result.getInt(primaryKeyColumn);
+		int id = -1;
+		try {
+			result.next();
+			id = result.getInt(primaryKeyColumn);
+		}catch(SQLException e) {
+			throw new SQLException("Failed to retrieve the primary key value of the model.");
+		}
+		
+		return id;
 	}
 }

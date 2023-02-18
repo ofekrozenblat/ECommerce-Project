@@ -110,10 +110,13 @@ public class QueryBuilder {
 	 * @param columns the specific column tables to insert into
 	 * @param conditions which will be placed in the WHERE clause, concatenated with an AND
 	 * @return UPDATE table for only specific columns query
+	 * @throws IllegalArgumentException if {@code conditions} is {@code null} or empty
 	 */
-	public String createUpdate(String table, String[] columns, String[] conditions) {
+	public String createUpdate(String table, String[] columns, String[] conditions) 
+			throws IllegalArgumentException {
 		if (conditions == null || conditions.length < 1) {
 			// Throw exception, avoid updating every record in the table
+			throw new IllegalArgumentException("Constructing update query requires conditions.");
 		}
 		
 		String query = OPERATION.UPDATE.toString() + " ";
@@ -140,10 +143,12 @@ public class QueryBuilder {
 	 * @param table to delete from
 	 * @param conditions which will be placed in the WHERE clause, concatenated with an AND
 	 * @return DELETE from table query
+	 * @throws IllegalArgumentException if {@code conditions} is {@code null} or empty
 	 */
-	public String createDelete(String table, String[] conditions) {
+	public String createDelete(String table, String[] conditions) throws IllegalArgumentException {
 		if (conditions == null || conditions.length < 1) {
 			// Throw exception, avoid deleting every record in the table
+			throw new IllegalArgumentException("Constructing delete query requires conditions.");
 		}
 		
 		String query = OPERATION.DELETE.toString() + " ";

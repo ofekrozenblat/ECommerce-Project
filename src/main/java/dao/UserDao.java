@@ -22,7 +22,7 @@ public class UserDao extends Dao {
 	}
 	
 	@Override
-	public User get(int id) {
+	public User get(int id)  throws SQLException {
 		// Creates the user
 		User user = new User(this, id);
 				
@@ -30,18 +30,25 @@ public class UserDao extends Dao {
 		String table = user.getTable();
 		String condition = "id=" + id;
 		String[] conditions = {condition};
-		ResultSet resultSet = connection.executeSelect(table, null, conditions);
+		ResultSet resultSet;
 		
-		// Sets the user attributes here
+		try {
+			resultSet = connection.executeSelect(table, null, conditions);
+		} catch (SQLException e) {
+			throw new SQLException("Failed to retreive user with id " + id + ".");
+		}
+		
+		// Get the user attributes
 		String firstName = "";
 		try {
 			while(resultSet.next()) {
 				firstName = resultSet.getString("first_name");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Failed to retreive attributes of the user with id " + id + ".");
 		}
 		
+		// Set the user attributes
 		user.setFirstName(firstName);
 		
 		return user;

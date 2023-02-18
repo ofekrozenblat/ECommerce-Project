@@ -39,20 +39,20 @@ public class ConnectionManager {
 	 * @param table to execute this operation on
 	 * @param primaryKeyColumn name of the primary key column
 	 * @return {@link ResultSet}
+	 * @throws SQLException if the execution failed
 	 */
-	public ResultSet executeSelectLast(String table, String primaryKeyColumn) {
+	public ResultSet executeSelectLast(String table, String primaryKeyColumn) throws SQLException{
 		Connection con;
 		ResultSet result = null;
 		
 		String query = queryBuilder.createSelectLast(table, primaryKeyColumn);
-		System.out.println("QUERY LAST: " + query);
 		try {
 			con = ds.getConnection();
 			Statement statement = con.createStatement();
 			result = statement.executeQuery(query);
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Failed to execute select last.");
 		}
 		
 		return result;
@@ -66,8 +66,9 @@ public class ConnectionManager {
 	 * @param columns to select from the table
 	 * @param conditions enforced on this statement
 	 * @return {@link ResultSet}
+	 * @throws SQLException if the execution failed
 	 */
-	public ResultSet executeSelect(String table, String[] columns, String[] conditions) {
+	public ResultSet executeSelect(String table, String[] columns, String[] conditions) throws SQLException {
 		Connection con;
 		ResultSet result = null;
 		
@@ -80,7 +81,7 @@ public class ConnectionManager {
 			result = statement.executeQuery(query);
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Failed to execute select.");
 		}
 		
 		return result;
@@ -92,8 +93,9 @@ public class ConnectionManager {
 	 * @param table to execute this operation on
 	 * @param valueMap the map containing the row to insert, each (key,value) pair
 	 * mapping to a column name and its value
+	 * @throws SQLException if the execution failed
 	 */
-	public void executeInsert(String table, Map<String, String> valueMap) {
+	public void executeInsert(String table, Map<String, String> valueMap) throws SQLException {
 		Connection con;
 		String[] columns = extractColumnNames(valueMap);
 		
@@ -105,7 +107,7 @@ public class ConnectionManager {
 			preparedStatement.close();
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Failed to execute insert.");
 		}
 	}
 	
@@ -117,9 +119,10 @@ public class ConnectionManager {
 	 * @param primaryKeyValue the primary key value of the row to update
 	 * @param valueMap the map containing the row values to update, each (key,value) pair
 	 * mapping to a column name and its value
+	 * @throws SQLException if the execution failed
 	 */
 	public void executeSingleUpdate(String table, String primaryKeyColumn, String primaryKeyValue, 
-			Map<String, String> valueMap) {
+			Map<String, String> valueMap) throws SQLException {
 		Connection con;
 		String[] columns = extractColumnNames(valueMap);
 		String[] conditions = {primaryKeyColumn + "=" + primaryKeyValue};
@@ -132,7 +135,7 @@ public class ConnectionManager {
 			preparedStatement.close();
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Failed to execute single update.");
 		}
 	}
 	
@@ -142,8 +145,9 @@ public class ConnectionManager {
 	 * @param table to execute this operation on
 	 * @param primaryKeyColumn the primary key column name
 	 * @param primaryKeyValue the primary key value of the row to delete
+	 * @throws SQLException if the execution failed
 	 */
-	public void executeSingleDelete(String table, String primaryKeyColumn, String primaryKeyValue) {
+	public void executeSingleDelete(String table, String primaryKeyColumn, String primaryKeyValue) throws SQLException {
 		Connection con;
 		String[] conditions = {primaryKeyColumn + "=" + primaryKeyValue};
 		String query = queryBuilder.createDelete(table, conditions);
@@ -154,7 +158,7 @@ public class ConnectionManager {
 			preparedStatement.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Failed to execute single delete.");
 		}
 	}
 
@@ -165,9 +169,10 @@ public class ConnectionManager {
 	 * @param query query string for this statement
 	 * @param valueMap the value map with each (key,value) pair mapping to a value name and its value 
 	 * @return the constructed {@link PreparedStatement}
+	 * @throws SQLException if constructing the prepared statement failed
 	 */
 	private PreparedStatement constructPreparedStatement(Connection con, String query,
-			Map<String, String> valueMap) {
+			Map<String, String> valueMap) throws SQLException {
 		System.out.println(query);
 		PreparedStatement preparedStatement = null;
 		try {
@@ -179,7 +184,7 @@ public class ConnectionManager {
 				i++;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Failed to construct prepared statement.");
 		}
 
 		return preparedStatement;
