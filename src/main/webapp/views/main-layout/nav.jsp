@@ -29,12 +29,13 @@
 				if(userAuth){
 					%>
 			<ul class="navbar-nav ms-auto d-flex">
-				<li class="nav-item"><a
-					class="nav-link active icon-nav-item position-relative" href="">
-						<span class="material-icons-outlined icon-30">shopping_cart
-					</span> <span class="custom-badge">5</span> <span
-						class="icon-nav-item-text">Cart</span>
-				</a></li>
+				<li class="nav-item">
+					<a class="nav-link active icon-nav-item position-relative" href="Cart">
+							<span class="material-icons-outlined icon-30">shopping_cart
+						</span> <span class="custom-badge">5</span> <span
+							class="icon-nav-item-text">Cart</span>
+					</a>
+				</li>
 
 				<li class="nav-item">
 					<div class="dropdown">

@@ -3,7 +3,7 @@
 <div class="listed-item card mx-1 my-1 text-center" style="width: 18rem;" onclick="redirect('Item_detail?item_id=1')">
   <img src="res/img/glasses-default.png" class="card-img-top" alt="">
   <div class="card-body">
-    <div class="card-title d-flex justify-content-between">
+    <div class="card-title">
     	<h5>Item Name</h5>
     	<h5>$999</h5>
     </div>

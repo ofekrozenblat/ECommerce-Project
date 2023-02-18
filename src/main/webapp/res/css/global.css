@@ -1,12 +1,16 @@
 @charset "ISO-8859-1";
 
 .btn-custom{
+	cursor: ponter;
+	text-decoration: none;
 	background-color: rgba(255,51,56,1.00) !important;
 	color: white !important;
     transition: 300ms;
 }
 
 .btn-custom-round{
+	cursor: ponter;
+	text-decoration: none;
 	background-color: rgba(255,51,56,1.00) !important;
 	color: white !important;
 	border-radius: 20px !important;
