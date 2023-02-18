@@ -21,7 +21,7 @@ public class ContextListener implements ServletContextListener{
 		  
 		  // TESTING
 //		  User user = ModelFactory.createUser();
-//		  user.setFirstName("Yummy2");
+//		  user.setFirstName("Bobby3");
 //		  try {
 //			user.save();
 //			System.out.println("ID: " + user.getId());
@@ -33,8 +33,12 @@ public class ContextListener implements ServletContextListener{
 		  UserDao userDao = new UserDao();
 		  User user;
 		try {
-			user = userDao.get(15);
-			user.delete();
+			user = userDao.get(18);
+			System.out.println(user.getFirstName());
+			user.setFirstName("Kool");
+			user.save();
+			System.out.println(user.getFirstName());
+			//user.delete();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

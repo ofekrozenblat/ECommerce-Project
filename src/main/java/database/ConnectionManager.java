@@ -91,24 +91,40 @@ public class ConnectionManager {
 	 * Executes an INSERT INTO operation into the database.
 	 * 
 	 * @param table to execute this operation on
+	 * @param primaryKeyColumn the primary key column name that will 
+	 * be returned upon successful insert
 	 * @param valueMap the map containing the row to insert, each (key,value) pair
 	 * mapping to a column name and its value
+	 * @return primary key value created for this insert
 	 * @throws SQLException if the execution failed
 	 */
-	public void executeInsert(String table, Map<String, String> valueMap) throws SQLException {
+	public int executeInsert(String table, String primaryKeyColumn, 
+			Map<String, String> valueMap) throws SQLException {
 		Connection con;
+		ResultSet result = null;
+		int primaryKey = -1;
 		String[] columns = extractColumnNames(valueMap);
 		
 		String query = queryBuilder.createInsert(table, columns);
+		String[] returnColumnNames = {primaryKeyColumn};
 		try {
-			con = this.ds.getConnection();
-			PreparedStatement preparedStatement = constructPreparedStatement(con, query, valueMap);
+			con = ds.getConnection();
+			PreparedStatement preparedStatement = constructPreparedStatement(con, query, 
+					returnColumnNames, valueMap);
 			preparedStatement.executeUpdate();
+			result = preparedStatement.getGeneratedKeys();
+			
+			if(result.next()) {
+				primaryKey = result.getInt(1);
+			}
+			
 			preparedStatement.close();
 			con.close();
 		} catch (SQLException e) {
 			throw new SQLException("Failed to execute insert.");
 		}
+		
+		return primaryKey;
 	}
 	
 	/**
@@ -129,7 +145,7 @@ public class ConnectionManager {
 		String query = queryBuilder.createUpdate(table, columns, conditions);
 		
 		try {
-			con = this.ds.getConnection();
+			con = ds.getConnection();
 			PreparedStatement preparedStatement = constructPreparedStatement(con, query, valueMap);
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -167,17 +183,24 @@ public class ConnectionManager {
 	 * 
 	 * @param con the connection to perform this statement on
 	 * @param query query string for this statement
+	 * @param columnNames the column names to return upon successful insert
 	 * @param valueMap the value map with each (key,value) pair mapping to a value name and its value 
 	 * @return the constructed {@link PreparedStatement}
 	 * @throws SQLException if constructing the prepared statement failed
 	 */
-	private PreparedStatement constructPreparedStatement(Connection con, String query,
-			Map<String, String> valueMap) throws SQLException {
+	private PreparedStatement constructPreparedStatement(Connection con, String query, 
+			String[] columnNames, Map<String, String> valueMap) throws SQLException {
 		System.out.println(query);
 		PreparedStatement preparedStatement = null;
 		try {
-			con = this.ds.getConnection();
-			preparedStatement = con.prepareStatement(query);
+			con = ds.getConnection();
+			
+			if (columnNames != null) { // Should only be used by INSERT
+				preparedStatement = con.prepareStatement(query, columnNames);
+			}else {
+				preparedStatement = con.prepareStatement(query);
+			}
+			
 			int i = 1;
 			for (String valueName : valueMap.keySet()) {
 				preparedStatement.setString(i, valueMap.get(valueName));
@@ -190,6 +213,26 @@ public class ConnectionManager {
 		return preparedStatement;
 	}
 	
+	/**
+	 * Constructs a {@link PreparedStatement} from the given parameters.
+	 * 
+	 * @param con the connection to perform this statement on
+	 * @param query query string for this statement
+	 * @param valueMap the value map with each (key,value) pair mapping to a value name and its value 
+	 * @return the constructed {@link PreparedStatement}
+	 * @throws SQLException if constructing the prepared statement failed
+	 */
+	private PreparedStatement constructPreparedStatement (Connection con, String query, 
+			Map<String, String> valueMap) throws SQLException  {
+		return constructPreparedStatement(con, query, null, valueMap);
+	}
+	
+	/**
+	 * Extracts the column names from the map.
+	 * 
+	 * @param valueMap the value map with each (key,value) pair mapping to a column name and its value
+	 * @return array of column names
+	 */
 	private String[] extractColumnNames(Map<String, String> valueMap) {
 		return valueMap.keySet().toArray(new String[valueMap.size()]);
 	}

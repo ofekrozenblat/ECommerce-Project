@@ -83,19 +83,13 @@ public abstract class Dao {
 		String table = model.getTable();
 		String primaryKeyColumn = model.getPrimaryKeyColumnName();
 		
-		connection.executeInsert(table, attributes);
+		// Executes the insert and gets the ID of the new primary key
+		int retrievedPrimaryKey = connection.executeInsert(table, primaryKeyColumn, attributes);
 		
-		// Execute query to get ID of new user and return it
-		ResultSet result = connection.executeSelectLast(table, primaryKeyColumn);
-		
-		int id = -1;
-		try {
-			result.next();
-			id = result.getInt(primaryKeyColumn);
-		}catch(SQLException e) {
+		if (retrievedPrimaryKey == -1) {
 			throw new SQLException("Failed to retrieve the primary key value of the model.");
 		}
 		
-		return id;
+		return retrievedPrimaryKey;
 	}
 }

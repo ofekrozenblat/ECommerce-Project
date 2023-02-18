@@ -75,7 +75,7 @@ public class QueryBuilder {
 	}
 	
 	/**
-	 * Creates a INSERT INTO statement for only certain columns in a table.
+	 * Creates an INSERT statement for only certain columns in a table.
 	 * 
 	 * @param table to select
 	 * @param columns the specific column tables to insert into
@@ -104,10 +104,10 @@ public class QueryBuilder {
 	}
 	
 	/**
-	 * Creates a INSERT INTO statement for only certain columns in a table.
+	 * Creates an UPDATE statement for only certain columns in a table.
 	 * 
 	 * @param table to select
-	 * @param columns the specific column tables to insert into
+	 * @param columns the specific column tables to update
 	 * @param conditions which will be placed in the WHERE clause, concatenated with an AND
 	 * @return UPDATE table for only specific columns query
 	 * @throws IllegalArgumentException if {@code conditions} is {@code null} or empty
