@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context privileged="true" reloadable="true">
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Manager pathname="" />
+	<Resource name="jdbc/reagailDB" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+		type="javax.sql.DataSource"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/reagail" 
+		username="root"
+		password="6rb9"
+		/>
+	<ResourceLink global="jdbc/reagailDB" name="jdbc/reagailDB" type="javax.sql.DataSource" />
+</Context>
