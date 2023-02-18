@@ -1,13 +1,7 @@
 package listeners;
 
-import java.sql.SQLException;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import dao.UserDao;
-import factories.ModelFactory;
-import model.User;
 
 public class ContextListener implements ServletContextListener{
 	  @Override
