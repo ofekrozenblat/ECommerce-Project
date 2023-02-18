@@ -11,7 +11,7 @@ public class QueryBuilder {
 	public enum OPERATION{
 		INSERT("INSERT INTO"),
 		UPDATE("UPDATE"),
-		DELETE("DELETE"),
+		DELETE("DELETE FROM"),
 		SELECT("SELECT");
 		
 		private final String operation;
@@ -109,7 +109,7 @@ public class QueryBuilder {
 	 * @param table to select
 	 * @param columns the specific column tables to insert into
 	 * @param conditions which will be placed in the WHERE clause, concatenated with an AND
-	 * @return INSERT INTO table for only specific columns query
+	 * @return UPDATE table for only specific columns query
 	 */
 	public String createUpdate(String table, String[] columns, String[] conditions) {
 		if (conditions == null || conditions.length < 1) {
@@ -129,6 +129,25 @@ public class QueryBuilder {
 		}
 		
 		query += setClause;
+		query = addWHERE(query, conditions);
+		
+		return query;
+	}
+	
+	/**
+	 * Creates a DELETE statement for the table.
+	 * 
+	 * @param table to delete from
+	 * @param conditions which will be placed in the WHERE clause, concatenated with an AND
+	 * @return DELETE from table query
+	 */
+	public String createDelete(String table, String[] conditions) {
+		if (conditions == null || conditions.length < 1) {
+			// Throw exception, avoid deleting every record in the table
+		}
+		
+		String query = OPERATION.DELETE.toString() + " ";
+		query += table;
 		query = addWHERE(query, conditions);
 		
 		return query;

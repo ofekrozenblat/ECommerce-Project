@@ -46,12 +46,11 @@ public abstract class Dao {
 	 * @param model {@link Model} object to be saved
 	 */
 	public void save(Model model) {
-		// Save should check if user is being created or is already created
 		Map<String, String> attributes = model.getAttributeMap();
 		String table = model.getTable();
-		// construct save query
 		String primaryKeyColumn = model.getPrimaryKeyColumnName();
 		String primaryKeyValue = String.valueOf(model.getId());
+		
 		connection.executeSingleUpdate(table, primaryKeyColumn, primaryKeyValue, attributes);
 	}
 	
@@ -61,9 +60,11 @@ public abstract class Dao {
 	 * @param model {@link Model} object to be deleted
 	 */
 	public void delete(Model model) {
-		Map<String, String> attributes = model.getAttributeMap();
 		String table = model.getTable();
-		// construct delete query
+		String primaryKeyColumn = model.getPrimaryKeyColumnName();
+		String primaryKeyValue = String.valueOf(model.getId());
+		
+		connection.executeSingleDelete(table, primaryKeyColumn, primaryKeyValue);
 	}
 	
 	/**
@@ -78,6 +79,7 @@ public abstract class Dao {
 		Map<String, String> attributes = model.getAttributeMap();
 		String table = model.getTable();
 		String primaryKeyColumn = model.getPrimaryKeyColumnName();
+		
 		connection.executeInsert(table, attributes);
 		
 		// Execute query to get ID of new user and return it

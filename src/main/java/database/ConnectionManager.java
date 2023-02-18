@@ -135,6 +135,28 @@ public class ConnectionManager {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Executes a DELETE operation on a single row in the database.
+	 * 
+	 * @param table to execute this operation on
+	 * @param primaryKeyColumn the primary key column name
+	 * @param primaryKeyValue the primary key value of the row to delete
+	 */
+	public void executeSingleDelete(String table, String primaryKeyColumn, String primaryKeyValue) {
+		Connection con;
+		String[] conditions = {primaryKeyColumn + "=" + primaryKeyValue};
+		String query = queryBuilder.createDelete(table, conditions);
+		
+		try {
+			con = ds.getConnection();
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			preparedStatement.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Constructs a {@link PreparedStatement} from the given parameters.
