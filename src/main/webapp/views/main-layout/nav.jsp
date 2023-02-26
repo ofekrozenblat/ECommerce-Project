@@ -47,7 +47,7 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="dropdownMenuLink">
-							<a class="dropdown-item" href=""> <i
+							<a class="dropdown-item" href="Account"> <i
 								class="material-icons-outlined icon-22">person</i> <span
 								class="ml-3">Your Account</span>
 							</a>
