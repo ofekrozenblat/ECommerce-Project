@@ -26,7 +26,7 @@ public class CheckoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/views/ShoppingCart/checkout.jsp"; 
+		String target = "/views/shopping-cart/checkout.jsp"; 
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 

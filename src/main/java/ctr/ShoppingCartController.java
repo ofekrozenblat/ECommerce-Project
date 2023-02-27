@@ -28,7 +28,7 @@ public class ShoppingCartController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String target = "/views/ShoppingCart/cart.jsp"; 
+		String target = "/views/shopping-cart/cart.jsp"; 
 		
 		request.getSession().setAttribute("number_of_items", 5);
 		
