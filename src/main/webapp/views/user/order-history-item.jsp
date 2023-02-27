@@ -9,6 +9,6 @@
 			<h6 class="fw-bold">Item Name</h6>
 			<h6 class="fw-bold">Total: $999</h6>
 		</div>
-		<p class="mb-2 text-muted fw-bold">Order Placed on February 13,2023</p>
+		<p class="mb-2 text-muted fw-bold">Order Placed on February 13, 2023</p>
 	</div>
 </div>
