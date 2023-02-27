@@ -11,5 +11,5 @@
 	<hr class="mb-3">
 	<%}
 %>
-
+<button class="btn btn-custom-round w-50 mx-auto">Load More Orders</button>
 </div>
