@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <div class="order-item my-3">
-	<div class="order-item-img">
+	<div class="order-item-img cursor-pointer" onclick="redirect('Item_detail?item_id=1')">
 		<img src="res/img/glasses-default.png" class="img-fluid" alt="">
 	</div>
 	<div class="order-item-body">

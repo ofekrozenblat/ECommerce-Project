@@ -25,3 +25,7 @@
 .btn-custom-round:hover{
 	background-color: #da2e1b !important;
 }
+
+.cursor-pointer{
+	cursor: pointer;
+}
