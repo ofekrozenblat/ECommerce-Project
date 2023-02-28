@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Item;
 
@@ -15,7 +16,7 @@ public class ItemDao extends Dao {
 
 		// Gets the item from DB based on primary key
 		String table = item.getTable();
-		String condition = "id=" + id;
+		String condition = item.getPrimaryKeyColumnName() + "=" + id;
 		String[] conditions = { condition };
 		ResultSet resultSet;
 
@@ -27,11 +28,10 @@ public class ItemDao extends Dao {
 
 		// Get and set the item attributes
 		try {
-			while (resultSet.next()) {
-				for (String attribute : item.getAttributeMap().keySet()) {
-					String value = resultSet.getString(attribute);
-					item.getAttributeMap().put(attribute, value);
-				}
+			resultSet.next();
+			for (String attribute : item.getAttributeMap().keySet()) {
+				String value = resultSet.getString(attribute);
+				item.setAttribute(attribute, value);
 			}
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive attributes of the item with id " + id + ".");
@@ -40,12 +40,13 @@ public class ItemDao extends Dao {
 		return item;
 	}
 	
-	public ArrayList<Item> getAll() throws SQLException {
+	public List<Item> getAll() throws SQLException {
 		// Creates list of items
-		ArrayList<Item> items = new ArrayList<Item>();
+		List<Item> items = new ArrayList<Item>();
 		
 		ResultSet resultSet;
-		String table = new Item(this).getTable();
+		String table = Item.table;
+		String primaryKeyColumnName = Item.primaryKeyColumnName;
 		
 		try {
 			resultSet = connection.executeSelect(table, null, null);
@@ -56,7 +57,7 @@ public class ItemDao extends Dao {
 		// Get and set the item attributes
 		try {
 			while (resultSet.next()) {
-				int id = Integer.parseInt(resultSet.getString("id"));
+				int id = Integer.parseInt(resultSet.getString(primaryKeyColumnName));
 				Item item = new Item(this, id);
 				
 				for (String attribute : item.getAttributeMap().keySet()) {

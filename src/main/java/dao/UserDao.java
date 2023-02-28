@@ -28,7 +28,7 @@ public class UserDao extends Dao {
 				
 		// Gets the user from DB based on primary key
 		String table = user.getTable();
-		String condition = "id=" + id;
+		String condition = user.getPrimaryKeyColumnName() + "=" + id;
 		String[] conditions = {condition};
 		ResultSet resultSet;
 		
@@ -40,11 +40,10 @@ public class UserDao extends Dao {
 		
 		// Get and set the user attributes
 		try {
-			while(resultSet.next()) {
-				for(String attribute: user.getAttributeMap().keySet()) {
-					String value = resultSet.getString(attribute);
-					user.getAttributeMap().put(attribute, value);
-				}
+			resultSet.next();
+			for(String attribute: user.getAttributeMap().keySet()) {
+				String value = resultSet.getString(attribute);
+				user.setAttribute(attribute, value);
 			}
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive attributes of the user with id " + id + ".");

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ItemDao;
 import model.Item;
 import java.util.ArrayList;
+import java.util.List;
 /**
  * Servlet implementation class HomeController
  */
@@ -33,9 +34,9 @@ public class HomeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ArrayList<Item> items = new ArrayList<Item>();
-		ArrayList<Item> featured = new ArrayList<Item>();
-		ArrayList<Item> newArrivals = new ArrayList<Item>();
+		List<Item> items = new ArrayList<Item>();
+		List<Item> featured = new ArrayList<Item>();
+		List<Item> newArrivals = new ArrayList<Item>();
 		
 		try {
 			items = new ItemDao().getAll();

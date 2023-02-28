@@ -16,12 +16,6 @@ import dao.Dao;
  */
 public abstract class Model {
 	
-	/** Table of the model in the database **/
-	protected String table;
-	
-	/** Primary key column name. Defaults to 'id'. **/
-	protected String primaryKeyColumnName = "id";
-	
 	/** Primary key value **/
 	protected int id;
 	
@@ -89,15 +83,6 @@ public abstract class Model {
 	}
 	
 	/**
-	 * Retrieves the name of the primary key column name.
-	 * 
-	 * @return primary key column name
-	 */
-	public String getPrimaryKeyColumnName() {
-		return this.primaryKeyColumnName;
-	}
-	
-	/**
 	 * Retrieves the attribute map of this model.
 	 * 
 	 * @return map where key=attribute name, value=attribute value
@@ -106,6 +91,13 @@ public abstract class Model {
 		return attributes;
 	}
 	
+	/**
+	 * Retrieves the name of the primary key column name.
+	 * 
+	 * @return primary key column name
+	 */
+	public abstract String getPrimaryKeyColumnName();
+
 	/**
 	 * Retrieves the table name of this model in the database.
 	 * 
@@ -120,7 +112,7 @@ public abstract class Model {
 	 * @param attributeName attribute name to modify
 	 * @param value to assign to the attribute
 	 */
-	protected void setAttribute(String attributeName, String value) {
+	public void setAttribute(String attributeName, String value) {
 		// Check to make sure method is not used to insert 
 		// an attribute not declared in attributeNames
 		if (attributes.containsKey(attributeName)) {
@@ -162,6 +154,12 @@ public abstract class Model {
 		}	
 	}
 	
+	/**
+	 * Converts the model into a JSON format.
+	 * 
+	 * @return JSON string representation of this mode.
+	 * @deprecated Currently should not be used.
+	 */
 	public String toJson() {
 		StringBuilder json = new StringBuilder();
         json.append("{");
