@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,9 +38,9 @@ public class ItemDetailController extends HttpServlet {
 		String item_id = request.getParameter("item_id");
 		String target = "/views/item/item-detail.jsp";
 		
-		ArrayList<Item> recommendations = new ArrayList<Item>();
+		List<Item> recommendations = new ArrayList<Item>();
 		try {
-			ArrayList<Item> items = new ItemDao().getAll();
+			List<Item> items = new ItemDao().getAll();
 			
 			for(int i = 0; i < 4; i++) {
 				recommendations.add(items.get(i));

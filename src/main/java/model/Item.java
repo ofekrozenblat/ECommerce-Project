@@ -5,9 +5,10 @@ import dao.ItemDao;
 
 public class Item extends Model{
 
+	public static final String table = "items";
+	
 	public Item(Dao dao) {
 		super(dao);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Item(ItemDao dao, int id) {
@@ -16,8 +17,7 @@ public class Item extends Model{
 
 	@Override
 	public String getTable() {
-		// TODO Auto-generated method stub
-		return "items";
+		return table;
 	}
 
 	@Override

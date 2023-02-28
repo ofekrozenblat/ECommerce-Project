@@ -11,6 +11,8 @@ import dao.UserDao;
  */
 public class User extends Model {
 	
+	public static final String table = "users";
+	
 	public User(UserDao dao) {
 		super(dao);
 	}
@@ -20,7 +22,7 @@ public class User extends Model {
 	}
 	
 	public String getTable() {
-		return "users";
+		return table;
 	}
 
 	protected String[] getAttributeNames() {

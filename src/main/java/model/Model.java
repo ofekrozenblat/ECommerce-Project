@@ -120,7 +120,7 @@ public abstract class Model {
 	 * @param attributeName attribute name to modify
 	 * @param value to assign to the attribute
 	 */
-	protected void setAttribute(String attributeName, String value) {
+	public void setAttribute(String attributeName, String value) {
 		// Check to make sure method is not used to insert 
 		// an attribute not declared in attributeNames
 		if (attributes.containsKey(attributeName)) {
