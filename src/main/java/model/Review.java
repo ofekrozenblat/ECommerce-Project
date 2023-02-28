@@ -61,11 +61,7 @@ public class Review extends Model {
 	
 	public Calendar getDate() throws ParseException {
 		String dateString = getAttribute("date");
-		DateFormat df = DateFormat.getDateInstance();
-		Date date = df.parse(dateString);
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		return calendar;
+		return parseStringToCalendar(dateString);
 	}
 	
 	public void setItemId(int ItemId) {
@@ -82,6 +78,14 @@ public class Review extends Model {
 	
 	public int getUserId() {
 		return Integer.parseInt(getAttribute("user_id"));
+	}
+	
+	private Calendar parseStringToCalendar(String date) throws ParseException {
+		DateFormat df = DateFormat.getDateInstance();
+		Date d = df.parse(date);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(d);
+		return calendar;
 	}
 
 }

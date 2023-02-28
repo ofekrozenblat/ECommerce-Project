@@ -1,6 +1,6 @@
 package factories;
 
-import dao.UserDao;
+import dao.*;
 import model.*;
 
 /**
@@ -19,6 +19,16 @@ public class ModelFactory {
 	public static User createUser() {
 		// Performs dependency injection of the data access object related to the user class.
 		return new User(new UserDao());
+	}
+	
+	/**
+	 * Creates and returns a {@link Review} model.
+	 * 
+	 * @return {@link Review} object
+	 */
+	public static Review createReview() {
+		// Performs dependency injection of the data access object related to the user class.
+		return new Review(new ReviewDao());
 	}
 	
 }
