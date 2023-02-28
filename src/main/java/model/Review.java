@@ -2,6 +2,7 @@ package model;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,11 +13,13 @@ public class Review extends Model {
 	public static final String table = "reviews";
 	public static final String primaryKeyColumnName = "id";
 	
+	private static final String DATE_PATTERN = "yyyy-MM-dd";
+	
 	public Review(Dao dao) {
 		super(dao);
 		
 		// Set the date of this review to the current date it was created
-		setDate(Calendar.getInstance());
+		setDate(new Date());
 	}
 	
 	public Review(Dao dao, int id) {
@@ -40,7 +43,7 @@ public class Review extends Model {
 	
 	// Getters & Setters
 	public void setRating(int rating) {
-	    setAttribute("name", String.valueOf(rating));
+	    setAttribute("rating", String.valueOf(rating));
 	}
 
 	public int getRating() {
@@ -55,13 +58,17 @@ public class Review extends Model {
 	    return getAttribute("description");
 	}
 	
-	public void setDate(Calendar calendar) {
-		setAttribute("date", calendar.toString());
+	public void setDate(Date date) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
+		String dateString = simpleDateFormat.format(date);
+		setAttribute("date", dateString);
 	}
 	
-	public Calendar getDate() throws ParseException {
+	public Date getDate() throws ParseException {
 		String dateString = getAttribute("date");
-		return parseStringToCalendar(dateString);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
+		Date date = simpleDateFormat.parse(dateString);
+		return date;
 	}
 	
 	public void setItemId(int ItemId) {
@@ -78,14 +85,6 @@ public class Review extends Model {
 	
 	public int getUserId() {
 		return Integer.parseInt(getAttribute("user_id"));
-	}
-	
-	private Calendar parseStringToCalendar(String date) throws ParseException {
-		DateFormat df = DateFormat.getDateInstance();
-		Date d = df.parse(date);
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(d);
-		return calendar;
 	}
 
 }
