@@ -1,6 +1,7 @@
 package model;
 
-import dao.Dao;
+import java.util.ArrayList;
+import java.util.List;
 import dao.ItemDao;
 
 public class Item extends Model{
@@ -8,12 +9,17 @@ public class Item extends Model{
 	public static final String table = "items";
 	public static final String primaryKeyColumnName = "id";
 	
-	public Item(Dao dao) {
+	/** List of reviews related to this item **/
+	private List<Review> reviews;
+	
+	public Item(ItemDao dao) {
 		super(dao);
 	}
 	
 	public Item(ItemDao dao, int id) {
 		super(dao, id);
+		
+		reviews = new ArrayList<Review>();
 	}
 
 	@Override
@@ -78,6 +84,18 @@ public class Item extends Model{
 
 	public double getPrice() {
 		return Double.parseDouble(getAttribute("price"));
+	}
+	
+	public void addReview(Review review) {
+		this.reviews.add(review);
+	}
+	
+	public List<Review> getReviews(){
+		return this.reviews;
+	}
+	
+	public void setReviews(List<Review> reviews){
+		this.reviews = reviews;
 	}
 
 }

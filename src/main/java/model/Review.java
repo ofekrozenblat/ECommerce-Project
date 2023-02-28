@@ -1,12 +1,9 @@
 package model;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
-import dao.Dao;
+import dao.ReviewDao;
 
 public class Review extends Model {
 
@@ -15,15 +12,15 @@ public class Review extends Model {
 	
 	private static final String DATE_PATTERN = "yyyy-MM-dd";
 	
-	public Review(Dao dao) {
+	public Review(ReviewDao dao) {
 		super(dao);
+	}
+	
+	public Review(ReviewDao dao, int id) {
+		super(dao, id);
 		
 		// Set the date of this review to the current date it was created
 		setDate(new Date());
-	}
-	
-	public Review(Dao dao, int id) {
-		super(dao, id);
 	}
 
 	@Override

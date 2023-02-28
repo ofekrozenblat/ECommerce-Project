@@ -2,8 +2,8 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import factories.ModelFactory;
+import java.util.ArrayList;
+import java.util.List;
 import model.Review;
 
 /**
@@ -27,7 +27,7 @@ public class ReviewDao extends Dao {
 		// Creates the user
 		Review review = new Review(this, id);
 				
-		// Gets the user from DB based on primary key
+		// Gets the review from DB based on primary key
 		String table = review.getTable();
 		String condition = review.getPrimaryKeyColumnName() + "=" + id;
 		String[] conditions = {condition};
@@ -36,7 +36,7 @@ public class ReviewDao extends Dao {
 		try {
 			resultSet = connection.executeSelect(table, null, conditions);
 		} catch (SQLException e) {
-			throw new SQLException("Failed to retreive user with id " + id + ".");
+			throw new SQLException("Failed to retreive review with id " + id + ".");
 		}
 		
 		// Get and set the user attributes
@@ -47,12 +47,56 @@ public class ReviewDao extends Dao {
 				review.setAttribute(attribute, value);
 			}
 		} catch (SQLException e) {
-			throw new SQLException("Failed to retreive attributes of the user with id " + id + ".");
+			throw new SQLException("Failed to retreive attributes of the review with id " + id + ".");
 		}
 		
 		return review;
 	}
 	
-	// Can create other specific methods such as getAllUsers(), getUsersBy(...), etc..
+	/**
+	 * Gets all the reviews related to the item with id {@code itemId}.
+	 * 
+	 * @param itemId id of the item to retrieve reviews for
+	 * @return list of {@link Review} objects related to this item
+	 * @throws Exception if something went wrong with retrieving the id of the reviews or an SQL
+	 * exception has occurred
+	 */
+	public List<Review> getReviewsByItemId(int itemId) throws Exception{
+		// Creates list of items
+		List<Review> reviews = new ArrayList<Review>();
+		
+		ResultSet resultSet = null;
+		String table = Review.table;
+		String primaryKeyColumnName = Review.primaryKeyColumnName;
+		String condition = "item_id = " + itemId;
+		String[] conditions = {condition};
+		
+		try {
+			resultSet = connection.executeSelect(table, null, conditions);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		// Get and set the item attributes
+		try {
+			while (resultSet.next()) {
+				int id = Integer.parseInt(resultSet.getString(primaryKeyColumnName));
+				Review review = new Review(this, id);
+				
+				for (String attribute : review.getAttributeMap().keySet()) {
+					String value = resultSet.getString(attribute);
+					review.getAttributeMap().put(attribute, value);
+				}
+				
+				reviews.add(review);
+			}
+		} catch (NumberFormatException e) {
+			throw new Exception("Failed to format id: " + e.getMessage());
+		} catch (SQLException e) {
+			throw new Exception("Failed to get reviews: " + e.getMessage());
+		}
+	
+		return reviews;
+	}
 	
 }
