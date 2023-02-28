@@ -2,13 +2,10 @@ package model;
 
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 import dao.Dao;
-
 /**
  * An object that is used to represent a generic database table. This class is meant to be
  * extended and implemented by child classes that will represent specific individual tables
@@ -163,5 +160,17 @@ public abstract class Model {
 		for(int i = 0; i < attributeNames.length; i++) {
 			attributes.put(attributeNames[i], ""); // Assign empty strings
 		}	
+	}
+	
+	public String toJson() {
+		StringBuilder json = new StringBuilder();
+        json.append("{");
+        for (Map.Entry<String, String> entry : this.getAttributeMap().entrySet()) {
+            json.append("\"").append(entry.getKey()).append("\":").append(entry.getValue()).append(",");
+        }
+        json.deleteCharAt(json.length() - 1);
+        json.append("}");
+        
+        return json.toString();
 	}
 }

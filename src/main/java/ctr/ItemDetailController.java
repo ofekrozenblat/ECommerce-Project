@@ -1,6 +1,8 @@
 package ctr;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
@@ -8,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.ItemDao;
+import model.Item;
 
 /**
  * Servlet implementation class ItemController
@@ -32,8 +37,22 @@ public class ItemDetailController extends HttpServlet {
 		String item_id = request.getParameter("item_id");
 		String target = "/views/item/item-detail.jsp";
 		
+		ArrayList<Item> recommendations = new ArrayList<Item>();
+		try {
+			ArrayList<Item> items = new ItemDao().getAll();
+			
+			for(int i = 0; i < 4; i++) {
+				recommendations.add(items.get(i));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("rating", 3);
 		request.setAttribute("review_count", 123);
+		request.setAttribute("recommendation_list", recommendations);
 		
 		request.getRequestDispatcher(target).forward(request, response);
 	}

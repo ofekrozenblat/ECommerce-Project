@@ -1,12 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="model.Item" %>
+<%@ page import="java.util.ArrayList" %>
+
 <div class="item-listing d-flex flex-row flex-wrap justify-content-evenly">
 <%
-	int list_amount = Integer.parseInt(request.getParameter("list_amount"));
-	for(int i = 0; i < list_amount; i++)
-	{%>
-		<jsp:include page="listed-item.jsp" />
-	<%}
+    String list_name = request.getParameter("list_name");
+    ArrayList<Item> item_list = (ArrayList<Item>) request.getAttribute(list_name);
+    for(Item item: item_list)
+    {
+%>
+        <jsp:include page="listed-item.jsp" >
+          <jsp:param name="name" value="<%= item.getName() %>" />
+          <jsp:param name="price" value="<%= item.getPrice() %>" />
+          <jsp:param name="description" value="<%= item.getDescription() %>" />
+        </jsp:include>
+<%
+    }
 %>
 
 </div>

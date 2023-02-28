@@ -4,10 +4,10 @@
   <img src="res/img/glasses-default.png" class="card-img-top" alt="">
   <div class="card-body">
     <div class="card-title">
-    	<h5>Item Name</h5>
-    	<h5>$999</h5>
+    	<h5>${param.name}</h5>
+    	<h5>$${param.price}</h5>
     </div>
-    <p class="card-text">Some extra info / description</p>
+    <p class="card-text">${param.description}</p>
     <a href="" class="btn btn-custom w-100">Try On</a>
   </div>
 </div>

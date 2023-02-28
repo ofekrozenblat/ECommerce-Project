@@ -38,18 +38,17 @@ public class UserDao extends Dao {
 			throw new SQLException("Failed to retreive user with id " + id + ".");
 		}
 		
-		// Get the user attributes
-		String firstName = "";
+		// Get and set the user attributes
 		try {
 			while(resultSet.next()) {
-				firstName = resultSet.getString("first_name");
+				for(String attribute: user.getAttributeMap().keySet()) {
+					String value = resultSet.getString(attribute);
+					user.getAttributeMap().put(attribute, value);
+				}
 			}
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive attributes of the user with id " + id + ".");
 		}
-		
-		// Set the user attributes
-		user.setFirstName(firstName);
 		
 		return user;
 	}
