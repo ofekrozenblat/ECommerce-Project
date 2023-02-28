@@ -31,7 +31,7 @@ public class ItemDao extends Dao {
 			resultSet.next();
 			for (String attribute : item.getAttributeMap().keySet()) {
 				String value = resultSet.getString(attribute);
-				item.getAttributeMap().put(attribute, value);
+				item.setAttribute(attribute, value);
 			}
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive attributes of the item with id " + id + ".");
