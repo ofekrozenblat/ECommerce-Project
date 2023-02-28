@@ -23,6 +23,7 @@ public class User extends Model {
 		super(dao, id);
 	}
 	
+	@Override
 	public String getTable() {
 		return table;
 	}
@@ -32,6 +33,7 @@ public class User extends Model {
 		return primaryKeyColumnName;
 	}
 
+	@Override
 	protected String[] getAttributeNames() {
 		return new String[] {"first_name", "last_name", "email_address", "is_admin"};
 	}
