@@ -86,7 +86,7 @@
 				<h5 class="mb-2 fw-bold ms-2">Customers also viewed</h5>
 				<div class="text-center">
 					<jsp:include page="item-listing.jsp">
-						<jsp:param name="list_amount" value="4" />
+						<jsp:param name="list_name" value="recommendation_list" />
 					</jsp:include>
 				</div>
 

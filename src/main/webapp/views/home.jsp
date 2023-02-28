@@ -31,13 +31,13 @@
 		<div class="content-section">
 			<div class="content-section-title"> FEATURED GLASSES</div>
 			<jsp:include page="item/item-listing.jsp" >
-			     <jsp:param name="list_amount" value="${featured_count}" />
+			     <jsp:param name="list_name" value="featured_list" />
 			</jsp:include>
 		</div>
 		<div class="content-section">
 			<div class="content-section-title"> NEW ARRIVALS </div>
 			<jsp:include page="item/item-listing.jsp" >
-			     <jsp:param name="list_amount" value="${new_arrivals_count}" />
+			     <jsp:param name="list_name" value="new_arrivals_list" />
 			</jsp:include>
 		</div>
 	</div>
