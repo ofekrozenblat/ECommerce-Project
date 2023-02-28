@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CheckoutController
+ * Servlet implementation class AccountController
  */
-@WebServlet("/Checkout")
-public class CheckoutController extends HttpServlet {
+@WebServlet("/Account")
+public class AccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckoutController() {
+    public AccountController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class CheckoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String target = "/views/shopping-cart/checkout.jsp"; 
+		String target = "/views/user/account.jsp"; 
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 

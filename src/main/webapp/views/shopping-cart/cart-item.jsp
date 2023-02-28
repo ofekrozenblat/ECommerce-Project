@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <div class="cart-item">
-	<div class="cart-item-img">
+	<div class="cart-item-img cursor-pointer" onclick="redirect('Item_detail?item_id=1')">
 		<img src="res/img/glasses-default.png" class="img-fluid" alt="">
 	</div>
 	<div class="cart-item-body">

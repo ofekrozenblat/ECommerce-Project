@@ -1,5 +1,9 @@
 @charset "ISO-8859-1";
 
+.w-10{
+	width: 10%;
+}
+
 .btn-custom{
 	cursor: ponter;
 	text-decoration: none;
@@ -20,4 +24,8 @@
 .btn-custom:hover,
 .btn-custom-round:hover{
 	background-color: #da2e1b !important;
+}
+
+.cursor-pointer{
+	cursor: pointer;
 }
