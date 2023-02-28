@@ -46,6 +46,7 @@ public class ItemDao extends Dao {
 		
 		ResultSet resultSet;
 		String table = Item.table;
+		String primaryKeyColumnName = Item.primaryKeyColumnName;
 		
 		try {
 			resultSet = connection.executeSelect(table, null, null);
@@ -56,7 +57,7 @@ public class ItemDao extends Dao {
 		// Get and set the item attributes
 		try {
 			while (resultSet.next()) {
-				int id = Integer.parseInt(resultSet.getString("id"));
+				int id = Integer.parseInt(resultSet.getString(primaryKeyColumnName));
 				Item item = new Item(this, id);
 				
 				for (String attribute : item.getAttributeMap().keySet()) {

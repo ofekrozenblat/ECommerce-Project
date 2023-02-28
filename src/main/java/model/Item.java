@@ -6,6 +6,7 @@ import dao.ItemDao;
 public class Item extends Model{
 
 	public static final String table = "items";
+	public static final String primaryKeyColumnName = "id";
 	
 	public Item(Dao dao) {
 		super(dao);
@@ -18,6 +19,11 @@ public class Item extends Model{
 	@Override
 	public String getTable() {
 		return table;
+	}
+
+	@Override
+	public String getPrimaryKeyColumnName() {
+		return primaryKeyColumnName;
 	}
 
 	@Override

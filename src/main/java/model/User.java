@@ -12,6 +12,8 @@ import dao.UserDao;
 public class User extends Model {
 	
 	public static final String table = "users";
+	public static final String primaryKeyColumnName = "id";
+	
 	
 	public User(UserDao dao) {
 		super(dao);
@@ -23,6 +25,11 @@ public class User extends Model {
 	
 	public String getTable() {
 		return table;
+	}
+
+	@Override
+	public String getPrimaryKeyColumnName() {
+		return primaryKeyColumnName;
 	}
 
 	protected String[] getAttributeNames() {
