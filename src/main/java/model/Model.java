@@ -154,6 +154,12 @@ public abstract class Model {
 		}	
 	}
 	
+	/**
+	 * Converts the model into a JSON format.
+	 * 
+	 * @return JSON string representation of this mode.
+	 * @deprecated Currently should not be used.
+	 */
 	public String toJson() {
 		StringBuilder json = new StringBuilder();
         json.append("{");
