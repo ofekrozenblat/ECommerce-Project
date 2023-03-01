@@ -1,16 +1,18 @@
-
-
-function loadMore(){
+function loadMore() {
 	let address = "Catalog"
 	let data = "loadMore=true"
-	
+
 	let catalog_list = document.getElementById('catalog_list');
 	let load_more_button = document.getElementById('load_more');
-	ajaxGET(address, data, function(response){
-		if(response.length == 2){
+	showLoading(catalog_list)
+
+	ajaxGET(address, data, function(response) {
+
+		if (response.getResponseHeader("Loaded-All")) {
 			load_more_button.style.display = "none";
-		}else{
-			catalog_list.innerHTML += response;
 		}
+
+		catalog_list.innerHTML += response.responseText;
+		doneLoading()
 	})
 }
