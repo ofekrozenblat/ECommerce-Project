@@ -40,7 +40,7 @@ public class ItemDao extends Dao {
 		return item;
 	}
 	
-	public List<Item> getAll() throws SQLException {
+	public List<Item> getAll(String[] conditions) throws SQLException {
 		// Creates list of items
 		List<Item> items = new ArrayList<Item>();
 		
@@ -49,7 +49,7 @@ public class ItemDao extends Dao {
 		String primaryKeyColumnName = Item.primaryKeyColumnName;
 		
 		try {
-			resultSet = connection.executeSelect(table, null, null);
+			resultSet = connection.executeSelect(table, null, conditions);
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive items");
 		}

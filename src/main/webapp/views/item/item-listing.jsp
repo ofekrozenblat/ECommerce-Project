@@ -3,9 +3,14 @@
 <%@ page import="model.Item" %>
 <%@ page import="java.util.ArrayList" %>
 
-<div class="item-listing d-flex flex-row flex-wrap justify-content-evenly">
+<div class="item-listing d-flex flex-row flex-wrap">
 <%
-    String list_name = request.getParameter("list_name");
+	String list_name = "catalog_list";
+
+	if(request.getParameter("list_name") != null){
+		list_name = request.getParameter("list_name");
+	}
+	
     ArrayList<Item> item_list = (ArrayList<Item>) request.getAttribute(list_name);
     for(Item item: item_list)
     {

@@ -40,7 +40,7 @@ public class ItemDetailController extends HttpServlet {
 		
 		List<Item> recommendations = new ArrayList<Item>();
 		try {
-			List<Item> items = new ItemDao().getAll();
+			List<Item> items = new ItemDao().getAll(null);
 			
 			for(int i = 0; i < 4; i++) {
 				recommendations.add(items.get(i));
