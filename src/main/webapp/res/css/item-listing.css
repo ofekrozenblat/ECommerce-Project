@@ -13,3 +13,8 @@
 	transform: translateY(-0.5rem);
 	box-shadow: 0 0 21px rgba(33,33,33,.2); 
 }
+
+.listed-item .card-footer{
+	background-color: white !important;
+	border: none !important;
+}

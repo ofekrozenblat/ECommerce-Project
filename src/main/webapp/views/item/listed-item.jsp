@@ -7,7 +7,9 @@
     	<h5>${param.name}</h5>
     	<h5>$${param.price}</h5>
     </div>
-    <p class="card-text">${param.description}</p>
+    <p class="card-text align-middle">${param.description}</p>
+  </div>
+   <div class="card-footer">
     <a href="" class="btn btn-custom w-100">Try On</a>
   </div>
 </div>
