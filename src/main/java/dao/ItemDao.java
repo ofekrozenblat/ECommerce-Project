@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Item;
+import model.Review;
 
 public class ItemDao extends Dao {
 
@@ -33,8 +34,13 @@ public class ItemDao extends Dao {
 				String value = resultSet.getString(attribute);
 				item.setAttribute(attribute, value);
 			}
+			
+			setReviewsForItem(item);
+			
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive attributes of the item with id " + id + ".");
+		}catch(Exception e) {
+			throw new SQLException(e.getMessage());
 		}
 
 		return item;
@@ -64,14 +70,21 @@ public class ItemDao extends Dao {
 					String value = resultSet.getString(attribute);
 					item.getAttributeMap().put(attribute, value);
 				}
-				
+				setReviewsForItem(item);
 				items.add(item);
 			}
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive attributes of the items");
+		}catch(Exception e) {
+			throw new SQLException(e.getMessage());
 		}
 		
 		return items;
+	}
+	
+	private void setReviewsForItem(Item item) throws Exception{
+		List<Review> reviews = new ReviewDao().getReviewsByItemId(item.getId());
+		item.setReviews(reviews);
 	}
 
 }

@@ -121,7 +121,7 @@ public class ConnectionManager {
 			preparedStatement.close();
 			con.close();
 		} catch (SQLException e) {
-			throw new SQLException("Failed to execute insert.");
+			throw new SQLException("Failed to execute insert: " + e.getMessage());
 		}
 		
 		return primaryKey;
