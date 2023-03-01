@@ -8,7 +8,7 @@
 
 <link rel="StyleSheet" href="res/css/catalog.css" type="text/css"></link>
 <link rel="StyleSheet" href="res/css/item-listing.css" type="text/css"></link>
-
+<script type="text/javascript" src="res/js/catalog.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -42,10 +42,12 @@
 					<h3 class="filter-title">Filters</h3>
 				</div>
 				<div class="w-75 me-5 ms-auto text-center">
-					<jsp:include page="item/item-listing.jsp">
-						<jsp:param name="list_amount" value="12" />
-					</jsp:include>
-					<button class="btn btn-danger mt-3 mb-3">Show More</button>
+					<div id="catalog_list">
+						<jsp:include page="item/item-listing.jsp">
+							<jsp:param name="list_name" value="catalog_list" />
+						</jsp:include>
+					</div>
+					<button onclick="loadMore()" id="load_more" class="btn btn-danger mt-3 mb-3">Show More</button>
 				</div>
 			</div>
 			

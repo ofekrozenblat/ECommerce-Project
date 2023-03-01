@@ -39,7 +39,7 @@ public class HomeController extends HttpServlet {
 		List<Item> newArrivals = new ArrayList<Item>();
 		
 		try {
-			items = new ItemDao().getAll();
+			items = new ItemDao().getAll(null);
 			
 			for(int i = 0; i < (FEATURED_COUNT + NEW_ARRIVALS_COUNT); i++) {
 				if(i < FEATURED_COUNT) {
