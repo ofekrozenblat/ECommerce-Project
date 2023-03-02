@@ -64,19 +64,9 @@
 					</div>
 				</div>
 				
-				<div class="d-flex flex-row flex-wrap justify-content-center">
-					<%
-						for(int i = 0; i < 5; i++)
-						{%>
-					<jsp:include page="item-review.jsp">
-						<jsp:param name="rating" value="3" />
-						<jsp:param name="date" value="02/13/2023" />
-					</jsp:include>
-					<%}
-					%>
+				<div id="review-list" class="d-flex flex-row flex-wrap justify-content-center" data-showing="5">
+					<jsp:include page="item-review-listing.jsp"/>
 				</div>
-				<button class="btn btn-custom-round mt-3 mb-3 mx-auto w-25">Show
-					more reviews</button>
 				
 				<!--  RECOMMENDATION SECTION -->
 				<hr></hr>

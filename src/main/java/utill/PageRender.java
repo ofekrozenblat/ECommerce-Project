@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * 
+ * This is used to load JSP pages dynamically
  * @author shach
  *
  */

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDao;
 import model.Item;
+import model.Review;
 
 /**
  * Servlet implementation class ItemController
@@ -21,6 +22,7 @@ import model.Item;
 @WebServlet("/Item_detail")
 public class ItemDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final int REVIEWS_BATCH_SIZE = 12;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,7 +47,10 @@ public class ItemDetailController extends HttpServlet {
 			e1.printStackTrace();
 		}
 		
-		//Set request attributes		
+		//Set request attributes	
+		
+		List<Review> itemReviews = item.getReviews();
+		
 		request.setAttribute("name", item.getName());
 		request.setAttribute("color", item.getColor());
 		request.setAttribute("brand", item.getBrand());
@@ -54,8 +59,9 @@ public class ItemDetailController extends HttpServlet {
 		request.setAttribute("review_count", item.getReviews().size());
 		request.setAttribute("price", item.getPrice());
 		request.setAttribute("description", item.getDescription());
-		request.setAttribute("review_count", item.getReviews().size());
+		request.setAttribute("review_count", itemReviews.size());
 		request.setAttribute("recommendation_list", item.getRecommendations());
+		request.setAttribute("reviews", itemReviews);
 		
 		
 		String target = "/views/item/item-detail.jsp";
