@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<div class="card w-100 my-2 mx-5">
+<div class="card w-100 my-2 mx-5" data-rating="${param.rating}" data-date="${param.date}">
 	<div class="card-header">
 		<div class="d-flex flex-row flex-wrap align-items-center mb-2">
 			<jsp:include page="star-rating.jsp">

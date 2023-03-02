@@ -57,15 +57,15 @@
 					Write a review
 					</button>
 					<div class="d-flex flex-row w-25">
-							<select class="form-select">
-								<option class="sort-option" selected>Latest</option>
-								<option class="sort-option">Rating: High to Low</option>
-								<option class="sort-option">Rating: Low to High</option>
+							<select id="rating-sort" class="form-select">
+								<option value=1 class="sort-option" selected>Latest</option>
+								<option value=2 class="sort-option">Rating: High to Low</option>
+								<option value=3 class="sort-option">Rating: Low to High</option>
 							</select>
 					</div>
 				</div>
 				
-				<div id="review-list" class="d-flex flex-row flex-wrap justify-content-center" data-showing="5">
+				<div id="review-list" class="d-flex flex-row flex-wrap justify-content-center">
 					<jsp:include page="item-review-listing.jsp"/>
 				</div>
 				
