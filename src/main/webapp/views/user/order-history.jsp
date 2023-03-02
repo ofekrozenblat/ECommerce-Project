@@ -7,9 +7,10 @@
 	int number_of_orders = 5;
 	for (int i = 0; i < number_of_orders; i++) {
 	%>
-	<jsp:include page="order-history-item.jsp" />
+	<jsp:include page="order-history-order.jsp" >
+		<jsp:param name="orderNumber" value="<%= i %>" />
+	</jsp:include>
 	<hr class="mb-3">
 	<%}
 %>
-<button class="btn btn-custom-round w-50 mx-auto">Load More Orders</button>
 </div>
