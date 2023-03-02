@@ -10,7 +10,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="mb-3">
+		  <label for="review-title" class="form-label fw-bold">Title</label>
+		  <input type="text" class="form-control" id="review-title" placeholder="Summarize your rating">
+		</div>
+		<div class="my-3">
+		  <label for="review-description" class="form-label fw-bold">Description</label>
+		  <textarea class="form-control" id="review-description" rows="3"></textarea>
+		</div>
+		<div class="mt-3">
+		  <label for="review-rating" class="form-label fw-bold">Rating</label>
+		  <div id="review-rating">
+			<jsp:include page="star-rating.jsp">
+				<jsp:param name="rating" value="0" />
+			</jsp:include>
+		  </div>
+		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
