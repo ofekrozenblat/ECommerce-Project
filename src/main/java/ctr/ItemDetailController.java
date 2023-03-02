@@ -35,26 +35,30 @@ public class ItemDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String item_id = request.getParameter("item_id");
-		String target = "/views/item/item-detail.jsp";
+		int item_id = Integer.parseInt(request.getParameter("item_id"));
 		
-		List<Item> recommendations = new ArrayList<Item>();
+		Item item = null;
 		try {
-			List<Item> items = new ItemDao().getAll(null);
-			
-			for(int i = 0; i < 4; i++) {
-				recommendations.add(items.get(i));
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			item = new ItemDao().get(item_id);
+		} catch (SQLException e1) {
+			// TO DO: Return 404 PAGE
+			e1.printStackTrace();
 		}
 		
-		request.setAttribute("rating", 3);
-		request.setAttribute("review_count", 123);
-		request.setAttribute("recommendation_list", recommendations);
+		//Set request attributes		
+		request.setAttribute("name", item.getName());
+		request.setAttribute("color", item.getColor());
+		request.setAttribute("brand", item.getBrand());
+		request.setAttribute("category", item.getCategory());
+		request.setAttribute("rating", item.getRating());
+		request.setAttribute("review_count", item.getReviews().size());
+		request.setAttribute("price", item.getPrice());
+		request.setAttribute("description", item.getDescription());
+		request.setAttribute("review_count", item.getReviews().size());
+		request.setAttribute("recommendation_list", item.getRecommendations());
 		
+		
+		String target = "/views/item/item-detail.jsp";
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 

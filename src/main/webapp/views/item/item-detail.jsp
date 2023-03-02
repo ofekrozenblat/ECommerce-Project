@@ -25,9 +25,8 @@
 					<img src="res/img/glasses-default.png" class="img-fluid" alt="">
 					<div class="col">
 						<div class="card-block px-3 py-3 d-flex flex-column">
-							<h4 class="card-title mb-1 fw-bold">Item Name</h4>
-							<p class="card-text text-muted">Bold and colorful, these
-								glasses are sure to make a statement.</p>
+							<h4 class="card-title mb-1 fw-bold">${name}</h4>
+							<p class="card-text text-muted">${description}</p>
 
 							<div class="d-flex flex-row flex-wrap align-items-center mb-2">
 								<jsp:include page="star-rating.jsp">
@@ -35,7 +34,7 @@
 								</jsp:include>
 								<span class="rating-count">(${review_count} Reviews)</span>
 							</div>
-							<h4 class="card-title mb-5 fw-bold ps-1">$999</h4>
+							<h4 class="card-title mb-5 fw-bold ps-1">$${price}</h4>
 							<a href="" class="btn btn-custom-round w-50 mx-auto"> Add to Cart </a>
 						</div>
 					</div>
@@ -43,12 +42,10 @@
 				
 				<!--  DESCRIPTION SECTION -->
 				<hr></hr>
-				<h4 class="mb-1 fw-bold ms-2">DESCRIPTION</h4>
-				<p class="ms-2 me-5">Luxury glasses are high-end eyewear that
-					are crafted from premium materials and designed with meticulous
-					attention to detail. These glasses are often adorned with exquisite
-					embellishments such as precious metals, Swarovski crystals, or
-					intricate engraving.</p>
+				<h4 class="mb-2 fw-bold ms-2">DETAILS</h4>
+				<p class="ms-2 me-5">Color: ${color}</p>
+				<p class="ms-2 me-5">Brand: ${brand}</p>
+				<p class="ms-2 me-5">Category: ${category}</p>
 				<a href="" class="btn btn-custom-round w-25 mx-auto">Try them on!</a>
 				
 				<!--  REVIEWS SECTION -->
