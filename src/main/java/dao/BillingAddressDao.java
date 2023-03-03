@@ -7,11 +7,13 @@ import model.BillingAddress;
 import model.User;
 
 /**
- * The {@code UserDao} class is in charge of providing the interfaces for the {@link model.User} model
- * to communicate with the database and any additional database operations related to this model.
+ * The {@code BillingAddressDao} class is in charge of providing the 
+ * interfaces for the {@link model.BillingAddress} model
+ * to communicate with the database and any additional 
+ * database operations related to this model.
  * 
  * @author ofekr
- * @see model.User
+ * @see model.BillingAddress
  * @see Dao
  *
  */
@@ -19,10 +21,8 @@ public class BillingAddressDao extends Dao {
 	
 	@Override
 	public BillingAddress get(int id)  throws SQLException {
-		// Creates the user
 		BillingAddress billingAddress = new BillingAddress(this, id);
-				
-		// Gets the user from DB based on primary key
+		
 		String table = billingAddress.getTable();
 		String condition = billingAddress.getPrimaryKeyColumnName() + "=" + id;
 		String[] conditions = {condition};

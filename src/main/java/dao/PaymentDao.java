@@ -8,11 +8,13 @@ import model.Payment;
 import model.User;
 
 /**
- * The {@code UserDao} class is in charge of providing the interfaces for the {@link model.User} model
- * to communicate with the database and any additional database operations related to this model.
+ * The {@code PaymentDao} class is in charge of providing the 
+ * interfaces for the {@link model.Payment} model
+ * to communicate with the database and any 
+ * additional database operations related to this model.
  * 
  * @author ofekr
- * @see model.User
+ * @see model.Payment
  * @see Dao
  *
  */
@@ -20,10 +22,8 @@ public class PaymentDao extends Dao {
 	
 	@Override
 	public Payment get(int id)  throws SQLException {
-		// Creates the user
 		Payment payment = new Payment(this, id);
-				
-		// Gets the user from DB based on primary key
+		
 		String table = payment.getTable();
 		String condition = payment.getPrimaryKeyColumnName() + "=" + id;
 		String[] conditions = {condition};

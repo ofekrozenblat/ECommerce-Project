@@ -15,12 +15,12 @@ import model.Payment;
 import model.User;
 
 /**
- * The {@code UserDao} class is in charge of providing the interfaces for the
- * {@link model.User} model to communicate with the database and any additional
+ * The {@code OrderDao} class is in charge of providing the interfaces for the
+ * {@link model.Order} model to communicate with the database and any additional
  * database operations related to this model.
  * 
  * @author ofekr
- * @see model.User
+ * @see model.Order
  * @see Dao
  *
  */
@@ -28,10 +28,8 @@ public class OrderDao extends Dao {
 
 	@Override
 	public Order get(int id) throws SQLException {
-		// Creates the user
 		Order order = new Order(this, id);
 
-		// Gets the user from DB based on primary key
 		String table = order.getTable();
 		String condition = order.getPrimaryKeyColumnName() + "=" + id;
 		String[] conditions = { condition };
