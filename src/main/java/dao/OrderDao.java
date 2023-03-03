@@ -2,7 +2,9 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import model.BillingAddress;
@@ -77,6 +79,42 @@ public class OrderDao extends Dao {
 		return order;
 	}
 	
+	/**
+	 * Retrieves a list of orders related to a user
+	 * 
+	 * @param userId id of the user
+	 * @return list of orders
+	 * @throws SQLException if retrieval failed
+	 */
+	public List<Order> getOrdersByUserId(int userId) throws SQLException{
+		List<Order> orders = new ArrayList<Order>();
+		
+		String table = Order.table;
+		String condition = "user_id" + "=" + userId;
+		String[] conditions = { condition };
+		ResultSet resultSet;
+
+		try {
+			resultSet = connection.executeSelect(table, null, conditions);
+			
+			while(resultSet.next()) {
+				String orderIdString = resultSet.getString(Order.primaryKeyColumnName);
+				int orderId = Integer.parseInt(orderIdString);
+				Order order = this.get(orderId);
+				orders.add(order);
+			}
+			
+		} catch (SQLException e) {
+			throw new SQLException("Failed to get orders with user id " + userId 
+					+ ": " + e.getMessage());
+		} catch(NumberFormatException e) {
+			throw new SQLException("Failed to get orders with user id " + userId 
+					+ " because of number formatting: " + e.getMessage());
+		}
+		
+		return orders;
+	}
+	
 	@Override
 	public int create(Model model) throws SQLException {
 		int id = super.create(model);
@@ -84,7 +122,7 @@ public class OrderDao extends Dao {
 		// Save the items related to this order in the order_items table
 		Order order = (Order) model;
 		String orderItemTable = order.orderItemsTable;
-		String primaryKeyColumn = "id";
+		String primaryKeyColumn = "id"; // primarykey column name of order_items table
 		
 		for(Item item : order.getItems()) {
 			Map<String, String> attributes = new HashMap<String, String>();
@@ -104,6 +142,27 @@ public class OrderDao extends Dao {
 		return id;
 	}
 
+	/*TODO: 
+	 * --> save() will currently not update the items related to this order
+	 * --> delete() will currently not delete the items related to this order
+	*/
+	
+	@Override
+	/**
+	 * @apiNote this will currently not save items related to this order
+	 */
+	public void save(Model model) throws SQLException {
+		super.save(model);
+	}
+	
+	@Override
+	/**
+	 * @apiNote this will currently not delete items related to this order
+	 */
+	public void delete(Model model) throws SQLException {
+		super.delete(model);
+	}
+	
 	private void setOrderItems(Order order) throws SQLException {
 		// Gets the user from DB based on primary key
 		int id = order.getId();

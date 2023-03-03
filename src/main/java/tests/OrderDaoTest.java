@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -72,6 +73,17 @@ class OrderDaoTest {
 			Order order = (new OrderDao()).get(6);
 			assertEquals(6, order.getId());
 			assertTrue(order.getItems().size() == 2);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			fail("Exception: " + e.getMessage());
+		}
+	}
+	
+	@Test
+	void testGetByUserId() {
+		try {
+			List<Order> orders = (new OrderDao()).getOrdersByUserId(1);
+			assertTrue(orders.size() == 4);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			fail("Exception: " + e.getMessage());
