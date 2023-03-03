@@ -27,8 +27,18 @@ public class ModelFactory {
 	 * @return {@link Review} object
 	 */
 	public static Review createReview() {
-		// Performs dependency injection of the data access object related to the user class.
+		// Performs dependency injection of the data access object related to the review class.
 		return new Review(new ReviewDao());
+	}
+	
+	/**
+	 * Creates and returns a {@link Order} model.
+	 * 
+	 * @return {@link Order} object
+	 */
+	public static Order createOrder() {
+		// Performs dependency injection of the data access object related to the Order class.
+		return new Order(new OrderDao());
 	}
 	
 }
