@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ page import="utill.SessionManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,7 @@
 								<span class="rating-count">(${review_count} Reviews)</span>
 							</div>
 							<h4 class="card-title mb-5 fw-bold ps-1">$${price}</h4>
-							<a href="" class="btn btn-custom-round w-50 mx-auto"> Add to Cart </a>
+							<button onclick="addToCart()" class="btn btn-custom-round w-50 mx-auto"> Add to Cart </button>
 						</div>
 					</div>
 				</div>
@@ -54,7 +55,8 @@
 				<h4 class="mb-3 ms-2 fw-bold">REVIEWS</h4>
 				<div class="mb-3 ms-2 me-5 d-flex flex-row justify-content-between">
 				<% 
-				boolean is_Auth = (boolean) request.getSession().getAttribute("is_auth");
+				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+				boolean is_Auth = sm.isAuth();
 				if(is_Auth){
 					%>
 						<button type="button" class="btn btn-custom-round  w-25" data-bs-toggle="modal" data-bs-target="#write_review_modal">

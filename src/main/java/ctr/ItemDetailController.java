@@ -17,6 +17,7 @@ import dao.ItemDao;
 import factories.ModelFactory;
 import model.Item;
 import model.Review;
+import utill.SessionManager;
 
 /**
  * Servlet implementation class ItemController
@@ -76,32 +77,40 @@ public class ItemDetailController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// New review created
+
 		
 		int item_id = (int) request.getSession().getAttribute(REQ_SESSION_ITEM_ID);
 		
-		String title = (String) request.getParameter("title");
-		String description = (String) request.getParameter("description");
-		int rating = Integer.parseInt((String) request.getParameter("rating"));
-		
-		try {
-			Review review = ModelFactory.createReview();
+		// New review created
+		if(request.getParameter("new-review") != null) {
+			String title = (String) request.getParameter("title");
+			String description = (String) request.getParameter("description");
+			int rating = Integer.parseInt((String) request.getParameter("rating"));
 			
-			review.setDate(new Date());
-			review.setTitle(title);
-			review.setDescription(description);
-			review.setRating(rating);
-			review.setItemId(item_id);
-			review.setUserId(1); 
+			try {
+				Review review = ModelFactory.createReview();
+				
+				review.setDate(new Date());
+				review.setTitle(title);
+				review.setDescription(description);
+				review.setRating(rating);
+				review.setItemId(item_id);
+				review.setUserId(1); 
+				
+				review.save();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				response.setHeader("error", "something went wrong");
+				return;
+			}
 			
-			review.save();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			response.setHeader("error", "something went wrong");
-			return;
+			response.setHeader("success", "true");
 		}
 		
-		response.setHeader("success", "true");
+		if(request.getParameter("add-to-cart") != null) {
+			SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+			sm.addToCart(item_id, 1);
+		}
 	}
 
 }

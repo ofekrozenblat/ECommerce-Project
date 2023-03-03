@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ page import="utill.SessionManager" %>
 <!DOCTYPE html>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 	<div class="container-fluid">
@@ -24,15 +25,18 @@
 					class="input-group-text material-symbols-outlined text-light">search</span>
 			</div>
 			<% 
-				boolean is_Auth = (boolean) request.getSession().getAttribute("is_auth");
-				boolean is_Admin = (boolean) request.getSession().getAttribute("is_admin");;
+				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+				boolean is_Auth = sm.isAuth();
+				boolean is_Admin = sm.isAdmin();
+				
+				int cart_size = sm.cartSize();
 				if(is_Auth){
 					%>
 			<ul class="navbar-nav ms-auto d-flex">
 				<li class="nav-item">
 					<a class="nav-link active icon-nav-item position-relative" href="Cart">
 							<span class="material-icons-outlined icon-30">shopping_cart
-						</span> <span class="custom-badge">5</span> <span
+						</span> <span value="<%= cart_size %>" id="nav-cart-size" class="custom-badge"><%= cart_size %></span> <span
 							class="icon-nav-item-text">Cart</span>
 					</a>
 				</li>

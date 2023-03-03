@@ -158,3 +158,17 @@ function successfullySubmited(){
 	body.innerHTML = "Thank you for the review!";
 	submit_button.style.display = "none";
 }
+
+function addToCart(){
+	let address = "Item_detail"
+	let data = `add-to-cart=true`;
+	
+	ajaxPOST(address, data, function(response){
+		
+		let nav_cart_size = document.getElementById("nav-cart-size");
+		let size = parseInt(nav_cart_size.getAttribute('value')) + 1;
+		nav_cart_size.setAttribute('value', size);
+		nav_cart_size.innerHTML = size;
+		
+	})
+}
