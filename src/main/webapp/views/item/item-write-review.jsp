@@ -11,16 +11,16 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-		  <label for="review-title" class="form-label fw-bold">Title</label>
-		  <input type="text" class="form-control" id="review-title" placeholder="Summarize your rating">
+		  <label for="write-review-title" class="form-label fw-bold">Title</label>
+		  <input type="text" class="form-control" id="write-review-title" placeholder="Summarize your rating">
 		</div>
 		<div class="my-3">
-		  <label for="review-description" class="form-label fw-bold">Description</label>
-		  <textarea class="form-control" id="review-description" rows="3"></textarea>
+		  <label for="write-review-description" class="form-label fw-bold">Description</label>
+		  <textarea class="form-control" id="write-review-description" rows="3"></textarea>
 		</div>
 		<div class="mt-3">
-		  <label for="review-rating" class="form-label fw-bold">Rating</label>
-		  <div id="review-rating">
+		  <label for="write-review-rating" class="form-label fw-bold">Rating</label>
+		  <div id="write-review-rating">
 			<jsp:include page="star-rating.jsp">
 				<jsp:param name="rating" value="0" />
 			</jsp:include>
@@ -29,7 +29,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-custom ">Submit</button>
+        <button type="button" class="btn btn-custom" onclick="submitReview()">Submit</button>
       </div>
     </div>
   </div>

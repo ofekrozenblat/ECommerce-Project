@@ -1,12 +1,12 @@
 
 window.onload = function() {
-	setReviewRatingFunctionality();
+	setWriteReviewRatingFunctionality();
 	setRatingSortFunctionality();
 };
 
 
-function setReviewRatingFunctionality() {
-	let review_rating = document.getElementById("review-rating");
+function setWriteReviewRatingFunctionality() {
+	let review_rating = document.getElementById("write-review-rating");
 	review_rating.setAttribute('value', 0);
 
 	let stars_div = review_rating.children[0];
@@ -114,4 +114,31 @@ function sortRatingHighToLow(){
 	});
 	
 	reviews.forEach(review => review_list.appendChild(review));
+}
+
+function submitReview(){
+	let title = document.getElementById("write-review-title").value;
+	let description = document.getElementById("write-review-description").value;
+	let rating = document.getElementById("write-review-rating").getAttribute("value");
+	
+	
+	// TO DO: SEND DATA TO BACKEND
+	const urlParams = new URLSearchParams(window.location.search);
+	
+	let address = "/Item_detail"
+	let data = `item_id=${urlParams.get("item_id")}&new-review=true&title=${title}&
+	description=${description}&rating=${rating}`;
+	
+	console.log(address, data);
+	successfullySubmited();
+}
+
+
+function successfullySubmited(){
+	let write_review_modal = document.getElementById("write_review_modal");
+	
+	let body = write_review_modal.querySelector(".modal-body");
+	let submit_button = write_review_modal.querySelector(".btn-custom");
+	body.innerHTML = "Thank you for the review!";
+	submit_button.style.display = "none";
 }
