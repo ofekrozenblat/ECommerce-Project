@@ -87,7 +87,6 @@ public class ItemDetailController extends HttpServlet {
 		try {
 			Review review = ModelFactory.createReview();
 			
-			review.setDate(new Date());
 			review.setTitle(title);
 			review.setDescription(description);
 			review.setRating(rating);
