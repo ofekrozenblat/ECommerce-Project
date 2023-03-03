@@ -28,7 +28,7 @@ public class Payment extends Model {
 	@Override
 	protected String[] getAttributeNames() {
 		return new String[] {"payment_type", "credit_card_name", "credit_card_number", 
-				"credit_card_expiration", "credit_card_cv"};
+				"credit_card_expiration", "credit_card_cvv"};
 	}
 	
 	// Getters & Setters
@@ -64,12 +64,12 @@ public class Payment extends Model {
 	    return getAttribute("credit_card_expiration");
 	}
 
-	public void setCreditCardCv(String creditCardCv) {
-	    setAttribute("credit_card_cv", creditCardCv);
+	public void setCreditCardCvv(String creditCardCv) {
+	    setAttribute("credit_card_cvv", creditCardCv);
 	}
 
-	public String getCreditCardCv() {
-	    return getAttribute("credit_card_cv");
+	public String getCreditCardCvv() {
+	    return getAttribute("credit_card_cvv");
 	}
 
 }
