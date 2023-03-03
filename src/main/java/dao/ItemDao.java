@@ -68,7 +68,7 @@ public class ItemDao extends Dao {
 				
 				for (String attribute : item.getAttributeMap().keySet()) {
 					String value = resultSet.getString(attribute);
-					item.getAttributeMap().put(attribute, value);
+					item.setAttribute(attribute, value);
 				}
 				setReviewsForItem(item);
 				items.add(item);

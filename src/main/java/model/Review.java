@@ -15,13 +15,13 @@ public class Review extends Model {
 	
 	public Review(ReviewDao dao) {
 		super(dao);
+		
+		// Set the date of this review to the current date it was created
+		setDate(new Date());
 	}
 	
 	public Review(ReviewDao dao, int id) {
 		super(dao, id);
-		
-		// Set the date of this review to the current date it was created
-		setDate(new Date());
 	}
 
 	@Override

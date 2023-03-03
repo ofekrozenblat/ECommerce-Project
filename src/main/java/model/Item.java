@@ -15,11 +15,11 @@ public class Item extends Model {
 
 	public Item(ItemDao dao) {
 		super(dao);
+		reviews = new ArrayList<Review>();
 	}
 
 	public Item(ItemDao dao, int id) {
 		super(dao, id);
-
 		reviews = new ArrayList<Review>();
 	}
 

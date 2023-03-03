@@ -15,10 +15,6 @@ import model.User;
  */
 public class UserDao extends Dao {
 	
-	public UserDao() {
-		
-	}
-	
 	@Override
 	public User get(int id)  throws SQLException {
 		// Creates the user

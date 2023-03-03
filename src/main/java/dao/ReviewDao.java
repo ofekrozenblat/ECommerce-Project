@@ -85,7 +85,7 @@ public class ReviewDao extends Dao {
 				
 				for (String attribute : review.getAttributeMap().keySet()) {
 					String value = resultSet.getString(attribute);
-					review.getAttributeMap().put(attribute, value);
+					review.setAttribute(attribute, value);
 				}
 				
 				reviews.add(review);
