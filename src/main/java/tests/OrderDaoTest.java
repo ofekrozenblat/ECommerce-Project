@@ -9,9 +9,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import dao.OrderDao;
+import dao.*;
+import factories.ModelFactory;
 import hthurow.tomcatjndi.TomcatJNDI;
-import model.Order;
+import model.*;
 
 class OrderDaoTest {
 	
@@ -30,11 +31,47 @@ class OrderDaoTest {
     	tomcatJNDI.tearDown();
     }
 	
+    @Test
+    void testCreateAndGet() {
+    	Order order = ModelFactory.createOrder();
+    	ItemDao itemDao = new ItemDao();
+    	PaymentDao paymentDao = new PaymentDao();
+    	BillingAddressDao billingAddressDao = new BillingAddressDao();
+    	
+    	try {
+			Item item10 =  itemDao.get(10);
+			Item item26 =  itemDao.get(26);
+			order.addItem(item10);
+			order.addItem(item26);
+			order.calculateTotal();
+			
+			Payment payment = paymentDao.get(1);
+			BillingAddress billingAddress = billingAddressDao.get(1);
+			
+			order.setBillingAddress(billingAddress);
+			order.setPayment(payment);
+			order.setUserId(1);
+			
+			assertTrue(order.getId() == -1);
+			
+			order.save();
+			
+			// Check to see that the order was created successfully
+			assertTrue(order.getId() > 0);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			fail("Exception: " + e.getMessage());
+		}
+    	
+    }
+    
 	@Test
 	void testGet() {
 		try {
-			Order order = (new OrderDao()).get(2);
-			assertEquals(2, order.getId());
+			Order order = (new OrderDao()).get(6);
+			assertEquals(6, order.getId());
+			assertTrue(order.getItems().size() == 2);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			fail("Exception: " + e.getMessage());

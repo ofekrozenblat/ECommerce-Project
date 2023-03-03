@@ -2,9 +2,12 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import model.BillingAddress;
 import model.Item;
+import model.Model;
 import model.Order;
 import model.Payment;
 import model.User;
@@ -46,28 +49,59 @@ public class OrderDao extends Dao {
 				order.setAttribute(attribute, value);
 			}
 		} catch (SQLException e) {
-			throw new SQLException("Failed to retreive attributes of the payment with id " + id + ".");
+			throw new SQLException("Failed to retreive attributes of "
+					+ "the payment with id " + id + ".");
 		}
 
 		try {
 			setPayment(order);
 		} catch (SQLException e) {
-			throw new SQLException("Failed to get payment of order with id " + id + ": " + e.getMessage());
+			throw new SQLException("Failed to get payment of "
+					+ "order with id " + id + ": " + e.getMessage());
 		}
 
 		try {
 			setBillingAddress(order);
 		} catch (SQLException e) {
-			throw new SQLException("Failed to get billing address of order with id " + id + ": " + e.getMessage());
+			throw new SQLException("Failed to get billing address "
+					+ "of order with id " + id + ": " + e.getMessage());
 		}
 		
 		try {
 			setOrderItems(order);
 		} catch (SQLException e) {
-			throw new SQLException("Failed to get items of order with id " + id + ": " + e.getMessage());
+			throw new SQLException("Failed to get items of order "
+					+ "with id " + id + ": " + e.getMessage());
 		}
 
 		return order;
+	}
+	
+	@Override
+	public int create(Model model) throws SQLException {
+		int id = super.create(model);
+		
+		// Save the items related to this order in the order_items table
+		Order order = (Order) model;
+		String orderItemTable = order.orderItemsTable;
+		String primaryKeyColumn = "id";
+		
+		for(Item item : order.getItems()) {
+			Map<String, String> attributes = new HashMap<String, String>();
+			attributes.put("order_id", String.valueOf(id));
+			attributes.put("item_id", String.valueOf(item.getId()));
+			
+			// Executes the insert and gets the ID of the new primary key
+			int retrievedPrimaryKey = connection.executeInsert(orderItemTable, 
+					primaryKeyColumn, attributes);
+			
+			if (retrievedPrimaryKey == -1) {
+				throw new SQLException("Failed to create order item of "
+						+ "order with id " + id);
+			}
+		}
+		
+		return id;
 	}
 
 	private void setOrderItems(Order order) throws SQLException {

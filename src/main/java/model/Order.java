@@ -21,11 +21,11 @@ public class Order extends Model {
 	
 	public Order(OrderDao dao) {
 		super(dao);
+		orderItems = new ArrayList<Item>();
 	}
 	
 	public Order(OrderDao dao, int id) {
 		super(dao, id);
-		
 		orderItems = new ArrayList<Item>();
 	}
 
@@ -42,6 +42,19 @@ public class Order extends Model {
 	@Override
 	protected String[] getAttributeNames() {
 		return new String[] {"total", "user_id", "billing_address_id", "payment_id"};
+	}
+	
+	/**
+	 * Will re-calculate the total of the order based on the items
+	 * in this order and set the calculated total to the total of this order.
+	 */
+	public void calculateTotal() {
+		double total = 0.0;
+		for(Item item : this.orderItems) {
+			total += item.getPrice();
+		}
+		
+		setTotal(total);
 	}
 	
 	public void setTotal(double total) {
@@ -78,6 +91,7 @@ public class Order extends Model {
 	
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+		setPaymentId(payment.getId());
 	}
 	
 	public Payment getPayment() {
@@ -86,6 +100,7 @@ public class Order extends Model {
 	
 	public void setBillingAddress(BillingAddress billingAddress) {
 		this.billingAddress = billingAddress;
+		setBillingAddressId(billingAddress.getId());
 	}
 	
 	public BillingAddress getBillingAddress() {
@@ -94,6 +109,10 @@ public class Order extends Model {
 	
 	public void addItem(Item item) {
 		this.orderItems.add(item);
+	}
+	
+	public List<Item> getItems(){
+		return this.orderItems;
 	}
 
 }
