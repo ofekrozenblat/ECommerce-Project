@@ -17,6 +17,11 @@
     color: #0046be;
 }
 
+#review-list{
+	max-height: 700px;
+	overflow: auto;
+}
+
 @media (max-width: 1200px) {
 	.info-container{
 		flex-direction: column;

@@ -3,6 +3,7 @@ package ctr;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDao;
+import factories.ModelFactory;
 import model.Item;
+import model.Review;
 
 /**
  * Servlet implementation class ItemController
@@ -21,7 +24,8 @@ import model.Item;
 @WebServlet("/Item_detail")
 public class ItemDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static final String REQ_SESSION_ITEM_ID = "Item_id"; 
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,26 +39,36 @@ public class ItemDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String item_id = request.getParameter("item_id");
-		String target = "/views/item/item-detail.jsp";
+		int item_id = Integer.parseInt(request.getParameter("item_id"));
 		
-		List<Item> recommendations = new ArrayList<Item>();
+		request.getSession().setAttribute(REQ_SESSION_ITEM_ID, item_id);
+		
+		Item item = null;
 		try {
-			List<Item> items = new ItemDao().getAll(null);
-			
-			for(int i = 0; i < 4; i++) {
-				recommendations.add(items.get(i));
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			item = new ItemDao().get(item_id);
+		} catch (SQLException e1) {
+			// TO DO: Return 404 PAGE
+			e1.printStackTrace();
 		}
 		
-		request.setAttribute("rating", 3);
-		request.setAttribute("review_count", 123);
-		request.setAttribute("recommendation_list", recommendations);
+		//Set request attributes	
 		
+		List<Review> itemReviews = item.getReviews();
+		
+		request.setAttribute("name", item.getName());
+		request.setAttribute("color", item.getColor());
+		request.setAttribute("brand", item.getBrand());
+		request.setAttribute("category", item.getCategory());
+		request.setAttribute("rating", item.getRating());
+		request.setAttribute("review_count", item.getReviews().size());
+		request.setAttribute("price", item.getPrice());
+		request.setAttribute("description", item.getDescription());
+		request.setAttribute("review_count", itemReviews.size());
+		request.setAttribute("recommendation_list", item.getRecommendations());
+		request.setAttribute("reviews", itemReviews);
+		
+		
+		String target = "/views/item/item-detail.jsp";
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 
@@ -62,8 +76,32 @@ public class ItemDetailController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// New review created
+		
+		int item_id = (int) request.getSession().getAttribute(REQ_SESSION_ITEM_ID);
+		
+		String title = (String) request.getParameter("title");
+		String description = (String) request.getParameter("description");
+		int rating = Integer.parseInt((String) request.getParameter("rating"));
+		
+		try {
+			Review review = ModelFactory.createReview();
+			
+			review.setDate(new Date());
+			review.setTitle(title);
+			review.setDescription(description);
+			review.setRating(rating);
+			review.setItemId(item_id);
+			review.setUserId(1); 
+			
+			review.save();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			response.setHeader("error", "something went wrong");
+			return;
+		}
+		
+		response.setHeader("success", "true");
 	}
 
 }

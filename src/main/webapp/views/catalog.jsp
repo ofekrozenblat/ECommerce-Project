@@ -9,6 +9,7 @@
 <link rel="StyleSheet" href="res/css/catalog.css" type="text/css"></link>
 <link rel="StyleSheet" href="res/css/item-listing.css" type="text/css"></link>
 <script type="text/javascript" src="res/js/catalog.js"></script>
+
 </head>
 <body class="d-flex flex-column min-vh-100">
 

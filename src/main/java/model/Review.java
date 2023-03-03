@@ -11,6 +11,7 @@ public class Review extends Model {
 	public static final String primaryKeyColumnName = "id";
 	
 	private static final String DATE_PATTERN = "yyyy-MM-dd";
+	private static final String DATE_PATTERN_FULL = "MMMM d', 'yyyy";
 	
 	public Review(ReviewDao dao) {
 		super(dao);
@@ -35,7 +36,7 @@ public class Review extends Model {
 
 	@Override
 	protected String[] getAttributeNames() {
-		return new String[] {"rating", "description", "date", "item_id", "user_id"};
+		return new String[] {"rating", "title", "description", "date", "item_id", "user_id"};
 	}
 	
 	// Getters & Setters
@@ -45,6 +46,14 @@ public class Review extends Model {
 
 	public int getRating() {
 	    return Integer.parseInt(getAttribute("rating"));
+	}
+	
+	public void setTitle(String title) {
+	    setAttribute("title", title);
+	}
+
+	public String getTitle() {
+	    return getAttribute("title");
 	}
 	
 	public void setDescription(String description) {
@@ -66,6 +75,12 @@ public class Review extends Model {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
 		Date date = simpleDateFormat.parse(dateString);
 		return date;
+	}
+	
+	public String getDateString() throws ParseException {
+		SimpleDateFormat outputDateFormat = new SimpleDateFormat(DATE_PATTERN_FULL);
+        String outputDateStr = outputDateFormat.format(this.getDate());
+		return outputDateStr;
 	}
 	
 	public void setItemId(int ItemId) {
