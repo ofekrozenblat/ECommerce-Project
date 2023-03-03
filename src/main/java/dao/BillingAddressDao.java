@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import model.BillingAddress;
 import model.User;
 
 /**
@@ -13,39 +15,37 @@ import model.User;
  * @see Dao
  *
  */
-public class UserDao extends Dao {
+public class BillingAddressDao extends Dao {
 	
 	@Override
-	public User get(int id)  throws SQLException {
+	public BillingAddress get(int id)  throws SQLException {
 		// Creates the user
-		User user = new User(this, id);
+		BillingAddress billingAddress = new BillingAddress(this, id);
 				
 		// Gets the user from DB based on primary key
-		String table = user.getTable();
-		String condition = user.getPrimaryKeyColumnName() + "=" + id;
+		String table = billingAddress.getTable();
+		String condition = billingAddress.getPrimaryKeyColumnName() + "=" + id;
 		String[] conditions = {condition};
 		ResultSet resultSet;
 		
 		try {
 			resultSet = connection.executeSelect(table, null, conditions);
 		} catch (SQLException e) {
-			throw new SQLException("Failed to retreive user with id " + id + ".");
+			throw new SQLException("Failed to retreive billing address with id " + id + ".");
 		}
 		
 		// Get and set the user attributes
 		try {
 			resultSet.next();
-			for(String attribute: user.getAttributeMap().keySet()) {
+			for(String attribute: billingAddress.getAttributeMap().keySet()) {
 				String value = resultSet.getString(attribute);
-				user.setAttribute(attribute, value);
+				billingAddress.setAttribute(attribute, value);
 			}
 		} catch (SQLException e) {
-			throw new SQLException("Failed to retreive attributes of the user with id " + id + ".");
+			throw new SQLException("Failed to retreive attributes of the billing address with id " + id + ".");
 		}
 		
-		return user;
+		return billingAddress;
 	}
-	
-	// Can create other specific methods such as getAllUsers(), getUsersBy(...), etc..
 	
 }

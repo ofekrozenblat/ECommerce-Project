@@ -1,14 +1,18 @@
 package model;
 
-import dao.Dao;
+import dao.BillingAddressDao;
 
 public class BillingAddress extends Model {
 
 	public static final String table = "billing_addresses";
 	public static final String primaryKeyColumnName = "id";
 	
-	public BillingAddress(Dao dao) {
+	public BillingAddress(BillingAddressDao dao) {
 		super(dao);
+	}
+	
+	public BillingAddress(BillingAddressDao dao, int id) {
+		super(dao, id);
 	}
 
 	@Override
