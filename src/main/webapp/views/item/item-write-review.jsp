@@ -9,7 +9,14 @@
         <h5 class="modal-title" id="write_review_modal_label">Write a Review</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      
       <div class="modal-body">
+              
+        <div id="submit-error" class="alert alert-danger alert-dismissible fade hide" role="alert">
+		  <strong>Something went wrong!</strong> Please try again later.
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
         <div class="mb-3">
 		  <label for="write-review-title" class="form-label fw-bold">Title</label>
 		  <input type="text" class="form-control" id="write-review-title" placeholder="Summarize your rating">

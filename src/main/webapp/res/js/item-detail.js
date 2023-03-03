@@ -121,15 +121,32 @@ function submitReview(){
 	let description = document.getElementById("write-review-description").value;
 	let rating = document.getElementById("write-review-rating").getAttribute("value");
 	
-	
-	// TO DO: SEND DATA TO BACKEND
-
 	let address = "Item_detail"
 	let data = `new-review=true&title=${title}&description=${description}&rating=${rating}`;
 	
-	ajaxPOST(address, data, function(){
-		successfullySubmited();
+	let error = document.getElementById("submit-error-copy");
+	
+	if(error){
+		error.remove();
+	}
+	
+	ajaxPOST(address, data, function(response){
+		if (response.getResponseHeader("error")) {
+			unsuccessfullSubmition();
+		}else{
+			successfullySubmited();
+		}
 	})
+}
+
+function unsuccessfullSubmition(){
+	let submit_error = document.getElementById("submit-error");
+	
+	let submit_error_copy = submit_error.cloneNode(true);
+	submit_error_copy.classList.remove("hide");
+	submit_error_copy.classList.add("show");
+	submit_error_copy.id = "submit-error-copy";
+	submit_error.after(submit_error_copy);
 }
 
 

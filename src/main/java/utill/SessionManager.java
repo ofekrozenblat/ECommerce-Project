@@ -23,7 +23,7 @@ public class SessionManager{
 	public SessionManager(HttpSession session){
 		this.session = session;
 		this.session.setAttribute(IS_ADMIN, false);
-		this.session.setAttribute(IS_AUTH, false);
+		this.session.setAttribute(IS_AUTH, true);
 	}
 	
 	public void setAuth(boolean auth) {
