@@ -24,9 +24,9 @@
 					class="input-group-text material-symbols-outlined text-light">search</span>
 			</div>
 			<% 
-				boolean userAuth = true;
-				boolean userAdmin = true;
-				if(userAuth){
+				boolean is_Auth = (boolean) request.getSession().getAttribute("is_auth");
+				boolean is_Admin = (boolean) request.getSession().getAttribute("is_admin");;
+				if(is_Auth){
 					%>
 			<ul class="navbar-nav ms-auto d-flex">
 				<li class="nav-item">
@@ -51,7 +51,7 @@
 								class="material-icons-outlined icon-22">person</i> <span
 								class="ml-3">Your Account</span>
 							</a>
-							<% if(userAdmin){
+							<% if(is_Admin){
                         	%>
 							<a class="dropdown-item" href=""> <i
 								class="material-icons-outlined icon-22">admin_panel_settings</i>

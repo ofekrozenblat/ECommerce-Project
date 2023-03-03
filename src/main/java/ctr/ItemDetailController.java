@@ -3,6 +3,7 @@ package ctr;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDao;
+import factories.ModelFactory;
 import model.Item;
 import model.Review;
 
@@ -22,8 +24,8 @@ import model.Review;
 @WebServlet("/Item_detail")
 public class ItemDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final int REVIEWS_BATCH_SIZE = 12;
-       
+    private static final String REQ_SESSION_ITEM_ID = "Item_id"; 
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,6 +40,8 @@ public class ItemDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int item_id = Integer.parseInt(request.getParameter("item_id"));
+		
+		request.getSession().setAttribute(REQ_SESSION_ITEM_ID, item_id);
 		
 		Item item = null;
 		try {
@@ -72,8 +76,29 @@ public class ItemDetailController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// New review created
+		
+		int item_id = (int) request.getSession().getAttribute(REQ_SESSION_ITEM_ID);
+		
+		String title = (String) request.getParameter("title");
+		String description = (String) request.getParameter("description");
+		int rating = Integer.parseInt((String) request.getParameter("rating"));
+		
+		try {
+			Review review = ModelFactory.createReview();
+			
+			review.setDate(new Date());
+			review.setTitle(title);
+			review.setDescription(description);
+			review.setRating(rating);
+			review.setItemId(item_id);
+			review.setUserId(1); 
+			
+			review.save();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -123,14 +123,13 @@ function submitReview(){
 	
 	
 	// TO DO: SEND DATA TO BACKEND
-	const urlParams = new URLSearchParams(window.location.search);
+
+	let address = "Item_detail"
+	let data = `new-review=true&title=${title}&description=${description}&rating=${rating}`;
 	
-	let address = "/Item_detail"
-	let data = `item_id=${urlParams.get("item_id")}&new-review=true&title=${title}&
-	description=${description}&rating=${rating}`;
-	
-	console.log(address, data);
-	successfullySubmited();
+	ajaxPOST(address, data, function(){
+		successfullySubmited();
+	})
 }
 
 

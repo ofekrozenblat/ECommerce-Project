@@ -21,6 +21,7 @@ public class HomeController extends HttpServlet {
       
 	private static final int FEATURED_COUNT = 4;
 	private static final int NEW_ARRIVALS_COUNT = 8;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

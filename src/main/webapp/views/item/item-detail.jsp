@@ -53,9 +53,21 @@
 				<hr></hr>
 				<h4 class="mb-3 ms-2 fw-bold">REVIEWS</h4>
 				<div class="mb-3 ms-2 me-5 d-flex flex-row justify-content-between">
-					<button type="button" class="btn btn-custom-round  w-25" data-bs-toggle="modal" data-bs-target="#write_review_modal">
-					Write a review
-					</button>
+				<% 
+				boolean is_Auth = (boolean) request.getSession().getAttribute("is_auth");
+				if(is_Auth){
+					%>
+						<button type="button" class="btn btn-custom-round  w-25" data-bs-toggle="modal" data-bs-target="#write_review_modal">
+						Write a review
+						</button>
+					<%
+					}
+				else{
+					%>
+					<div class="w-25"></div>
+					<%
+				}
+				%>
 					<div class="d-flex flex-row w-25">
 							<select id="rating-sort" class="form-select">
 								<option value=1 class="sort-option" selected>Latest</option>

@@ -27,9 +27,9 @@ function ajaxGET(address, data, callback){
 	request.send(null)
 }
 
-function ajaxPUT(address, data, callback){
+function ajaxPOST(address, data, callback){
 	var request = new XMLHttpRequest()
-	request.open("PUT", (address + "?" + data), true)
+	request.open("POST", (address + "?" + data), true)
 	request.onreadystatechange = () => { handler(request, callback) }
 	request.send(null)
 }
