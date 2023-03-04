@@ -60,10 +60,11 @@ public class LoginController extends HttpServlet {
 					sm.setUserId(user.getId());
 					sm.setUsername(user.getFirstName());
 					sm.setAuth(true);
+				}else {
+					response.setHeader("error", "Failed to login, check credentials");
+					return;
 				}
 			} catch (Exception e) {
-				System.out.println("erro1");
-				System.out.println(e.getMessage());
 				response.setHeader("error", "Failed to login, check credentials");
 				return;
 			}
@@ -74,8 +75,6 @@ public class LoginController extends HttpServlet {
 			
 			response.setHeader("success", "user logged in");
 		} catch (SQLException e1) {
-			System.out.println("erro2");
-			System.out.println(e1.getMessage());
 			response.setHeader("error", "Failed to login, check credentials");
 			return;
 		}
