@@ -18,7 +18,7 @@
 		</div>
 		
 		<div id="submit-warning" class="alert alert-warning alert-dismissible fade hide" role="alert">
-		  <strong>Missing fields!</strong> Please fill in all the fields to submit your item review.
+		  <strong>Missing fields!</strong> Please fill in all the fields to submit your review.
 		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 		
