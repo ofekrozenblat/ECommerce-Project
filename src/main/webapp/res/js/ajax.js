@@ -33,3 +33,9 @@ function ajaxPOST(address, data, callback){
 	request.onreadystatechange = () => { handler(request, callback) }
 	request.send(null)
 }
+
+function logout(){
+	ajaxPOST("Logout", "", function(){
+		window.location.reload();
+	});
+}

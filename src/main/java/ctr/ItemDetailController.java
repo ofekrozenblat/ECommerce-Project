@@ -88,13 +88,14 @@ public class ItemDetailController extends HttpServlet {
 			int rating = Integer.parseInt((String) request.getParameter("rating"));
 			
 			try {
+				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 				Review review = ModelFactory.createReview();
 				
 				review.setTitle(title);
 				review.setDescription(description);
 				review.setRating(rating);
 				review.setItemId(item_id);
-				review.setUserId(1); 
+				review.setUserId(sm.getUserId()); 
 				
 				review.save();
 			} catch (SQLException e) {

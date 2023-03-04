@@ -8,13 +8,19 @@
 
 <%@ include file="/views/main-layout/head.html"%>
 <link rel="StyleSheet" href="res/css/login.css" type="text/css"></link>
+<script type="text/javascript" src="res/js/login.js"></script>
 
 </head>
 <body class="d-flex flex-column min-vh-100 bg-dark">
 
-	<form class="login-form bg-light">
+	<form id="login-form" class="login-form bg-light">
 	<span class="material-symbols-outlined text-center account-icon">account_circle</span>
 		<h1 class="h1 mb-3 fw-normal text-center">Login</h1>
+		
+		<div id="submit-error" class="alert alert-danger alert-dismissible fade hide" role="alert">
+		  <strong>Failed to login!</strong> Please check credentials are correct.
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
 
 		<div class="form-floating mt-3">
 			<input type="email" class="form-control" id="emailInput"

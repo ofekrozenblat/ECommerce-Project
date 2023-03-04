@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import factories.ModelFactory;
 import model.User;
 
 /**
@@ -19,7 +20,7 @@ import model.User;
 public class UserDao extends Dao {
 	
 	@Override
-	public User get(int id)  throws SQLException {
+	public User get(int id) throws SQLException {
 		// Creates the user
 		User user = new User(this, id);
 				
@@ -44,6 +45,37 @@ public class UserDao extends Dao {
 			}
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive attributes of the user with id " + id + ".");
+		}
+		
+		return user;
+	}
+	
+
+	public User getByEmail(String email) throws SQLException {
+		User user;
+		// Gets the user from DB based on primary key
+		String table = User.table;
+		String condition = "email_address" + "=" + "\"" + email + "\"";
+		String[] conditions = {condition};
+		ResultSet resultSet;
+		
+		try {
+			resultSet = connection.executeSelect(table, null, conditions);
+		} catch (SQLException e) {
+			throw new SQLException("Failed to retreive user with email " + email + ".");
+		}
+		
+		// Get and set the user attributes
+		try {
+			resultSet.next();
+			int id = Integer.parseInt(resultSet.getString(User.primaryKeyColumnName));
+			user = new User(this, id);
+			for(String attribute: user.getAttributeMap().keySet()) {
+				String value = resultSet.getString(attribute);
+				user.setAttribute(attribute, value);
+			}
+		} catch (SQLException e) {
+			throw new SQLException("Failed to retreive attributes of the user with email " + email + ".");
 		}
 		
 		return user;

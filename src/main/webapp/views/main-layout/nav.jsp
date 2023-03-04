@@ -28,6 +28,7 @@
 				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 				boolean is_Auth = sm.isAuth();
 				boolean is_Admin = sm.isAdmin();
+				String username = sm.getUsername();
 				
 				int cart_size = sm.getCart().getSize();
 				if(is_Auth){
@@ -47,7 +48,7 @@
 							type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
 							aria-expanded="false"> <span
 							class="material-icons-outlined icon-30">account_circle</span> <span
-							class="icon-nav-item-text">FirstName</span>
+							class="icon-nav-item-text"><%= username %></span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="dropdownMenuLink">
@@ -64,7 +65,7 @@
                         }
                         %>
 							<hr>
-							<a class="dropdown-item" href=""><i
+							<a onclick="logout()" class="dropdown-item" href=""><i
 								class="material-icons-outlined icon-22">logout</i> <span
 								class="ml-3">Logout </span> </a>
 

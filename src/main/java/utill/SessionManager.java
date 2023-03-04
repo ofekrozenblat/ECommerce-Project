@@ -22,8 +22,12 @@ public class SessionManager{
 	//User's shopping cart
 	private CartManager cart;
 	
+	private int userId;
+	
+	private String username;
+	
 	public SessionManager(){
-		this.isAuth = true;
+		this.isAuth = false;
 		this.isAdmin = false;
 		this.cart = new CartManager();
 	}
@@ -46,6 +50,34 @@ public class SessionManager{
 	
 	public CartManager getCart() {
 		return this.cart;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public int getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 }
