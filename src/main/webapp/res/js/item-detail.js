@@ -150,6 +150,7 @@ function submitReview() {
 	})
 }
 
+// three helper Functions for review submitions
 function unsuccessfullSubmition() {
 	let submit_error = document.getElementById("submit-error");
 
@@ -173,6 +174,17 @@ function successfullySubmited() {
 
 }
 
+function unsuccessfullClientSubmition() {
+	let submit_error = document.getElementById("submit-warning");
+
+	let submit_error_copy = submit_error.cloneNode(true);
+	submit_error_copy.classList.remove("hide");
+	submit_error_copy.classList.add("show");
+	submit_error_copy.id = "submit-warning-copy";
+	submit_error.after(submit_error_copy);
+}
+
+
 function addToCart() {
 	let address = "Item_detail"
 	let data = `add-to-cart=true`;
@@ -191,14 +203,4 @@ function addToCart() {
 
 
 	})
-}
-
-function unsuccessfullClientSubmition() {
-	let submit_error = document.getElementById("submit-warning");
-
-	let submit_error_copy = submit_error.cloneNode(true);
-	submit_error_copy.classList.remove("hide");
-	submit_error_copy.classList.add("show");
-	submit_error_copy.id = "submit-warning-copy";
-	submit_error.after(submit_error_copy);
 }
