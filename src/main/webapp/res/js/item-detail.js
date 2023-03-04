@@ -11,7 +11,7 @@ function setWriteReviewRatingFunctionality() {
 
 	let stars_div = review_rating.children[0];
 	let len = stars_div.children.length
-	
+
 	stars_div.addEventListener("mouseleave", mouseleave = function() {
 		for (let j = 0; j < len; j++) {
 			stars_div.children[j].classList.remove("material-icons");
@@ -38,12 +38,12 @@ function setWriteReviewRatingFunctionality() {
 
 			}
 		});
-		
+
 		child.addEventListener("click", function() {
 			stars_div.removeEventListener("mouseleave", mouseleave);
 			review_rating.setAttribute('value', i + 1);
 			for (let j = 0; j < len; j++) {
-				
+
 				if (j <= i) {
 					stars_div.children[j].classList.remove("material-icons-outlined");
 					stars_div.children[j].classList.add("material-icons");
@@ -57,91 +57,91 @@ function setWriteReviewRatingFunctionality() {
 	}
 }
 
-function setRatingSortFunctionality(){
+function setRatingSortFunctionality() {
 	const rating_sort = document.getElementById("rating-sort");
 	sortLatest();
 	rating_sort.addEventListener("change", function() {
-	  const selectedValue = this.value;
-	  if(selectedValue == 1){
-		  sortLatest();
-	  }
-	  if(selectedValue == 2){
-		  sortRatingHighToLow();
-	  }
-	   if(selectedValue == 3){
-		  sortRatingLowToHigh();
-	  }
+		const selectedValue = this.value;
+		if (selectedValue == 1) {
+			sortLatest();
+		}
+		if (selectedValue == 2) {
+			sortRatingHighToLow();
+		}
+		if (selectedValue == 3) {
+			sortRatingLowToHigh();
+		}
 	});
 }
 
-function sortLatest(){
+function sortLatest() {
 	let review_list = document.getElementById("review-list");
 	const reviews = Array.from(review_list.children);
-	
-	
+
+
 	reviews.sort((a, b) => {
-	  const dateA = new Date(a.getAttribute("data-date"));
-	  const dateB = new Date(b.getAttribute("data-date"));
-	  return dateB - dateA;
+		const dateA = new Date(a.getAttribute("data-date"));
+		const dateB = new Date(b.getAttribute("data-date"));
+		return dateB - dateA;
 	});
-	
+
 	reviews.forEach(review => review_list.appendChild(review));
 }
 
-function sortRatingLowToHigh(){
+function sortRatingLowToHigh() {
 	let review_list = document.getElementById("review-list");
 	const reviews = Array.from(review_list.children);
-	
-	
+
+
 	reviews.sort((a, b) => {
-	  const dateA = new Date(a.getAttribute("data-rating"));
-	  const dateB = new Date(b.getAttribute("data-rating"));
-	  return dateA - dateB;
+		const dateA = new Date(a.getAttribute("data-rating"));
+		const dateB = new Date(b.getAttribute("data-rating"));
+		return dateA - dateB;
 	});
-	
+
 	reviews.forEach(review => review_list.appendChild(review));
 }
 
-function sortRatingHighToLow(){
+function sortRatingHighToLow() {
 	let review_list = document.getElementById("review-list");
 	const reviews = Array.from(review_list.children);
-	
-	
+
+
 	reviews.sort((a, b) => {
-	  const dateA = new Date(a.getAttribute("data-rating"));
-	  const dateB = new Date(b.getAttribute("data-rating"));
-	  return dateB - dateA;
+		const dateA = new Date(a.getAttribute("data-rating"));
+		const dateB = new Date(b.getAttribute("data-rating"));
+		return dateB - dateA;
 	});
-	
+
 	reviews.forEach(review => review_list.appendChild(review));
 }
 
-function submitReview(){
+function submitReview() {
 	let title = document.getElementById("write-review-title").value;
 	let description = document.getElementById("write-review-description").value;
 	let rating = document.getElementById("write-review-rating").getAttribute("value");
-	
+
 	let address = "Item_detail"
 	let data = `new-review=true&title=${title}&description=${description}&rating=${rating}`;
-	
+
 	let error = document.getElementById("submit-error-copy");
-	
-	if(error){
+
+	if (error) {
 		error.remove();
 	}
-	
-	ajaxPOST(address, data, function(response){
+
+	ajaxPOST(address, data, function(response) {
 		if (response.getResponseHeader("error")) {
 			unsuccessfullSubmition();
-		}else{
+		} else {
 			successfullySubmited();
 		}
 	})
 }
 
-function unsuccessfullSubmition(){
+function unsuccessfullSubmition() {
 	let submit_error = document.getElementById("submit-error");
-	
+
 	let submit_error_copy = submit_error.cloneNode(true);
 	submit_error_copy.classList.remove("hide");
 	submit_error_copy.classList.add("show");
@@ -150,25 +150,31 @@ function unsuccessfullSubmition(){
 }
 
 
-function successfullySubmited(){
+function successfullySubmited() {
 	let write_review_modal = document.getElementById("write_review_modal");
-	
+
 	let body = write_review_modal.querySelector(".modal-body");
 	let submit_button = write_review_modal.querySelector(".btn-custom");
 	body.innerHTML = "Thank you for the review!";
 	submit_button.style.display = "none";
 }
 
-function addToCart(){
+function addToCart() {
 	let address = "Item_detail"
 	let data = `add-to-cart=true`;
-	
-	ajaxPOST(address, data, function(response){
-		
-		let nav_cart_size = document.getElementById("nav-cart-size");
-		let size = parseInt(nav_cart_size.getAttribute('value')) + 1;
-		nav_cart_size.setAttribute('value', size);
-		nav_cart_size.innerHTML = size;
-		
+
+	ajaxPOST(address, data, function(response) {
+		if (response.getResponseHeader("success")) {
+			let nav_cart_size = document.getElementById("nav-cart-size");
+			let size = parseInt(nav_cart_size.getAttribute('value')) + 1;
+			nav_cart_size.setAttribute('value', size);
+			nav_cart_size.innerHTML = size;
+		} else {
+			var modal = document.getElementById('askToLogin');
+			var bootstrapModal = new bootstrap.Modal(modal);
+			bootstrapModal.show();
+		}
+
+
 	})
 }

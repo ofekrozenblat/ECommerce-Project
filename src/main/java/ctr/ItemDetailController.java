@@ -109,7 +109,14 @@ public class ItemDetailController extends HttpServlet {
 		
 		if(request.getParameter("add-to-cart") != null) {
 			SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
-			sm.getCart().addToCart(item_id, 1);
+			
+			if(sm.isAuth()) {
+				sm.getCart().addToCart(item_id, 1);
+				response.setHeader("success", "true");
+			}else {
+				response.setHeader("failed", "true");
+			}
+			
 		}
 	}
 
