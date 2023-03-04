@@ -120,6 +120,17 @@ function submitReview() {
 	let title = document.getElementById("write-review-title").value;
 	let description = document.getElementById("write-review-description").value;
 	let rating = document.getElementById("write-review-rating").getAttribute("value");
+	
+	let warning = document.getElementById("submit-warning-copy");
+
+	if (warning) {
+		warning.remove();
+	}
+	
+	if(title == "" || description == ""){
+		unsuccessfullClientSubmition();
+		return;
+	}
 
 	let address = "Item_detail"
 	let data = `new-review=true&title=${title}&description=${description}&rating=${rating}`;
@@ -157,6 +168,9 @@ function successfullySubmited() {
 	let submit_button = write_review_modal.querySelector(".btn-custom");
 	body.innerHTML = "Thank you for the review!";
 	submit_button.style.display = "none";
+	
+	document.getElementById("write-review-button").remove();
+
 }
 
 function addToCart() {
@@ -177,4 +191,14 @@ function addToCart() {
 
 
 	})
+}
+
+function unsuccessfullClientSubmition() {
+	let submit_error = document.getElementById("submit-warning");
+
+	let submit_error_copy = submit_error.cloneNode(true);
+	submit_error_copy.classList.remove("hide");
+	submit_error_copy.classList.add("show");
+	submit_error_copy.id = "submit-warning-copy";
+	submit_error.after(submit_error_copy);
 }

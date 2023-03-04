@@ -99,4 +99,50 @@ public class ReviewDao extends Dao {
 		return reviews;
 	}
 	
+	/**
+	 * Gets all the reviews related to the user with id {@code userId}.
+	 * 
+	 * @param itemId id of the item to retrieve reviews for
+	 * @return list of {@link Review} objects related to this user
+	 * @throws Exception if something went wrong with retrieving the id of the reviews or an SQL
+	 * exception has occurred
+	 */
+	public List<Review> getReviewsByUserId(int userId) throws Exception{
+		// Creates list of items
+		List<Review> reviews = new ArrayList<Review>();
+		
+		ResultSet resultSet = null;
+		String table = Review.table;
+		String primaryKeyColumnName = Review.primaryKeyColumnName;
+		String condition = "user_id = " + userId;
+		String[] conditions = {condition};
+		
+		try {
+			resultSet = connection.executeSelect(table, null, conditions);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		// Get and set the item attributes
+		try {
+			while (resultSet.next()) {
+				int id = Integer.parseInt(resultSet.getString(primaryKeyColumnName));
+				Review review = new Review(this, id);
+				
+				for (String attribute : review.getAttributeMap().keySet()) {
+					String value = resultSet.getString(attribute);
+					review.setAttribute(attribute, value);
+				}
+				
+				reviews.add(review);
+			}
+		} catch (NumberFormatException e) {
+			throw new Exception("Failed to format id: " + e.getMessage());
+		} catch (SQLException e) {
+			throw new Exception("Failed to get reviews: " + e.getMessage());
+		}
+	
+		return reviews;
+	}
+	
 }

@@ -1,6 +1,7 @@
 package utill;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,15 +72,21 @@ public class CartManager {
 		}
 		
 		// 2 decimal places
-		total = Math.round( total * 100.0) / 100.0;
+		DecimalFormat df = new DecimalFormat("#.##");
+		String formatted = df.format(total);
+		total = Double.parseDouble(formatted);
 		
 		return total;
 	}
 	
 	public double getShipping() {
+		double shipping = Math.round(this.getTotal() * 0.05);
+		
 		// 2 decimal places
-		double shipping = Math.round( this.getTotal() * 100.0 * 0.05) / 100.0;
-				
+		DecimalFormat df = new DecimalFormat("#.##");
+		String formatted = df.format(shipping);
+		shipping = Double.parseDouble(formatted);	
+		
 		return shipping;
 	}
 	

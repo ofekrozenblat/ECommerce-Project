@@ -17,13 +17,18 @@
 		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 		
+		<div id="submit-warning" class="alert alert-warning alert-dismissible fade hide" role="alert">
+		  <strong>Missing fields!</strong> Please fill in all the fields to submit your item review.
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		
         <div class="mb-3">
 		  <label for="write-review-title" class="form-label fw-bold">Title</label>
 		  <input type="text" class="form-control" id="write-review-title" placeholder="Summarize your rating">
 		</div>
 		<div class="my-3">
 		  <label for="write-review-description" class="form-label fw-bold">Description</label>
-		  <textarea class="form-control" id="write-review-description" rows="3"></textarea>
+		  <textarea class="form-control" id="write-review-description" rows="3" placeholder="Describe the item in more detail"></textarea>
 		</div>
 		<div class="mt-3">
 		  <label for="write-review-rating" class="form-label fw-bold">Rating</label>

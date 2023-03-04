@@ -74,9 +74,11 @@
 				<% 
 				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 				boolean is_Auth = sm.isAuth();
-				if(is_Auth){
+				boolean userReviewed = (boolean) request.getAttribute("userReviewed");
+				
+				if(is_Auth && !userReviewed){
 					%>
-						<button type="button" class="btn btn-custom-round  w-25" data-bs-toggle="modal" data-bs-target="#write_review_modal">
+						<button id="write-review-button" type="button" class="btn btn-custom-round  w-25" data-bs-toggle="modal" data-bs-target="#write_review_modal">
 						Write a review
 						</button>
 					<%
