@@ -78,7 +78,7 @@ public class CartManager {
 	
 	public double getShipping() {
 		// 2 decimal places
-		double shipping = Math.round( this.getTotal() * 100.0) / 100.0;
+		double shipping = Math.round( this.getTotal() * 100.0 * 0.05) / 100.0;
 				
 		return shipping;
 	}
