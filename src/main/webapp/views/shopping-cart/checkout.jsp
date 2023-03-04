@@ -133,17 +133,17 @@
 		    <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                   Products
-                  <span>$999.99</span>
+                  <span>$${total}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   Shipping
-                  <span>$9.99</span>
+                  <span>$${shipping}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                   <div>
                     <strong>Total amount</strong>
                   </div>
-                  <span><strong>$999.99</strong></span>
+                  <span><strong>$${total + shipping}</strong></span>
                 </li>
               </ul>
              <a href="Cart" class="btn btn-custom ms-auto">&#8592 Back to Cart</a>

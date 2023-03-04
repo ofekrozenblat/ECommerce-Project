@@ -20,12 +20,12 @@ public class SessionManager{
 	public static final String SESSION_MANAGER = "sessionManager";
 	
 	//User's shopping cart
-	private Map<Integer, Integer> cart;
+	private CartManager cart;
 	
 	public SessionManager(){
 		this.isAuth = true;
 		this.isAdmin = false;
-		this.cart = new HashMap<Integer, Integer>();
+		this.cart = new CartManager();
 	}
 	
 	public void setAuth(boolean auth) {
@@ -44,34 +44,8 @@ public class SessionManager{
 		return this.isAdmin;
 	}
 	
-	public void addToCart(int itemId, int quanitity) {
-		
-		if(cart.containsKey(itemId)) {
-			int currentQuantity = cart.get(itemId);
-			cart.put(itemId, currentQuantity + quanitity);
-		}else {
-			cart.put(itemId, quanitity);
-		}
-	}
-	
-	public void removeFromCart(int itemId) {
-		cart.remove(itemId);
-	}
-	
-	public int cartSize() {
-		int cartSize = 0;
-		for(int quantity: this.cart.values()) {
-			cartSize += quantity;
-		}
-		return cartSize;
-	}
-	
-	/**
-	 * 
-	 * @return all item id's in the user's cart
-	 */
-	public Map<Integer, Integer> getCart(){
-		return cart;
+	public CartManager getCart() {
+		return this.cart;
 	}
 	
 }

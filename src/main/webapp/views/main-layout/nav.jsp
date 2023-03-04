@@ -29,7 +29,7 @@
 				boolean is_Auth = sm.isAuth();
 				boolean is_Admin = sm.isAdmin();
 				
-				int cart_size = sm.cartSize();
+				int cart_size = sm.getCart().getSize();
 				if(is_Auth){
 					%>
 			<ul class="navbar-nav ms-auto d-flex">
