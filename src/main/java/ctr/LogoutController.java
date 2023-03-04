@@ -36,6 +36,8 @@ public class LogoutController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 		sm.setAuth(false);
+		sm.setAdmin(false);
+		sm.getCart().clear();
 	}
 
 }

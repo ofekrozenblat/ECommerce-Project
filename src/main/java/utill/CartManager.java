@@ -86,4 +86,8 @@ public class CartManager {
 	public int getItemQuantity(int itemId) {
 		return cart.get(itemId);
 	}
+	
+	public void clear() {
+		cart.clear();
+	}
 }

@@ -36,6 +36,6 @@ function ajaxPOST(address, data, callback){
 
 function logout(){
 	ajaxPOST("Logout", "", function(){
-		window.location.reload();
+		window.location.href = "Home";
 	});
 }

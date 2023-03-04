@@ -18,7 +18,7 @@
 		<h1 class="h1 mb-3 fw-normal text-center">Sign Up</h1>
 		
 		<div id="submit-error" class="alert alert-danger alert-dismissible fade hide" role="alert">
-		  <strong>Something went wrong!</strong> Please try again later.
+		  <strong>Something went wrong!</strong> Please try a different email.
 		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		</div>
 		
