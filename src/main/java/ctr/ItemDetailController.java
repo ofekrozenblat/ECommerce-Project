@@ -102,7 +102,6 @@ public class ItemDetailController extends HttpServlet {
 				response.setHeader("error", "something went wrong");
 				return;
 			}
-
 			
 			response.setHeader("success", "true");
 		}
