@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ page import="utill.SessionManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,23 @@
 
 	<jsp:include page="/views/main-layout/nav.jsp"/>
 	<jsp:include page="item-write-review.jsp"/>
+	
+		<!-- Ask to Login Modal -->
+	<div class="modal fade" id="askToLogin" tabindex="-1" aria-labelledby="askToLoginLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p>Only registered users can add to cart. Please <a href="Login" class="fw-bold">login here.</a></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<div class="page-wrapper overflow-hidden d-flex flex-column">
 		<div class="m-auto w-75">
@@ -36,7 +54,7 @@
 								<span class="rating-count">(${review_count} Reviews)</span>
 							</div>
 							<h4 class="card-title mb-5 fw-bold ps-1">$${price}</h4>
-							<a href="" class="btn btn-custom-round w-50 mx-auto"> Add to Cart </a>
+							<button onclick="addToCart()" class="btn btn-custom-round w-50 mx-auto"> Add to Cart </button>
 						</div>
 					</div>
 				</div>
@@ -54,10 +72,13 @@
 				<h4 class="mb-3 ms-2 fw-bold">REVIEWS</h4>
 				<div class="mb-3 ms-2 me-5 d-flex flex-row justify-content-between">
 				<% 
-				boolean is_Auth = (boolean) request.getSession().getAttribute("is_auth");
-				if(is_Auth){
+				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+				boolean is_Auth = sm.isAuth();
+				boolean userReviewed = (boolean) request.getAttribute("userReviewed");
+				
+				if(is_Auth && !userReviewed){
 					%>
-						<button type="button" class="btn btn-custom-round  w-25" data-bs-toggle="modal" data-bs-target="#write_review_modal">
+						<button id="write-review-button" type="button" class="btn btn-custom-round  w-25" data-bs-toggle="modal" data-bs-target="#write_review_modal">
 						Write a review
 						</button>
 					<%

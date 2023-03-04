@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ page import="utill.SessionManager" %>
 <!DOCTYPE html>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 	<div class="container-fluid">
@@ -24,15 +25,19 @@
 					class="input-group-text material-symbols-outlined text-light">search</span>
 			</div>
 			<% 
-				boolean is_Auth = (boolean) request.getSession().getAttribute("is_auth");
-				boolean is_Admin = (boolean) request.getSession().getAttribute("is_admin");;
+				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+				boolean is_Auth = sm.isAuth();
+				boolean is_Admin = sm.isAdmin();
+				String username = sm.getUsername();
+				
+				int cart_size = sm.getCart().getSize();
 				if(is_Auth){
 					%>
 			<ul class="navbar-nav ms-auto d-flex">
 				<li class="nav-item">
 					<a class="nav-link active icon-nav-item position-relative" href="Cart">
 							<span class="material-icons-outlined icon-30">shopping_cart
-						</span> <span class="custom-badge">5</span> <span
+						</span> <span value="<%= cart_size %>" id="nav-cart-size" class="custom-badge"><%= cart_size %></span> <span
 							class="icon-nav-item-text">Cart</span>
 					</a>
 				</li>
@@ -43,7 +48,7 @@
 							type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
 							aria-expanded="false"> <span
 							class="material-icons-outlined icon-30">account_circle</span> <span
-							class="icon-nav-item-text">FirstName</span>
+							class="icon-nav-item-text"><%= username %></span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="dropdownMenuLink">
@@ -60,7 +65,7 @@
                         }
                         %>
 							<hr>
-							<a class="dropdown-item" href=""><i
+							<a onclick="logout()" class="dropdown-item" href=""><i
 								class="material-icons-outlined icon-22">logout</i> <span
 								class="ml-3">Logout </span> </a>
 

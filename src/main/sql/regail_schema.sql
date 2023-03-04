@@ -4,7 +4,7 @@ CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    email_address VARCHAR(255) NOT NULL,
+    email_address VARCHAR(255) NOT NULL UNIQUE,
     is_admin BOOL DEFAULT FALSE
 );
 
@@ -66,6 +66,7 @@ FOREIGN KEY (order_id) REFERENCES orders (id)
 CREATE TABLE reviews(
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 rating INT NOT NULL,
+title VARCHAR(255) NOT NULL,
 description VARCHAR(255) NOT NULL,
 date DATE NOT NULL,
 item_id INT NOT NULL,

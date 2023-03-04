@@ -64,10 +64,12 @@ public class User extends Model {
 	}
 	
 	public void setIsAdmin(boolean admin) {
-		setAttribute("is_admin", String.valueOf(admin));
+		int intValue = admin ? 1 : 0;
+		setAttribute("is_admin", String.valueOf(intValue));
 	}
 	
 	public boolean getIsAdmin() {
-		return Boolean.parseBoolean(getAttribute("is_admin"));
+		boolean admin = (Integer.parseInt(getAttribute("is_admin")) == 1) ? true : false;
+		return admin;
 	}
 }

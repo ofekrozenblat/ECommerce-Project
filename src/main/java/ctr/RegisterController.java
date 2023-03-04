@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import auth.Authenticator;
+import factories.ModelFactory;
+import model.User;
+import utill.SessionManager;
+
 /**
  * Servlet implementation class SignUpController
  */
@@ -35,8 +40,36 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		//register user
+		
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		User user = ModelFactory.createUser();
+		try {
+			user.setEmailAddress(email);
+			user.setFirstName(firstName);
+			user.setLastName(lastName);
+			user.setIsAdmin(false);
+			user.save();
+			
+			Authenticator.registerUser(password, user.getId());
+
+			
+			SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+			sm.setUserId(user.getId());
+			sm.setUsername(user.getFirstName());
+			sm.setAuth(true);
+			
+			response.setHeader("success", "registered user");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			response.setHeader("error", "failed to register");
+		}
+		
 	}
 
 }

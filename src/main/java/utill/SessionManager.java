@@ -1,5 +1,8 @@
 package utill;
-import javax.servlet.http.HttpSession;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * This class is to help manage the session data used across multiple pages.
@@ -9,29 +12,72 @@ import javax.servlet.http.HttpSession;
  *
  */
 public class SessionManager{
-	
-	//Session of the user
-	private HttpSession session;
-	
-	//Session attributes for User
-	private final String IS_ADMIN = "is_admin";
-	private final String IS_AUTH = "is_auth";
+
+	private boolean isAuth;
+	private boolean isAdmin;
 	
 	//Session Manager attribute 
 	public static final String SESSION_MANAGER = "sessionManager";
 	
-	public SessionManager(HttpSession session){
-		this.session = session;
-		this.session.setAttribute(IS_ADMIN, false);
-		this.session.setAttribute(IS_AUTH, false);
+	//User's shopping cart
+	private CartManager cart;
+	
+	private int userId;
+	
+	private String username;
+	
+	public SessionManager(){
+		this.isAuth = false;
+		this.isAdmin = false;
+		this.cart = new CartManager();
 	}
 	
 	public void setAuth(boolean auth) {
-		this.session.setAttribute(IS_AUTH, auth);
+		this.isAuth = auth;
 	}
 	
 	public void setAdmin(boolean admin) {
-		this.session.setAttribute(IS_ADMIN, admin);
+		this.isAdmin = admin;
+	}
+	
+	public boolean isAuth() {
+		return this.isAuth;
+	}
+	
+	public boolean isAdmin() {
+		return this.isAdmin;
+	}
+	
+	public CartManager getCart() {
+		return this.cart;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public int getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 }

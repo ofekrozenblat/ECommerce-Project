@@ -28,7 +28,7 @@ public class SessionListener implements HttpSessionListener {
     	HttpSession session = se.getSession();
         
         if(session.getAttribute(SessionManager.SESSION_MANAGER) == null) {
-        	session.setAttribute(SessionManager.SESSION_MANAGER, new SessionManager(session));
+        	session.setAttribute(SessionManager.SESSION_MANAGER, new SessionManager());
         }
     }
 

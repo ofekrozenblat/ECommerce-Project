@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDao;
+import dao.ReviewDao;
 import factories.ModelFactory;
 import model.Item;
 import model.Review;
+import utill.SessionManager;
 
 /**
  * Servlet implementation class ItemController
@@ -44,9 +46,11 @@ public class ItemDetailController extends HttpServlet {
 		request.getSession().setAttribute(REQ_SESSION_ITEM_ID, item_id);
 		
 		Item item = null;
+		boolean userReviewed = false;
 		try {
 			item = new ItemDao().get(item_id);
-		} catch (SQLException e1) {
+			userReviewed = this.userReviewed(item_id, request);
+		} catch (Exception e1) {
 			// TO DO: Return 404 PAGE
 			e1.printStackTrace();
 		}
@@ -66,6 +70,7 @@ public class ItemDetailController extends HttpServlet {
 		request.setAttribute("review_count", itemReviews.size());
 		request.setAttribute("recommendation_list", item.getRecommendations());
 		request.setAttribute("reviews", itemReviews);
+		request.setAttribute("userReviewed", userReviewed);
 		
 		
 		String target = "/views/item/item-detail.jsp";
@@ -76,31 +81,61 @@ public class ItemDetailController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// New review created
+
 		
 		int item_id = (int) request.getSession().getAttribute(REQ_SESSION_ITEM_ID);
 		
-		String title = (String) request.getParameter("title");
-		String description = (String) request.getParameter("description");
-		int rating = Integer.parseInt((String) request.getParameter("rating"));
-		
-		try {
-			Review review = ModelFactory.createReview();
+		// New review created
+		if(request.getParameter("new-review") != null) {
+			String title = (String) request.getParameter("title");
+			String description = (String) request.getParameter("description");
+			int rating = Integer.parseInt((String) request.getParameter("rating"));
 			
-			review.setTitle(title);
-			review.setDescription(description);
-			review.setRating(rating);
-			review.setItemId(item_id);
-			review.setUserId(1); 
+			try {
+				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+				Review review = ModelFactory.createReview();
+				
+				review.setTitle(title);
+				review.setDescription(description);
+				review.setRating(rating);
+				review.setItemId(item_id);
+				review.setUserId(sm.getUserId()); 
+				
+				review.save();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				response.setHeader("error", "something went wrong");
+				return;
+			}
 			
-			review.save();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			response.setHeader("error", "something went wrong");
-			return;
+			response.setHeader("success", "true");
 		}
 		
-		response.setHeader("success", "true");
+		if(request.getParameter("add-to-cart") != null) {
+			SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+			
+			if(sm.isAuth()) {
+				sm.getCart().addToCart(item_id, 1);
+				response.setHeader("success", "true");
+			}else {
+				response.setHeader("failed", "true");
+			}
+			
+		}
+	}
+	
+	private boolean userReviewed(int item_id, HttpServletRequest request) throws Exception {
+		SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+		int user_id = sm.getUserId();
+		List<Review> itemReviews = new ReviewDao().getReviewsByUserId(user_id);
+		
+		for(Review review: itemReviews) {
+			if(review.getUserId() == user_id && review.getItemId() == item_id) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 }

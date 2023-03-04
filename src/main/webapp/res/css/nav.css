@@ -90,4 +90,5 @@
     font-size: 12px;
     width: 19px;
     text-align: center;
+    transition: 300ms;
 }
