@@ -32,9 +32,12 @@ class AuthenticatorTest {
 	void testRegister() {
 		try {
 			String password = "hello123";
+			String falsePassword = "heLlo123";
+			
 			Authenticator.registerUser(password, 1);
 			
 			assertTrue(Authenticator.validateUser(password, 1));
+			assertFalse(Authenticator.validateUser(falsePassword, 1));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
