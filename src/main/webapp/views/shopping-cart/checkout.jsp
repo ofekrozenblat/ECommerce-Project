@@ -8,7 +8,7 @@
 
 <%@ include file="/views/main-layout/head.html" %>
 <link rel="StyleSheet" href="res/css/checkout.css" type="text/css"></link>
-
+<script type="text/javascript" src="res/js/checkout.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -16,13 +16,30 @@
 
 
 <div class="page-wrapper overflow-hidden d-flex flex-row justify-content-center">
-
+	
+		<!-- Ask to Login Modal -->
+	<div class="modal fade" id="askToLogin" tabindex="-1" aria-labelledby="askToLoginLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <p>Please login to place an order. You can <a href="Login" class="fw-bold">login here.</a></p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<div class="bg-light w-50 ms-auto my-3">
 		<div class="col-md-7 col-lg-8 mx-auto my-3">
 	        <h4 class="mb-3 fw-bold">Place Order</h4>
 	        <hr>
 	        <h4 class="mb-3">Shipping Address</h4>
-	        <form class="needs-validation" novalidate>
+	        <form id="checkout-form" class="needs-validation" novalidate>
 	          <div class="row g-3">
 	
 	            <div class="col-12">

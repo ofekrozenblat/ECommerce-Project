@@ -17,23 +17,6 @@
 
 	<jsp:include page="/views/main-layout/nav.jsp"/>
 	<jsp:include page="item-write-review.jsp"/>
-	
-		<!-- Ask to Login Modal -->
-	<div class="modal fade" id="askToLogin" tabindex="-1" aria-labelledby="askToLoginLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        <p>Only registered users can add to cart. Please <a href="Login" class="fw-bold">login here.</a></p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
 
 	<div class="page-wrapper overflow-hidden d-flex flex-column">
 		<div class="m-auto w-75">

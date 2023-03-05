@@ -43,7 +43,12 @@ public class CheckoutController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+		if(sm.isAuth()) {
+			response.setHeader("success", "true");
+		}else {
+			response.setHeader("error", "Need to login");
+		}
 	}
 
 }
