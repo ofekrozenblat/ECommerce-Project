@@ -37,14 +37,20 @@
 	<div class="bg-light w-50 ms-auto my-3">
 		<div class="col-md-7 col-lg-8 mx-auto my-3">
 	        <h4 class="mb-3 fw-bold">Place Order</h4>
+	        
+		     <div id="submit-error" class="alert alert-danger alert-dismissible fade hide" role="alert">
+			  <strong>Failed to palce order!</strong> <span>Please check credentials are correct.</span>
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			
 	        <hr>
 	        <h4 class="mb-3">Shipping Address</h4>
-	        <form id="checkout-form" class="needs-validation" novalidate>
+	        <form id="checkout-form" class="needs-validation">
 	          <div class="row g-3">
 	
 	            <div class="col-12">
 	              <label for="address" class="form-label">Address</label>
-	              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+	              <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St" required>
 	              <div class="invalid-feedback">
 	                Please enter your shipping address.
 	              </div>
@@ -52,12 +58,12 @@
 	
 	            <div class="col-12">
 	              <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-	              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+	              <input type="text" class="form-control" name="address2" id="address2" placeholder="Apartment or suite">
 	            </div>
 	
 	            <div class="col-md-5">
 	              <label for="country" class="form-label">Country</label>
-	              <select class="form-select" id="country" required>
+	              <select name="country" class="form-select" id="country" required>
 	                <option value="">Choose...</option>
 	                <option>Canada</option>
 	              </select>
@@ -67,8 +73,8 @@
 	            </div>
 	
 	            <div class="col-md-4">
-	              <label for="state" class="form-label">Province</label>
-	              <select class="form-select" id="state" required>
+	              <label for="province" class="form-label">Province</label>
+	              <select name="province" class="form-select" id="province" required>
 	                <option value="">Choose...</option>
 	                <option>Ontario</option>
 	              </select>
@@ -78,8 +84,8 @@
 	            </div>
 	
 	            <div class="col-md-3">
-	              <label for="zip" class="form-label">Postal Code</label>
-	              <input type="text" class="form-control" id="zip" placeholder="" required>
+	              <label for="postal_code" class="form-label">Postal Code</label>
+	              <input name="postal_code" type="text" class="form-control" id="postal_code" placeholder="" required>
 	              <div class="invalid-feedback">
 	                Postal code required.
 	              </div>
@@ -92,11 +98,11 @@
 	
 	          <div class="my-3">
 	            <div class="form-check">
-	              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
+	              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
 	              <label class="form-check-label" for="credit">Credit card</label>
 	            </div>
 	            <div class="form-check">
-	              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+	              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
 	              <label class="form-check-label" for="debit">Debit card</label>
 	            </div>
 	          </div>
@@ -104,7 +110,7 @@
 	          <div class="row gy-3">
 	            <div class="col-md-6">
 	              <label for="cc-name" class="form-label">Name on card</label>
-	              <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+	              <input name="cc-name" type="text" class="form-control" id="cc-name" placeholder="" required>
 	              <small class="text-muted">Full name as displayed on card</small>
 	              <div class="invalid-feedback">
 	                Name on card is required
@@ -113,7 +119,7 @@
 	
 	            <div class="col-md-6">
 	              <label for="cc-number" class="form-label">Credit card number</label>
-	              <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+	              <input name="cc-number" type="text" class="form-control" id="cc-number" placeholder="" required>
 	              <div class="invalid-feedback">
 	                Credit card number is required
 	              </div>
@@ -121,7 +127,7 @@
 	
 	            <div class="col-md-3">
 	              <label for="cc-expiration" class="form-label">Expiration</label>
-	              <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+	              <input  name="cc-expiration" type="text" class="form-control" id="cc-expiration" placeholder="" required>
 	              <div class="invalid-feedback">
 	                Expiration date required
 	              </div>
@@ -129,7 +135,7 @@
 	
 	            <div class="col-md-3">
 	              <label for="cc-cvv" class="form-label">CVV</label>
-	              <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+	              <input  name="cc-cvv" type="text" class="form-control" id="cc-cvv" placeholder="" required>
 	              <div class="invalid-feedback">
 	                Security code required
 	              </div>
