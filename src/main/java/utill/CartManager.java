@@ -91,7 +91,10 @@ public class CartManager {
 	}
 	
 	public int getItemQuantity(int itemId) {
-		return cart.get(itemId);
+		if(cart.containsKey(itemId)) {
+			return cart.get(itemId);
+		}
+		return 0;
 	}
 	
 	public void clear() {

@@ -124,8 +124,13 @@ public class OrderDao extends Dao {
 		
 		for(Item item : order.getItems()) {
 			Map<String, String> attributes = new HashMap<String, String>();
+			int quantity = order.getItemQuantity(item);
 			attributes.put("order_id", String.valueOf(id));
 			attributes.put("item_id", String.valueOf(item.getId()));
+			attributes.put("quantity", String.valueOf(quantity));
+			
+			item.setQuantity(item.getQuantity() - quantity);
+			item.save();
 			
 			// Executes the insert and gets the ID of the new primary key
 			int retrievedPrimaryKey = connection.executeInsert(orderItemTable, 
@@ -180,8 +185,9 @@ public class OrderDao extends Dao {
 		try {
 			while(resultSet.next()) {
 				String item_id = resultSet.getString("item_id");
+				int quantity = Integer.parseInt(resultSet.getString("quantity"));
 				Item item = itemDao.get(Integer.parseInt(item_id));
-				order.addItem(item);
+				order.addItem(item, quantity);
 			}
 		} catch (SQLException e) {
 			throw new SQLException("Failed to set items of order with id " + id + ".");

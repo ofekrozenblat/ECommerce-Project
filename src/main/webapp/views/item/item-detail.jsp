@@ -17,23 +17,6 @@
 
 	<jsp:include page="/views/main-layout/nav.jsp"/>
 	<jsp:include page="item-write-review.jsp"/>
-	
-		<!-- Ask to Login Modal -->
-	<div class="modal fade" id="askToLogin" tabindex="-1" aria-labelledby="askToLoginLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        <p>Only registered users can add to cart. Please <a href="Login" class="fw-bold">login here.</a></p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
 
 	<div class="page-wrapper overflow-hidden d-flex flex-column">
 		<div class="m-auto w-75">
@@ -54,7 +37,18 @@
 								<span class="rating-count">(${review_count} Reviews)</span>
 							</div>
 							<h4 class="card-title mb-5 fw-bold ps-1">$${price}</h4>
+							<% 
+							int quantity = (int) request.getAttribute("quantity");
+							if(quantity > 0){%>
+							<span class="w-50 mx-auto text-center mb-1">Available (Qty ${quantity})</span>
 							<button onclick="addToCart()" class="btn btn-custom-round w-50 mx-auto"> Add to Cart </button>
+							<%
+							}else{
+								%>
+								<span class="w-50 mx-auto text-center mb-1">Not Available (Qty ${quantity})</span>
+								<button disabled class="btn btn-custom-round w-50 mx-auto">Out of Stock</button>
+								<%
+							}%>
 						</div>
 					</div>
 				</div>

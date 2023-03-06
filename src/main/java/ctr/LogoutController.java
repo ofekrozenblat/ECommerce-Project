@@ -37,7 +37,6 @@ public class LogoutController extends HttpServlet {
 		SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 		sm.setAuth(false);
 		sm.setAdmin(false);
-		sm.getCart().clear();
 	}
 
 }

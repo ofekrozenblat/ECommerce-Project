@@ -41,4 +41,22 @@ public class ModelFactory {
 		return new Order(new OrderDao());
 	}
 	
+	/**
+	 * Creates and returns a {@link BillingAddress} model.
+	 * 
+	 * @return {@link BillingAddress} object
+	 */
+	public static BillingAddress createBillingAddress() {
+		return new BillingAddress(new BillingAddressDao());
+	}
+	
+	/**
+	 * Creates and returns a {@link Payment} model.
+	 * 
+	 * @return {@link Payment} object
+	 */
+	public static Payment createPayment() {
+		return new Payment(new PaymentDao());
+	}
+	
 }

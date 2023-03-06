@@ -32,8 +32,8 @@ public class Payment extends Model {
 	}
 	
 	// Getters & Setters
-	public void setPaymentType(String street) {
-		setAttribute("payment_type", street);
+	public void setPaymentType(String type) {
+		setAttribute("payment_type", type);
 	}
 	
 	public String getPaymentType() {

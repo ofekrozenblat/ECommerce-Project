@@ -71,7 +71,7 @@ public class ItemDetailController extends HttpServlet {
 		request.setAttribute("recommendation_list", item.getRecommendations());
 		request.setAttribute("reviews", itemReviews);
 		request.setAttribute("userReviewed", userReviewed);
-		
+		request.setAttribute("quantity", item.getQuantity());
 		
 		String target = "/views/item/item-detail.jsp";
 		request.getRequestDispatcher(target).forward(request, response);
@@ -114,11 +114,17 @@ public class ItemDetailController extends HttpServlet {
 		if(request.getParameter("add-to-cart") != null) {
 			SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 			
-			if(sm.isAuth()) {
-				sm.getCart().addToCart(item_id, 1);
-				response.setHeader("success", "true");
-			}else {
-				response.setHeader("failed", "true");
+			try {
+				Item item = new ItemDao().get(item_id);
+				if(item.getQuantity() - sm.getCart().getItemQuantity(item_id) == 0) {
+					return;
+				}else {
+					sm.getCart().addToCart(item_id, 1);
+					response.setHeader("success", "true");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				return;
 			}
 			
 		}

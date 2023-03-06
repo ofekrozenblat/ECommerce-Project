@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ page import="utill.SessionManager" %>
+<%@ page import="utill.SessionManager"%>
 <!DOCTYPE html>
+<% 
+SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+boolean is_Auth = sm.isAuth();
+boolean is_Admin = sm.isAdmin();
+String username = sm.getUsername();
+
+int cart_size = sm.getCart().getSize();
+%>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="Home"> REAGAIL </a>
@@ -24,24 +32,16 @@
 					placeholder="Search" aria-label="Search"> <span
 					class="input-group-text material-symbols-outlined text-light">search</span>
 			</div>
-			<% 
-				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
-				boolean is_Auth = sm.isAuth();
-				boolean is_Admin = sm.isAdmin();
-				String username = sm.getUsername();
-				
-				int cart_size = sm.getCart().getSize();
-				if(is_Auth){
-					%>
 			<ul class="navbar-nav ms-auto d-flex">
-				<li class="nav-item">
-					<a class="nav-link active icon-nav-item position-relative" href="Cart">
-							<span class="material-icons-outlined icon-30">shopping_cart
-						</span> <span value="<%= cart_size %>" id="nav-cart-size" class="custom-badge"><%= cart_size %></span> <span
-							class="icon-nav-item-text">Cart</span>
-					</a>
-				</li>
-
+				<li class="nav-item"><a
+					class="nav-link active icon-nav-item position-relative" href="Cart">
+						<span class="material-icons-outlined icon-30">shopping_cart
+					</span> <span value="<%= cart_size %>" id="nav-cart-size"
+						class="custom-badge"><%= cart_size %></span> <span
+						class="icon-nav-item-text">Cart</span>
+				</a></li>
+				<% if(is_Auth){
+				%>
 				<li class="nav-item">
 					<div class="dropdown">
 						<a class="nav-link active icon-nav-item dropdown-toggle"
@@ -62,7 +62,7 @@
 								class="material-icons-outlined icon-22">admin_panel_settings</i>
 								<span class="ml-3">Admin</span></a>
 							<%
-                        }
+                        	}
                         %>
 							<hr>
 							<a onclick="logout()" class="dropdown-item" href=""><i
@@ -72,20 +72,14 @@
 						</div>
 					</div>
 				</li>
-
-			</ul>
-			<%
-				}else{
-					%>
-			<ul class="navbar-nav ms-auto">
+				<%
+                }else{%>
 				<li class="nav-item"><a class="nav-link active" href="Login"><span
 						class="login">Login</span></a></li>
 				<li class="nav-item"><a class="nav-link active" href="Register"><span
 						class="sign-up">Sign Up</span></a></li>
+				<%}%>
 			</ul>
-			<%
-				}
-			%>
 		</div>
 	</div>
 </nav>

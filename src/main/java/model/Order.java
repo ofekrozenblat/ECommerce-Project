@@ -1,7 +1,10 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dao.OrderDao;
 
@@ -16,17 +19,17 @@ public class Order extends Model {
 	private Payment payment;
 	private BillingAddress billingAddress;
 	
-	/** Items related to this order. Represents the relationship table order_items**/
-	private List<Item> orderItems;
+	/** Items related to this order and the respective quantity ordered. Represents the relationship table order_items**/
+	private Map<Item, Integer> orderItems;
 	
 	public Order(OrderDao dao) {
 		super(dao);
-		orderItems = new ArrayList<Item>();
+		orderItems =  new HashMap<Item, Integer>();
 	}
 	
 	public Order(OrderDao dao, int id) {
 		super(dao, id);
-		orderItems = new ArrayList<Item>();
+		orderItems =  new HashMap<Item, Integer>();
 	}
 
 	@Override
@@ -42,19 +45,6 @@ public class Order extends Model {
 	@Override
 	protected String[] getAttributeNames() {
 		return new String[] {"total", "user_id", "billing_address_id", "payment_id"};
-	}
-	
-	/**
-	 * Will re-calculate the total of the order based on the items
-	 * in this order and set the calculated total to the total of this order.
-	 */
-	public void calculateTotal() {
-		double total = 0.0;
-		for(Item item : this.orderItems) {
-			total += item.getPrice();
-		}
-		
-		setTotal(total);
 	}
 	
 	public void setTotal(double total) {
@@ -107,12 +97,16 @@ public class Order extends Model {
 		return this.billingAddress;
 	}
 	
-	public void addItem(Item item) {
-		this.orderItems.add(item);
+	public void addItem(Item item, int quantity) {
+		this.orderItems.put(item, quantity);
 	}
 	
 	public List<Item> getItems(){
-		return this.orderItems;
+		return  new ArrayList<>(this.orderItems.keySet());
+	}
+	
+	public int getItemQuantity(Item item){
+		return this.orderItems.get(item);
 	}
 
 }
