@@ -111,7 +111,7 @@ function validateExpirationDate(expirationDate) {
   const now = new Date();
   const currentYear = now.getFullYear();
   const currentMonth = now.getMonth() + 1;
-  console.log(expirationYear, expirationMonth);
+  
   if (expirationYear < currentYear || (expirationYear === currentYear && expirationMonth < currentMonth)) {
     return false;
   }
