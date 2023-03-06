@@ -5,6 +5,7 @@
 <% 
 SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 boolean is_Auth = sm.isAuth();
+int cart_size = sm.getCart().getSize();
 %>
 
 <html>
@@ -141,9 +142,9 @@ boolean is_Auth = sm.isAuth();
 	
 	          <hr class="my-4">
 	          
-				<% if(is_Auth){
+				<% if(is_Auth && cart_size > 0){
 				%>
-				<button class="w-100 btn btn-custom" type="submit">Place Order</button>
+				<button id="submit-order"class="w-100 btn btn-custom" type="submit">Place Order</button>
 				<%}else{
 				%> 
 				<button class="w-100 btn btn-custom" type="submit" disabled>Place Order</button>

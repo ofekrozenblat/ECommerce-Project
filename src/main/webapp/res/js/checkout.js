@@ -16,12 +16,17 @@ function placeOrder() {
 	let urlData = data[1];
 	
 	let validaited = validateInput(jsonData["cc-number"], jsonData["cc-cvv"], jsonData["cc-expiration"], jsonData["postal_code"]);
-	console.log(jsonData);
 	
 	if(validaited == true){
+		
+		document.getElementById("submit-order").innerHTML = `
+		<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+					Placing your order...
+		`;
+		
 		ajaxPOST(address, urlData, function(response) {
 			if (response.getResponseHeader("success")) {
-				//order was placed
+				window.location.href = "Checkout?OrderSuccess=true"
 			} 
 			else{
 				// order failed to process in backend

@@ -40,10 +40,12 @@
 							<% 
 							int quantity = (int) request.getAttribute("quantity");
 							if(quantity > 0){%>
+							<span class="w-50 mx-auto text-center mb-1">Available (Qty ${quantity})</span>
 							<button onclick="addToCart()" class="btn btn-custom-round w-50 mx-auto"> Add to Cart </button>
 							<%
 							}else{
 								%>
+								<span class="w-50 mx-auto text-center mb-1">Not Available (Qty ${quantity})</span>
 								<button disabled class="btn btn-custom-round w-50 mx-auto">Out of Stock</button>
 								<%
 							}%>

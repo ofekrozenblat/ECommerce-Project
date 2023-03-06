@@ -195,12 +195,6 @@ function addToCart() {
 			let size = parseInt(nav_cart_size.getAttribute('value')) + 1;
 			nav_cart_size.setAttribute('value', size);
 			nav_cart_size.innerHTML = size;
-		} else {
-			var modal = document.getElementById('askToLogin');
-			var bootstrapModal = new bootstrap.Modal(modal);
-			bootstrapModal.show();
 		}
-
-
 	})
 }

@@ -113,8 +113,20 @@ public class ItemDetailController extends HttpServlet {
 		
 		if(request.getParameter("add-to-cart") != null) {
 			SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
-			sm.getCart().addToCart(item_id, 1);
-			response.setHeader("success", "true");
+			
+			try {
+				Item item = new ItemDao().get(item_id);
+				if(item.getQuantity() - sm.getCart().getItemQuantity(item_id) == 0) {
+					return;
+				}else {
+					sm.getCart().addToCart(item_id, 1);
+					response.setHeader("success", "true");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				return;
+			}
+			
 		}
 	}
 	

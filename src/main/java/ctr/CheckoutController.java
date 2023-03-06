@@ -39,6 +39,14 @@ public class CheckoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter("OrderSuccess") != null) {
+			String target = "/views/shopping-cart/orderSuccess.jsp"; 
+			request.getRequestDispatcher(target).forward(request, response);
+			return;
+		}
+		
+		
 		SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 		CartManager cart = sm.getCart();;
 		request.setAttribute("total", cart.getTotal());
@@ -74,7 +82,7 @@ public class CheckoutController extends HttpServlet {
 		String postal_code = request.getParameter("postal_code").strip().replaceAll(" ", "");
 		String province = request.getParameter("province");
 		
-		if(address2 != null) {
+		if(address2 != null && !address2.isEmpty()) {
 			address += ", Suite " + address2;
 		}
 		
@@ -119,6 +127,7 @@ public class CheckoutController extends HttpServlet {
 		
 		order.save();
 		
+		cart.clear();
 	}
 
 }
