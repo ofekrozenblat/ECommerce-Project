@@ -37,7 +37,16 @@
 								<span class="rating-count">(${review_count} Reviews)</span>
 							</div>
 							<h4 class="card-title mb-5 fw-bold ps-1">$${price}</h4>
+							<% 
+							int quantity = (int) request.getAttribute("quantity");
+							if(quantity > 0){%>
 							<button onclick="addToCart()" class="btn btn-custom-round w-50 mx-auto"> Add to Cart </button>
+							<%
+							}else{
+								%>
+								<button disabled class="btn btn-custom-round w-50 mx-auto">Out of Stock</button>
+								<%
+							}%>
 						</div>
 					</div>
 				</div>

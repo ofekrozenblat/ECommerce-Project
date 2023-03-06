@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="utill.SessionManager"%>
 <!DOCTYPE html>
+<% 
+SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+boolean is_Auth = sm.isAuth();
+%>
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -16,24 +22,6 @@
 
 
 <div class="page-wrapper overflow-hidden d-flex flex-row justify-content-center">
-	
-		<!-- Ask to Login Modal -->
-	<div class="modal fade" id="askToLogin" tabindex="-1" aria-labelledby="askToLoginLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	        <p>Please login to place an order. You can <a href="Login" class="fw-bold">login here.</a></p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
 	<div class="bg-light w-50 ms-auto my-3">
 		<div class="col-md-7 col-lg-8 mx-auto my-3">
 	        <h4 class="mb-3 fw-bold">Place Order</h4>
@@ -42,6 +30,15 @@
 			  <strong>Failed to palce order!</strong> <span>Please check credentials are correct.</span>
 			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
+			
+				
+		<% if(!is_Auth){
+		%>
+		<div id="submit-warning" class="alert alert-warning alert-dismissible" role="alert">
+		  <strong>Unable to place order!</strong> Please login to place your order.
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		<%}%>
 			
 	        <hr>
 	        <h4 class="mb-3">Shipping Address</h4>
@@ -85,7 +82,7 @@
 	
 	            <div class="col-md-3">
 	              <label for="postal_code" class="form-label">Postal Code</label>
-	              <input name="postal_code" type="text" class="form-control" id="postal_code" placeholder="" required>
+	              <input name="postal_code" type="text" class="form-control" id="postal_code" placeholder="A1A 1A1" required>
 	              <div class="invalid-feedback">
 	                Postal code required.
 	              </div>
@@ -98,11 +95,11 @@
 	
 	          <div class="my-3">
 	            <div class="form-check">
-	              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+	              <input value="credit" id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
 	              <label class="form-check-label" for="credit">Credit card</label>
 	            </div>
 	            <div class="form-check">
-	              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+	              <input value="debit" id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
 	              <label class="form-check-label" for="debit">Debit card</label>
 	            </div>
 	          </div>
@@ -127,7 +124,7 @@
 	
 	            <div class="col-md-3">
 	              <label for="cc-expiration" class="form-label">Expiration</label>
-	              <input  name="cc-expiration" type="text" class="form-control" id="cc-expiration" placeholder="" required>
+	              <input  name="cc-expiration" type="text" class="form-control" id="cc-expiration" placeholder="09/23" required>
 	              <div class="invalid-feedback">
 	                Expiration date required
 	              </div>
@@ -135,7 +132,7 @@
 	
 	            <div class="col-md-3">
 	              <label for="cc-cvv" class="form-label">CVV</label>
-	              <input  name="cc-cvv" type="text" class="form-control" id="cc-cvv" placeholder="" required>
+	              <input  name="cc-cvv" type="text" class="form-control" id="cc-cvv" placeholder="123" required>
 	              <div class="invalid-feedback">
 	                Security code required
 	              </div>
@@ -143,8 +140,15 @@
 	          </div>
 	
 	          <hr class="my-4">
-	
-	          <button class="w-100 btn btn-custom" type="submit">Place Order</button>
+	          
+				<% if(is_Auth){
+				%>
+				<button class="w-100 btn btn-custom" type="submit">Place Order</button>
+				<%}else{
+				%> 
+				<button class="w-100 btn btn-custom" type="submit" disabled>Place Order</button>
+				<%}%>
+				
 	        </form>
 	      </div>
 	</div>

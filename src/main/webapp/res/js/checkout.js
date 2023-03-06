@@ -15,16 +15,18 @@ function placeOrder() {
 	let jsonData = data[0];
 	let urlData = data[1];
 	
-	let validaited = validateCreditCard(jsonData["cc-number"], jsonData["cc-cvv"], jsonData["cc-expiration"]);
+	let validaited = validateInput(jsonData["cc-number"], jsonData["cc-cvv"], jsonData["cc-expiration"], jsonData["postal_code"]);
+	console.log(jsonData);
+	
 	if(validaited == true){
 		ajaxPOST(address, urlData, function(response) {
-		if (response.getResponseHeader("success")) {
-			//placeorder
-		} else {
-			var modal = document.getElementById('askToLogin');
-			var bootstrapModal = new bootstrap.Modal(modal);
-			bootstrapModal.show();
-		}
+			if (response.getResponseHeader("success")) {
+				//order was placed
+			} 
+			else{
+				// order failed to process in backend
+				unsuccessfull("Something went wrong! Please try again later.");
+			}
 		});
 	}else{
 		unsuccessfull(validaited);
@@ -33,6 +35,11 @@ function placeOrder() {
 }
 
 function unsuccessfull(message){
+	let error = document.getElementById("submit-error-copy");
+	if(error){
+		error.remove();
+	}
+	
 	let submit_error = document.getElementById("submit-error");
 	
 	let submit_error_copy = submit_error.cloneNode(true);
@@ -60,7 +67,14 @@ function getFormData(){
 	return [jsonData, urlData];
 }
 
-function validateCreditCard(ccNumber, ccCVV, ccExpiration) {
+function validateInput(ccNumber, ccCVV, ccExpiration, postal_code) {
+  const caPostalCodeRegex = /^[A-Za-z]\d[A-Za-z][- ]?\d[A-Za-z]\d$/;
+  
+  //Validate the postal code
+  if(!caPostalCodeRegex.test(postal_code)){
+	  return "Invalid Postal Code";
+  }
+  
   // Remove any whitespace from the credit card number
   ccNumber = ccNumber.replace(/\s+/g, '');
 
@@ -75,12 +89,33 @@ function validateCreditCard(ccNumber, ccCVV, ccExpiration) {
   }
 
   // Validate the expiration date
-  const today = new Date();
-  const expirationDate = new Date(ccExpiration);
-  if (expirationDate <= today) {
-    return "Expired Credit Card";
+  if (!validateExpirationDate(ccExpiration)) {
+    return "Invalid or Expired Credit Card Expiration";
   }
 
   // If all validations pass, return true
+  return true;
+}
+
+function validateExpirationDate(expirationDate) {
+  const [month, year] = expirationDate.split('/');
+  const expirationMonth = parseInt(month, 10);
+  const expirationYear = parseInt(year, 10) + 2000;
+  
+  // Check if the date is in the future
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+  console.log(expirationYear, expirationMonth);
+  if (expirationYear < currentYear || (expirationYear === currentYear && expirationMonth < currentMonth)) {
+    return false;
+  }
+  
+  // Check if the month is valid
+  if (expirationMonth < 1 || expirationMonth > 12) {
+    return false;
+  }
+  
+  // The date is valid
   return true;
 }

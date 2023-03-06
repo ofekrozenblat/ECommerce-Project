@@ -42,9 +42,8 @@ class OrderDaoTest {
     	try {
 			Item item10 =  itemDao.get(10);
 			Item item26 =  itemDao.get(26);
-			order.addItem(item10);
-			order.addItem(item26);
-			order.calculateTotal();
+			order.addItem(item10, 1);
+			order.addItem(item26, 1);
 			
 			Payment payment = paymentDao.get(1);
 			BillingAddress billingAddress = billingAddressDao.get(1);

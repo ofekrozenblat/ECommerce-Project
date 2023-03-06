@@ -59,6 +59,7 @@ CREATE TABLE order_items(
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 order_id INT NOT NULL,
 item_id INT NOT NULL,
+amount INT NOT NULL,
 FOREIGN KEY (item_id) REFERENCES items (id),
 FOREIGN KEY (order_id) REFERENCES orders (id)
 );
