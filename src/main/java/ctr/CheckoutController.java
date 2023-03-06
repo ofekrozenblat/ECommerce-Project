@@ -71,7 +71,7 @@ public class CheckoutController extends HttpServlet {
 		String address = request.getParameter("address");
 		String address2 = request.getParameter("address2");
 		String country = request.getParameter("country");
-		String postal_code = request.getParameter("postal_code");
+		String postal_code = request.getParameter("postal_code").strip().replaceAll(" ", "");
 		String province = request.getParameter("province");
 		
 		if(address2 != null) {
@@ -95,13 +95,14 @@ public class CheckoutController extends HttpServlet {
 		ba.setPostalCode(postal_code);
 		ba.setProvince(province);
 		ba.setStreet(address);
-		
+		ba.save();
 		//set payment info
 		payment.setCreditCardCvv(cc_cvv);
 		payment.setCreditCardExpiration(cc_expiration);
 		payment.setCreditCardName(cc_name);
 		payment.setCreditCardNumber(cc_number);
 		payment.setPaymentType(paymentMethod);
+		payment.save();
 		
 		order.setBillingAddress(ba);
 		order.setPayment(payment);

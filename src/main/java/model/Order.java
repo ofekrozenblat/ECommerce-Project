@@ -101,9 +101,8 @@ public class Order extends Model {
 		this.orderItems.put(item, quantity);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Item> getItems(){
-		return (List<Item>) this.orderItems.keySet();
+		return  new ArrayList<>(this.orderItems.keySet());
 	}
 	
 	public int getItemQuantity(Item item){

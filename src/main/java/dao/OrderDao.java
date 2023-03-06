@@ -183,6 +183,8 @@ public class OrderDao extends Dao {
 				String item_id = resultSet.getString("item_id");
 				int quantity = Integer.parseInt(resultSet.getString("quantity"));
 				Item item = itemDao.get(Integer.parseInt(item_id));
+				item.setQuantity(item.getQuantity() - quantity);
+				item.save();
 				order.addItem(item, quantity);
 			}
 		} catch (SQLException e) {
