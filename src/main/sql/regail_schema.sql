@@ -40,8 +40,8 @@ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 payment_type VARCHAR(255) NOT NULL,
 credit_card_name VARCHAR(255) NOT NULL,
 credit_card_number VARCHAR(255) NOT NULL,
-credit_card_expiration DATE NOT NULL,
-credit_card_cvv VARCHAR(3)
+credit_card_expiration VARCHAR(5) NOT NULL,
+credit_card_cvv VARCHAR(3) NOT NULL,
 );
 
 CREATE TABLE orders(
@@ -59,7 +59,7 @@ CREATE TABLE order_items(
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 order_id INT NOT NULL,
 item_id INT NOT NULL,
-amount INT NOT NULL,
+quantity INT NOT NULL,
 FOREIGN KEY (item_id) REFERENCES items (id),
 FOREIGN KEY (order_id) REFERENCES orders (id)
 );
