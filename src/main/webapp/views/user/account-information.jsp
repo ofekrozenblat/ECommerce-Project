@@ -5,15 +5,15 @@
 <form>
 	<div class="mb-3">
     <label for="firstName" class="form-label">First Name</label>
-    <input type="text" class="form-control" id="firstName" value="Bob">
+    <input type="text" class="form-control" id="firstName" value="${firstname}">
   </div>
   <div class="mb-3">
      <label for="LastName" class="form-label">Last Name</label>
-    <input type="text" class="form-control" id="LastName" value="Joe">
+    <input type="text" class="form-control" id="LastName" value="${lastname}">
   </div>
   <div class="mb-3">
     <label for="emailAddress" class="form-label">Email Address</label>
-    <input type="email" class="form-control" id="emailAddress" value="BobJoe@gmail.com">
+    <input type="email" class="form-control" id="emailAddress" value="${email}">
   </div>
   <button type="submit" class="btn btn-custom">Update Information</button>
 </form>

@@ -62,5 +62,10 @@ public class BillingAddress extends Model {
 	public String getPostalCode() {
 	    return getAttribute("postal_code");
 	}
+	
+	public String toString() {
+		String result = this.getStreet() + ", " + this.getProvince() + " " + this.getPostalCode() + " " + this.getCountry();
+		return result;
+	}
 
 }

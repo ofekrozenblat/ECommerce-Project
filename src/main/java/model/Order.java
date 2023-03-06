@@ -1,7 +1,10 @@
 package model;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +25,13 @@ public class Order extends Model {
 	/** Items related to this order and the respective quantity ordered. Represents the relationship table order_items**/
 	private Map<Item, Integer> orderItems;
 	
+	private static final String DATE_PATTERN = "yyyy-MM-dd";
+	private static final String DATE_PATTERN_FULL = "MMMM d', 'yyyy";
+	
 	public Order(OrderDao dao) {
 		super(dao);
 		orderItems =  new HashMap<Item, Integer>();
+		setDate(new Date());
 	}
 	
 	public Order(OrderDao dao, int id) {
@@ -44,7 +51,7 @@ public class Order extends Model {
 
 	@Override
 	protected String[] getAttributeNames() {
-		return new String[] {"total", "user_id", "billing_address_id", "payment_id"};
+		return new String[] {"total", "user_id", "billing_address_id", "payment_id", "date"};
 	}
 	
 	public void setTotal(double total) {
@@ -107,6 +114,25 @@ public class Order extends Model {
 	
 	public int getItemQuantity(Item item){
 		return this.orderItems.get(item);
+	}
+	
+	public void setDate(Date date) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
+		String dateString = simpleDateFormat.format(date);
+		setAttribute("date", dateString);
+	}
+	
+	public Date getDate() throws ParseException {
+		String dateString = getAttribute("date");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
+		Date date = simpleDateFormat.parse(dateString);
+		return date;
+	}
+	
+	public String getDateString() throws ParseException {
+		SimpleDateFormat outputDateFormat = new SimpleDateFormat(DATE_PATTERN_FULL);
+        String outputDateStr = outputDateFormat.format(this.getDate());
+		return outputDateStr;
 	}
 
 }
