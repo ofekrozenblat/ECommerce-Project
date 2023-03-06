@@ -19,10 +19,13 @@ function placeOrder() {
 	
 	if(validaited == true){
 		
-		document.getElementById("submit-order").innerHTML = `
+		let submit_order_btn = document.getElementById("submit-order")
+		
+		submit_order_btn.innerHTML = `
 		<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
 					Placing your order...
 		`;
+		submit_order_btn.setAttribute("disabled", "");
 		
 		ajaxPOST(address, urlData, function(response) {
 			if (response.getResponseHeader("success")) {
