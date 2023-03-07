@@ -41,7 +41,7 @@ payment_type VARCHAR(255) NOT NULL,
 credit_card_name VARCHAR(255) NOT NULL,
 credit_card_number VARCHAR(255) NOT NULL,
 credit_card_expiration VARCHAR(5) NOT NULL,
-credit_card_cvv VARCHAR(3) NOT NULL,
+credit_card_cvv VARCHAR(3) NOT NULL
 );
 
 CREATE TABLE orders(
@@ -50,6 +50,7 @@ total FLOAT NOT NULL,
 user_id INT NOT NULL,
 billing_address_id INT NOT NULL,
 payment_id INT NOT NULL,
+date DATE NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users (id),
 FOREIGN KEY (billing_address_id) REFERENCES billing_addresses (id),
 FOREIGN KEY (payment_id) REFERENCES payments (id)
