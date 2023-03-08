@@ -51,8 +51,9 @@ public class ItemDetailController extends HttpServlet {
 			item = new ItemDao().get(item_id);
 			userReviewed = this.userReviewed(item_id, request);
 		} catch (Exception e1) {
-			// TO DO: Return 404 PAGE
-			e1.printStackTrace();
+			// Return 404 PAGE
+			request.getRequestDispatcher("/views/errors/404.jsp").forward(request, response);
+			return;
 		}
 		
 		//Set request attributes	
