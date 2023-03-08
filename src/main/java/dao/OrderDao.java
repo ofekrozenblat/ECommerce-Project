@@ -129,6 +129,7 @@ public class OrderDao extends Dao {
 			attributes.put("item_id", String.valueOf(item.getId()));
 			attributes.put("quantity", String.valueOf(quantity));
 			
+			//This updates the item stock quantity to reflect the purchased amount 
 			item.setQuantity(item.getQuantity() - quantity);
 			item.save();
 			

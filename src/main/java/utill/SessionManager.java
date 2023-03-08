@@ -26,6 +26,9 @@ public class SessionManager{
 	
 	private String username;
 	
+	// to keep track of how many attempts the user has made to place an order
+	private int checkoutAttempts;
+	
 	public SessionManager(){
 		this.isAuth = false;
 		this.isAdmin = false;
@@ -78,6 +81,20 @@ public class SessionManager{
 	 */
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	/**
+	 * @return the checkoutAttempts
+	 */
+	public int getCheckoutAttempts() {
+		return checkoutAttempts;
+	}
+
+	/**
+	 * Increases the checkoutAttempts by 1
+	 */
+	public void updateCheckoutAttempts() {
+		this.checkoutAttempts = checkoutAttempts + 1;
 	}
 	
 }

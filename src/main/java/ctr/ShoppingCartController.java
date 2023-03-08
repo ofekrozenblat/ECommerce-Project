@@ -67,7 +67,7 @@ public class ShoppingCartController extends HttpServlet {
 				
 				// If the edit quantity of the item in the cart reaches
 				// 0 or goes above the item's available stock, return and do not 
-				// make this adjustment 
+				// make this adjustment. Note editvalue can be -1 or +1. 
 				if(cart.getItemQuantity(item_id) + editValue == 0 ||
 						cart.getItemQuantity(item_id) + editValue > item.getQuantity()) {
 					return;

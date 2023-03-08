@@ -1,4 +1,4 @@
-package tests;
+package tests.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
