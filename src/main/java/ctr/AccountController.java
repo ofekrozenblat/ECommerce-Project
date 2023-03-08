@@ -2,6 +2,7 @@ package ctr;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import dao.OrderDao;
 import model.User;
 import model.Order;
 import utill.SessionManager;
+import java.util.Collections;
 
 /**
  * Servlet implementation class AccountController
@@ -57,6 +59,17 @@ public class AccountController extends HttpServlet {
 
 			// User orders
 			List<Order> orders = new OrderDao().getOrdersByUserId(user_id);
+			
+			//Sort orders by date from most recent (i.e., in descending order),
+			Collections.sort(orders, (o1, o2) -> {
+				try {
+					return o2.getDate().compareTo(o1.getDate());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					return 0;
+				}
+			});
+			
 			request.setAttribute("orders", orders);
 
 		} catch (SQLException e) {
