@@ -2,36 +2,17 @@ package tests.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import dao.*;
 import factories.ModelFactory;
-import hthurow.tomcatjndi.TomcatJNDI;
 import model.*;
 
-class OrderDaoTest {
-	
-	private static TomcatJNDI tomcatJNDI;
+class OrderDaoTest extends DaoTest{
 
-    @BeforeAll
-    static void setup() {
-		tomcatJNDI = new TomcatJNDI();
-		tomcatJNDI.processContextXml(new File("src\\main\\webapp\\META-INF\\context.xml"));
-		tomcatJNDI.processWebXml(new File("src\\main\\webapp\\WEB-INF\\web.xml"));
-		tomcatJNDI.start();
-    }
-
-    @AfterAll
-    static void tearDown() {
-    	tomcatJNDI.tearDown();
-    }
-	
     @Test
     void testCreateAndGet() {
     	Order order = ModelFactory.createOrder();
@@ -44,7 +25,7 @@ class OrderDaoTest {
 			Item item26 =  itemDao.get(26);
 			order.addItem(item10, 1);
 			order.addItem(item26, 1);
-			
+			order.setTotal(item10.getPrice() + item26.getPrice());
 			Payment payment = paymentDao.get(1);
 			BillingAddress billingAddress = billingAddressDao.get(1);
 			
