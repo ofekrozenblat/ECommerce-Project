@@ -29,11 +29,13 @@ function placeOrder() {
 		
 		ajaxPOST(address, urlData, function(response) {
 			if (response.getResponseHeader("success")) {
-				window.location.href = "Checkout?OrderSuccess=true"
+				window.location.href = "Checkout?orderSuccess=true"
 			} 
 			else{
 				// order failed to process in backend
 				unsuccessfull("Something went wrong! Please try again later.");
+				submit_order_btn.innerHTML = 'Place order';
+				submit_order_btn.removeAttribute("disabled");
 			}
 		});
 	}else{

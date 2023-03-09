@@ -40,7 +40,7 @@ public class CheckoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter("OrderSuccess") != null) {
+		if(request.getParameter("orderSuccess") != null) {
 			String target = "/views/shopping-cart/orderSuccess.jsp"; 
 			request.getRequestDispatcher(target).forward(request, response);
 			return;
@@ -60,6 +60,15 @@ public class CheckoutController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+		sm.updateCheckoutAttempts();
+		
+		//Every third attempt, placing an order fails (as per project requirements)
+		if(sm.getCheckoutAttempts() % 3 == 0) {
+			response.setHeader("failed", "true");
+			return;
+		}
+		
 		// Place order
 		try {
 			processOrder(request);

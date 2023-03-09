@@ -53,13 +53,18 @@ public class LoginController extends HttpServlet {
 		User user;
 		try {
 			
+			// Get user from database, if doesn't exist then email credentials were wrong
 			user = new UserDao().getByEmail(email);
 			
+			// Validate password 
 			try {
+				
+				// if email & password match, log in user
 				if(Authenticator.validateUser(password, user.getId())) {
 					sm.setUserId(user.getId());
 					sm.setUsername(user.getFirstName());
 					sm.setAuth(true);
+					sm.setAdmin(user.getIsAdmin());
 				}else {
 					response.setHeader("error", "Failed to login, check credentials");
 					return;
@@ -68,10 +73,6 @@ public class LoginController extends HttpServlet {
 				response.setHeader("error", "Failed to login, check credentials");
 				return;
 			}
-			
-			sm.setUserId(user.getId());
-			sm.setUsername(user.getFirstName());
-			sm.setAuth(true);
 			
 			response.setHeader("success", "user logged in");
 		} catch (SQLException e1) {
