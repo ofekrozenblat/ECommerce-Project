@@ -1,6 +1,8 @@
 package ctr;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import auth.Authenticator;
 import factories.ModelFactory;
 import model.User;
+import security.Sanitizer;
 import utill.SessionManager;
 
 /**
@@ -41,12 +44,14 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//register user
+		// Sanitize input
+		Map<String, String> parameters = Sanitizer.cleanRequestParameters(request);
 		
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		//register user
+		String firstName = parameters.get("firstName");
+		String lastName = parameters.get("lastName");
+		String email = parameters.get("email");
+		String password = parameters.get("password");
 		
 		User user = ModelFactory.createUser();
 		try {
