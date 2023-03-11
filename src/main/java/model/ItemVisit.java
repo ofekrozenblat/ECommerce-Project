@@ -65,5 +65,17 @@ public class ItemVisit extends Model{
 		Item item = new ItemDao().get(this.getItemId());
 		return item;
 	}
+	
+	public String toJson() {
+		StringBuilder json = new StringBuilder();
+		json.append("{");
+
+		json.append("\"item_id\":").append("\"").append(this.getItemId()).append("\",");
+		json.append("\"visits\":").append("\"").append(this.getVisits()).append("\",");
+
+		json.append("}");
+
+		return json.toString();
+	}
 
 }
