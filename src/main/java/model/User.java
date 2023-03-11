@@ -17,6 +17,7 @@ public class User extends Model {
 	
 	public User(UserDao dao) {
 		super(dao);
+		this.setIsAdmin(false);
 	}
 	
 	public User(UserDao dao, int id) {
