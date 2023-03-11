@@ -72,12 +72,12 @@ public class CheckoutController extends HttpServlet {
 		// Place order
 		try {
 			processOrder(request);
+			response.setHeader("success", "true");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			response.setHeader("failed", "true");
 		}
-		
-		response.setHeader("success", "true");
+
 	}
 	
 	private void processOrder(HttpServletRequest request) throws SQLException {
