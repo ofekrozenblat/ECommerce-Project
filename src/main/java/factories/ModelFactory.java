@@ -59,4 +59,13 @@ public class ModelFactory {
 		return new Payment(new PaymentDao());
 	}
 	
+	/**
+	 * Creates and returns a {@link ItemVisit} model.
+	 * 
+	 * @return {@link ItemVisit} object
+	 */
+	public static ItemVisit createItemVisit() {
+		return new ItemVisit(new ItemVisitDao());
+	}
+	
 }
