@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDao;
+import dao.ItemVisitDao;
 import dao.ReviewDao;
 import factories.ModelFactory;
 import model.Item;
+import model.ItemVisit;
 import model.Review;
 import utill.SessionManager;
 
@@ -42,6 +44,7 @@ public class ItemDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int item_id = Integer.parseInt(request.getParameter("item_id"));
+		itemVisitEvent(item_id);
 		
 		request.getSession().setAttribute(REQ_SESSION_ITEM_ID, item_id);
 		
@@ -143,6 +146,24 @@ public class ItemDetailController extends HttpServlet {
 		}
 		
 		return false;
+	}
+	
+	private void itemVisitEvent(int item_id) {
+		try {
+			ItemVisit itemVisit = new ItemVisitDao().getByItemId(item_id);
+			itemVisit.updateVisits();
+			itemVisit.save();
+		} catch (SQLException e) {
+			ItemVisit itemVisit = ModelFactory.createItemVisit();
+			itemVisit.setItemId(item_id);
+			itemVisit.updateVisits();
+			try {
+				itemVisit.save();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 
 }

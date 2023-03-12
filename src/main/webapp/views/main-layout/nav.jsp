@@ -58,14 +58,14 @@ int cart_size = sm.getCart().getSize();
 							</a>
 							<% if(is_Admin){
                         	%>
-							<a class="dropdown-item" href=""> <i
+							<a class="dropdown-item" href="Admin"> <i
 								class="material-icons-outlined icon-22">admin_panel_settings</i>
 								<span class="ml-3">Admin</span></a>
 							<%
                         	}
                         %>
 							<hr>
-							<a onclick="logout()" class="dropdown-item" href=""><i
+							<a class="dropdown-item" href="Logout"><i
 								class="material-icons-outlined icon-22">logout</i> <span
 								class="ml-3">Logout </span> </a>
 

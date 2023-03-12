@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -133,6 +134,23 @@ public class Order extends Model {
 		SimpleDateFormat outputDateFormat = new SimpleDateFormat(DATE_PATTERN_FULL);
         String outputDateStr = outputDateFormat.format(this.getDate());
 		return outputDateStr;
+	}
+	
+	public String toJson() {
+		StringBuilder json = new StringBuilder();
+		json.append("{");
+
+		json.append("\"order_id\":").append("\"").append(this.getId()).append("\",");
+		json.append("\"total\":").append("\"").append(this.getTotal()).append("\",");
+		try {
+			json.append("\"Placed on\":").append("\"").append(this.getDateString()).append("\"");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		json.append("}");
+
+		return json.toString();
 	}
 
 }
