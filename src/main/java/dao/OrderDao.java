@@ -77,6 +77,34 @@ public class OrderDao extends Dao {
 		return order;
 	}
 	
+	public List<Order> getAll() throws SQLException {
+		List<Order> orders = new ArrayList<Order>();
+		
+		String table = Order.table;
+		String[] columns = {  Order.primaryKeyColumnName };
+		ResultSet resultSet;
+		
+		try {
+			resultSet = connection.executeSelect(table, columns, null);
+			
+			while(resultSet.next()) {
+				String orderIdString = resultSet.getString(Order.primaryKeyColumnName);
+				int orderId = Integer.parseInt(orderIdString);
+				Order order = this.get(orderId);
+				orders.add(order);
+			}
+			
+		} catch (SQLException e) {
+			throw new SQLException("Failed to get all orders"
+					+ ": " + e.getMessage());
+		} catch(NumberFormatException e) {
+			throw new SQLException("Failed to get all orders"
+					+ " because of number formatting: " + e.getMessage());
+		}
+		
+		return orders;
+	}
+	
 	/**
 	 * Retrieves a list of orders related to a user
 	 * 

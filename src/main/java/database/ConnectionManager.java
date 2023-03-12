@@ -74,7 +74,7 @@ public class ConnectionManager {
 		
 		String query = queryBuilder.createSelect(table, columns);
 		query = queryBuilder.addWHERE(query, conditions);
-		
+
 		try {
 			con = ds.getConnection();
 			Statement statement = con.createStatement();

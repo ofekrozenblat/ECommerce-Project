@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import dao.ItemVisitDao;
+import dao.OrderDao;
 import model.Item;
 import model.ItemVisit;
+import model.Order;
 
 public class AdminReports {
 	
@@ -27,6 +29,19 @@ public class AdminReports {
 			return data;
 		}
 		
+		return data;
+	}
+	
+	public List<String> getOrders(){
+		List<String> data = new ArrayList<String>();
+		try {
+			List<Order> orders = new OrderDao().getAll();
+			for(Order o: orders) {
+				data.add(o.toJson());
+			}
+		} catch (SQLException e) {
+			return data;
+		}
 		return data;
 	}
 }

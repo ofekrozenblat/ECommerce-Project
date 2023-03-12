@@ -44,6 +44,7 @@ public class AdminController extends HttpServlet {
 		
 		
 		String target = "/views/admin/admin-home.jsp"; 
+		request.setAttribute("username", sm.getUsername());
 		request.getRequestDispatcher(target).forward(request, response);
 	}
 
@@ -56,6 +57,12 @@ public class AdminController extends HttpServlet {
 		if(request.getParameter(REQ_REPORT_VISITS) != null) {
 			 PrintWriter out = response.getWriter();
 			 out.println(adminReports.getItemVisits());
+			 out.close();
+		}
+		
+		if(request.getParameter(REQ_REPORT_SALES) != null) {
+			 PrintWriter out = response.getWriter();
+			 out.println(adminReports.getOrders());
 			 out.close();
 		}
 	}

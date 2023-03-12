@@ -3,8 +3,18 @@ function runVisitsReport(){
 	let data = "visits=true";
 	loading();
 	ajaxPOST(addrress, data, function(response){
-		let data = JSON.parse(response.responseText);
-		createDataTableHTML(data);
+		let json_data = JSON.parse(response.responseText);
+		createDataTableHTML(json_data);
+	});
+}
+
+function runSalesReport(){
+	let addrress = "Admin";
+	let data = "sales=true";
+	loading();
+	ajaxPOST(addrress, data, function(response){
+		let json_data = JSON.parse(response.responseText);
+		createDataTableHTML(json_data);
 	});
 }
 
@@ -41,13 +51,6 @@ function createDataTableHTML(data) {
 
   // Initialize DataTable
    $('#myTable').DataTable({
-	    pageLength: 10,
-        filter: true,
-        deferRender:    true,
-        scrollY:        200,
-        scrollCollapse: true,
-        scroller:       true,
-        responsive: true
   });
 }
 

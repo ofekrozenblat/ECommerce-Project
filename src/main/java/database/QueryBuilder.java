@@ -62,7 +62,7 @@ public class QueryBuilder {
 			query += "* ";
 		}else {
 			for(int i = 0; i < columns.length; i++) {
-				query += columns[i];
+				query += columns[i] + " ";
 				
 				if (i+1 != columns.length) {
 					query += ", ";
