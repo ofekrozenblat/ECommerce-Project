@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import auth.Authenticator;
 import dao.UserDao;
 import factories.ModelFactory;
 import model.User;
+import security.Authenticator;
 import utill.SessionManager;
 
 /**
