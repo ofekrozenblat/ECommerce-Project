@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import auth.Authenticator;
 import factories.ModelFactory;
 import model.User;
+import security.Authenticator;
 import security.Sanitizer;
 import utill.SessionManager;
 
