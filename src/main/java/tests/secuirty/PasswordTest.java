@@ -1,4 +1,4 @@
-package tests.auth;
+package tests.secuirty;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import auth.Password;
+import security.Password;
 
 class PasswordTest {
 
