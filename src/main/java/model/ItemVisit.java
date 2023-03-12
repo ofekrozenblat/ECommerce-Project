@@ -72,7 +72,13 @@ public class ItemVisit extends Model{
 
 		json.append("\"item_id\":").append("\"").append(this.getItemId()).append("\",");
 		json.append("\"visits\":").append("\"").append(this.getVisits()).append("\",");
-
+		try {
+			json.append("\"item_name\":").append("\"").append(this.getItem().getName()).append("\",");
+			json.append("\"item_price\":").append("\"").append(this.getItem().getPrice()).append("\"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		json.append("}");
 
 		return json.toString();
