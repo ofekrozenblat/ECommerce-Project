@@ -65,7 +65,7 @@ int cart_size = sm.getCart().getSize();
                         	}
                         %>
 							<hr>
-							<a onclick="logout()" class="dropdown-item" href=""><i
+							<a class="dropdown-item" href="Logout"><i
 								class="material-icons-outlined icon-22">logout</i> <span
 								class="ml-3">Logout </span> </a>
 

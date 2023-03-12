@@ -26,8 +26,8 @@
 		class="icon-nav-item-text">${username}</span>
 	</a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
-         <li><a class="dropdown-item" href="#">Back Home</a></li>
+        <li><a class="dropdown-item" href="Logout">Sign out</a></li>
+         <li><a class="dropdown-item" href="Home">Back Home</a></li>
       </ul>
     </div>
   </div>
