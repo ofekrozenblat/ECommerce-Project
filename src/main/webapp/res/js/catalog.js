@@ -7,6 +7,8 @@ let max = 0;
 let filters = new Proxy(
   { 
     rating: 0,
+    maxPrice: Math.max,
+    minPrice: Math.min,
     brands: [],
     colors: [],
     categories: []
@@ -84,6 +86,12 @@ function filterCatalog(){
 			hide = true;
 		}
 		
+		let itemPrice = parseFloat(item.getAttribute("data-price"));
+		
+		if(itemPrice < parseFloat(filters.minPrice) || itemPrice > parseFloat(filters.maxPrice)){
+			hide = true;
+		}
+		
 		if(hide === false){
 			item.classList.remove('hide');
 		}else{
@@ -109,6 +117,19 @@ function updateFilters(type, value){
 	}
 	
 	filters[type] = list;
+}
+
+function filterPrice(){
+	max = document.getElementById("filter-maxPrice").value;
+	min = document.getElementById("filter-minPrice").value
+	
+	if(max == "" && min == ""){
+		filters.maxPrice = Math.max;
+		filters.minPrice = Math.min;
+	}
+	
+	filters.maxPrice = max == "" ? Math.max : max;
+	filters.minPrice = min == "" ? Math.min : min;
 }
 
 function setFilterRatingFunctionality() {

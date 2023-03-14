@@ -11,11 +11,6 @@ CatalogFilters filters = new CatalogFilters();
 List<String> filterCategories = filters.getCategoryFilters();
 List<String> filterBrands = filters.getBrandFilters();
 List<String> filterColors = filters.getColorFilters();
-
-List<String> priceFilters = filters.getPriceFilters();
-double filterMaxPrice = Double.parseDouble(priceFilters.get(0));
-double filterMinPrice = Double.parseDouble(priceFilters.get(1));
-
 %>
 <html>
 <head>
@@ -62,8 +57,9 @@ double filterMinPrice = Double.parseDouble(priceFilters.get(1));
 					<hr>
 					<h4 class="filter-title">Price</h4>
 					 <div class="d-flex flex-row justify-content-between me-2">
-						  <input placeholder="$Min" type="number" id="filter-min" min="${filterMinPrice}" max="${filterMaxPrice}">
-						  <input placeholder="$Max" type="number" id="filter-max" min="${filterMinPrice}" max="${filterMaxPrice}">
+						  <input id="filter-minPrice" placeholder="$Min" type="number" id="filter-min">
+						  <input id="filter-maxPrice" placeholder="$Max" type="number" id="filter-max">
+						  <button onclick="filterPrice()" class="btn btn-custom-round">Go</button>
 					 </div>
 					 <hr>
 					 <h4 class="filter-title">Minimum Rating</h4>
