@@ -145,15 +145,36 @@ public class Item extends Model {
 			List<Item> similar_price = thisDao.getAll(p_conditions);
 			
 			List<Item> all = thisDao.getAll(null);
-
-			recommendations.add(similar_category.get(0));
-			recommendations.add(similar_brand.get(0));
-			recommendations.add(similar_colour.get(0));
-			recommendations.add(similar_price.get(0));
 			
-			//Four additional recommendations in case there are not enough similar items
-			for (int i = 0; i < 4; i++) {
-				recommendations.add(all.get(i));
+			//Do not recommend current item
+			if(similar_category.contains(this)) similar_category.remove(this);
+			if(similar_brand.contains(this)) similar_brand.remove(this);
+			if(similar_colour.contains(this)) similar_colour.remove(this);
+			if(similar_price.contains(this)) similar_price.remove(this);
+			if(all.contains(this)) all.remove(this);
+
+			//Add one recommended items from each category as long as it is not already recommended
+			int index = 0;
+			while(recommendations.size() < 1 && index<similar_category.size()) {
+				if(!recommendations.contains(similar_category.get(index))) recommendations.add(similar_category.get(index));
+			}
+			index = 0;
+			while(recommendations.size() < 2 && index<similar_brand.size()) {
+				if(!similar_brand.contains(similar_brand.get(index))) recommendations.add(similar_brand.get(index));
+			}
+			index = 0;
+			while(recommendations.size() < 3 && index<similar_colour.size()) {
+				if(!similar_colour.contains(similar_colour.get(index))) recommendations.add(similar_colour.get(index));
+			}
+			index = 0;
+			while(recommendations.size() < 4 && index<similar_price.size()) {
+				if(!similar_colour.contains(similar_price.get(index))) recommendations.add(similar_price.get(index));
+			}
+			
+			//If needed fill up recommendations with additional items
+			index = 0;
+			while(recommendations.size() < 4 && index<all.size()) {
+				if(!recommendations.contains(all.get(index))) recommendations.add(all.get(index));
 			}
 
 		} catch (SQLException e) {
