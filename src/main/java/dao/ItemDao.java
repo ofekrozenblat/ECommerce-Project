@@ -5,9 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import model.Item;
 import model.Review;
 
@@ -127,12 +124,10 @@ public class ItemDao extends Dao {
 		List<String> filters = new ArrayList<String>();
 		String table = Item.table;
 		String[] columns = { filter_type };
-		String condition =  "";
-		String[] conditions = { condition };
 		ResultSet resultSet;
 
 		try {
-			resultSet = connection.executeSelect(table, columns, conditions);
+			resultSet = connection.executeSelect(table, columns, null);
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive list of filters  with type " + filter_type + ".");
 		}
