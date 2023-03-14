@@ -125,11 +125,77 @@ public class Item extends Model {
 		List<Item> recommendations = new ArrayList<Item>();
 		try {
 			ItemDao thisDao = (ItemDao) this.dao;
-			List<Item> items = thisDao.getAll(null);
-
-			for (int i = 0; i < 4; i++) {
-				recommendations.add(items.get(i));
+			
+			String catCondition =  "category=" + this.getCategory();
+			String[] catConditions = { catCondition };
+			List<Item> similarCategory = thisDao.getAll(catConditions);
+			
+			String bCondition =  "brand=" + this.getBrand();
+			String[] bConditions = { bCondition };
+			List<Item> similarBrand = thisDao.getAll(bConditions);
+			
+			String cCondition =  "colour=" + this.getColor();
+			String[] cConditions = { cCondition };
+			List<Item> similarColour = thisDao.getAll(cConditions);
+			
+			double price = this.getPrice();
+			String pCondition1 =  "price>" + (price - 50);
+			String pCondition2 =  "price<" + (price + 50);
+			String[] pConditions = { pCondition1, pCondition2 };
+			List<Item> similarPrice = thisDao.getAll(pConditions);
+			
+			List<Item> all = thisDao.getAll(null);
+			
+			//Do not recommend current item
+			similarCategory.removeIf(item -> item.getId() == this.getId());
+			similarBrand.removeIf(item -> item.getId() == this.getId());
+			similarColour.removeIf(item -> item.getId() == this.getId());
+			similarPrice.removeIf(item -> item.getId() == this.getId());
+			all.removeIf(item -> item.getId() == this.getId());
+			
+			while (recommendations.size() < 4) {
+				
+	            if (similarCategory.isEmpty() && similarBrand.isEmpty() && similarColour.isEmpty() && similarPrice.isEmpty()) {
+	                
+	            	for (Item item : all) {
+	            		if(item.getId() != this.getId()) {
+	            			recommendations.add(item);
+	            			if(recommendations.size() == 4) break;
+	            		}
+	    			}
+	            	
+	            	break;
+	            }
+	            
+	            if (!similarCategory.isEmpty()) {
+	                Item item = similarCategory.remove(0);
+	                if (!recommendations.contains(item)) {
+	                    recommendations.add(item);
+	                }
+	            }
+	            if (!similarBrand.isEmpty()) {
+	                Item item = similarBrand.remove(0);
+	                if (!recommendations.contains(item)) {
+	                    recommendations.add(item);
+	                }
+	            }
+	            if (!similarColour.isEmpty()) {
+	                Item item = similarColour.remove(0);
+	                if (!recommendations.contains(item)) {
+	                    recommendations.add(item);
+	                }
+	            }
+	            if (!similarPrice.isEmpty()) {
+	                Item item = similarPrice.remove(0);
+	                if (!recommendations.contains(item)) {
+	                    recommendations.add(item);
+	                }
+	            }
+	            
 			}
+			
+			
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

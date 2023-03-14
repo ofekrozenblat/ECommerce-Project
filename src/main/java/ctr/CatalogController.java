@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -103,6 +104,4 @@ public class CatalogController extends HttpServlet {
 	    out.println(renderedHtml);
 	    out.close();
 	}
-
-
 }
