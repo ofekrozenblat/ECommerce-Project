@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import model.Item;
 import model.Review;
 
@@ -85,6 +88,77 @@ public class ItemDao extends Dao {
 	private void setReviewsForItem(Item item) throws Exception{
 		List<Review> reviews = new ReviewDao().getReviewsByItemId(item.getId());
 		item.setReviews(reviews);
+	}
+	
+	public List<String> getFilters(String filter_type) throws SQLException {
+		// Gets the list of filters based on the type
+		
+		List<String> filters = new ArrayList<String>();
+		String table = Item.table;
+		String[] columns = { filter_type };
+		String condition =  "";
+		String[] conditions = { condition };
+		ResultSet resultSet;
+
+		try {
+			resultSet = connection.executeSelect(table, columns, conditions);
+		} catch (SQLException e) {
+			throw new SQLException("Failed to retreive list of filters  with type " + filter_type + ".");
+		}
+		
+		// Add the filters to the List
+		try {
+			while (resultSet.next()) {
+				String filter = resultSet.getString(filter_type);
+				filters.add(filter);
+			}
+		} catch (SQLException e) {
+			throw new SQLException("Failed to retreive filters of the items");
+		}catch(Exception e) {
+			throw new SQLException(e.getMessage());
+		}
+		
+		return filters;
+	}
+	
+	public List<String> getPriceFilters(String filter_type) throws SQLException {
+		// Gets the list of filters based on the type
+		
+		List<String> filters = new ArrayList<String>();
+		String table = Item.table;
+		String[] columns = { filter_type };
+		String condition =  "";
+		String[] conditions = { condition };
+		ResultSet resultSet;
+
+		try {
+			resultSet = connection.executeSelect(table, columns, conditions);
+		} catch (SQLException e) {
+			throw new SQLException("Failed to retreive list of filters  with type " + filter_type + ".");
+		}
+		
+		// Add the filters to the List
+		try {
+			int min = 0;
+			int max = 0;
+			int price = 0;
+			while (resultSet.next()) {
+				price = Integer.parseInt(resultSet.getString(filter_type));
+				if(price > max) {
+					max = price;
+				} else if(price < min) {
+					min = price;
+				}
+			}
+			filters.add("" + max);
+			filters.add("" + min);
+		} catch (SQLException e) {
+			throw new SQLException("Failed to retreive filters of the items");
+		}catch(Exception e) {
+			throw new SQLException(e.getMessage());
+		}
+		
+		return filters;
 	}
 
 }

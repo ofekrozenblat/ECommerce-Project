@@ -125,10 +125,35 @@ public class Item extends Model {
 		List<Item> recommendations = new ArrayList<Item>();
 		try {
 			ItemDao thisDao = (ItemDao) this.dao;
-			List<Item> items = thisDao.getAll(null);
+			
+			String cat_condition =  "category=" + this.getCategory();
+			String[] cat_conditions = { cat_condition };
+			List<Item> similar_category = thisDao.getAll(cat_conditions);
+			
+			String b_condition =  "brand=" + this.getBrand();
+			String[] b_conditions = { b_condition };
+			List<Item> similar_brand = thisDao.getAll(b_conditions);
+			
+			String c_condition =  "colour=" + this.getColor();
+			String[] c_conditions = { c_condition };
+			List<Item> similar_colour = thisDao.getAll(c_conditions);
+			
+			double price = this.getPrice();
+			String p_condition1 =  "price>" + (price - 50);
+			String p_condition2 =  "price<" + (price + 50);
+			String[] p_conditions = { p_condition1, p_condition2 };
+			List<Item> similar_price = thisDao.getAll(p_conditions);
+			
+			List<Item> all = thisDao.getAll(null);
 
+			recommendations.add(similar_category.get(0));
+			recommendations.add(similar_brand.get(0));
+			recommendations.add(similar_colour.get(0));
+			recommendations.add(similar_price.get(0));
+			
+			//Four additional recommendations in case there are not enough similar items
 			for (int i = 0; i < 4; i++) {
-				recommendations.add(items.get(i));
+				recommendations.add(all.get(i));
 			}
 
 		} catch (SQLException e) {

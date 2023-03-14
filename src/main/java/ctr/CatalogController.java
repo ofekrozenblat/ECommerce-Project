@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -103,6 +104,92 @@ public class CatalogController extends HttpServlet {
 	    out.println(renderedHtml);
 	    out.close();
 	}
+	
+	private void loadCategoryFilters(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	    List<String> category_list;
+	    String filter_type = "category";
+	    
+	    try {
+	    	category_list = new ItemDao().getFilters(filter_type);	
+	    	request.setAttribute("category_list", category_list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    // Get the rendered HTML code as a string
+	    String page = "/views/item/item-listing.jsp";
+	    String renderedHtml = PageRender.renderJSP(request, response, page);
 
+	    // Send the rendered HTML code back to the client-side JavaScript
+	    PrintWriter out = response.getWriter();
+	    out.println(renderedHtml);
+	    out.close();
+	}
+	
+	private void loadBrandFilters(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	    List<String> brand_list;
+	    String filter_type = "brand";
+	    
+	    try {
+	    	brand_list = new ItemDao().getFilters(filter_type);	
+	    	request.setAttribute("brand_list", brand_list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    // Get the rendered HTML code as a string
+	    String page = "/views/item/item-listing.jsp";
+	    String renderedHtml = PageRender.renderJSP(request, response, page);
 
+	    // Send the rendered HTML code back to the client-side JavaScript
+	    PrintWriter out = response.getWriter();
+	    out.println(renderedHtml);
+	    out.close();
+	}
+	
+	private void loadColorFilters(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	    List<String> color_list;
+	    String filter_type = "color";
+	    
+	    try {
+	    	color_list = new ItemDao().getFilters(filter_type);	
+	    	request.setAttribute("color_list", color_list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    // Get the rendered HTML code as a string
+	    String page = "/views/item/item-listing.jsp";
+	    String renderedHtml = PageRender.renderJSP(request, response, page);
+
+	    // Send the rendered HTML code back to the client-side JavaScript
+	    PrintWriter out = response.getWriter();
+	    out.println(renderedHtml);
+	    out.close();
+	}
+	
+	private void loadPriceFilters(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	    List<String> price_list;
+	    String filter_type = "price";
+	    
+	    try {
+	    	price_list = new ItemDao().getPriceFilters(filter_type);
+	    	request.setAttribute("price_list", price_list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    // Get the rendered HTML code as a string
+	    String page = "/views/item/item-listing.jsp";
+	    String renderedHtml = PageRender.renderJSP(request, response, page);
+
+	    // Send the rendered HTML code back to the client-side JavaScript
+	    PrintWriter out = response.getWriter();
+	    out.println(renderedHtml);
+	    out.close();
+	}
 }
