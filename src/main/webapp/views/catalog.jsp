@@ -57,7 +57,7 @@ double filterMinPrice = Double.parseDouble(priceFilters.get(1));
 			</div>
 			
 			<div class="d-flex flex-row w-100 overflow-auto">
-				<div class="w-25 ms-5 me-3 d-flex flex-column text-start overflow-auto mb-3" style="max-height: 100vh;">
+				<div class="w-25 ms-5 me-3 d-flex flex-column text-start mb-3">
 					<h3 class="filter-title">Filters</h3>
 					<hr>
 					<h4 class="filter-title">Price</h4>
@@ -66,7 +66,7 @@ double filterMinPrice = Double.parseDouble(priceFilters.get(1));
 						  <input placeholder="$Max" type="number" id="filter-max" min="${filterMinPrice}" max="${filterMaxPrice}">
 					 </div>
 					 <hr>
-					 <h4 class="filter-title">Rating</h4>
+					 <h4 class="filter-title">Minimum Rating</h4>
 					  <div id="filter-rating">
 						<jsp:include page="item/star-rating.jsp">
 							<jsp:param name="rating" value="0" />
@@ -76,8 +76,8 @@ double filterMinPrice = Double.parseDouble(priceFilters.get(1));
 					<h4 class="filter-title">Categories</h4>
 					<% for(String value: filterCategories){
 						%>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="${value}" id="category-filter-${value}">
+							<div class="form-check category-filter">
+							  <input onclick="updateFilters('categories', '<%= value %>')" class="form-check-input" type="checkbox" >
 							  <label class="form-check-label" for="flexCheckDefault">
 							    <%= value %>
 							  </label>
@@ -88,8 +88,8 @@ double filterMinPrice = Double.parseDouble(priceFilters.get(1));
 					<h4 class="filter-title">Brands</h4>
 					<% for(String value: filterBrands){
 						%>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="${value}" id="brand-filter-${value}">
+							<div class="form-check brand-filter">
+							  <input onclick="updateFilters('brands', '<%= value %>')" class="form-check-input" type="checkbox" >
 							  <label class="form-check-label" for="flexCheckDefault">
 							    <%= value %>
 							  </label>
@@ -100,14 +100,15 @@ double filterMinPrice = Double.parseDouble(priceFilters.get(1));
 					<h4 class="filter-title">Colors</h4>
 					<% for(String value: filterColors){
 						%>
-							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="${value}" id="color-filter-${value}">
+							<div class="form-check color-filter">
+							  <input onclick="updateFilters('colors', '<%= value %>')" class="form-check-input" type="checkbox" >
 							  <label class="form-check-label" for="flexCheckDefault">
 							    <%= value %>
 							  </label>
 							</div>
 						<%
 					}%>
+				<button class="btn btn-custom mt-3" onclick="clearFilters()">Clear Filters</button>
 				</div>
 				<div class="w-75 me-5 ms-auto text-center">
 					<div id="catalog_list">
