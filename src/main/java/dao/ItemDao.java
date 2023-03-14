@@ -93,12 +93,10 @@ public class ItemDao extends Dao {
 		List<String> filters = new ArrayList<String>();
 		String table = Item.table;
 		String[] columns = { filter_type };
-		String condition =  "";
-		String[] conditions = { condition };
 		ResultSet resultSet;
 
 		try {
-			resultSet = connection.executeSelect(table, columns, conditions);
+			resultSet = connection.executeSelect(table, columns, null);
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive list of filters  with type " + filter_type + ".");
 		}

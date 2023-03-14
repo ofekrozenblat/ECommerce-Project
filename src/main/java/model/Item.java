@@ -147,35 +147,55 @@ public class Item extends Model {
 			List<Item> all = thisDao.getAll(null);
 			
 			//Do not recommend current item
-			if(similarCategory.contains(this)) similarCategory.remove(this);
-			if(similarBrand.contains(this)) similarBrand.remove(this);
-			if(similarColour.contains(this)) similarColour.remove(this);
-			if(similarPrice.contains(this)) similarPrice.remove(this);
-			if(all.contains(this)) all.remove(this);
-
-			//Add one recommended items from each category as long as it is not already recommended
-			int index = 0;
-			while(recommendations.size() < 1 && index<similarCategory.size()) {
-				if(!recommendations.contains(similarCategory.get(index))) recommendations.add(similarCategory.get(index));
-			}
-			index = 0;
-			while(recommendations.size() < 2 && index<similarBrand.size()) {
-				if(!similarBrand.contains(similarBrand.get(index))) recommendations.add(similarBrand.get(index));
-			}
-			index = 0;
-			while(recommendations.size() < 3 && index<similarColour.size()) {
-				if(!similarColour.contains(similarColour.get(index))) recommendations.add(similarColour.get(index));
-			}
-			index = 0;
-			while(recommendations.size() < 4 && index<similarPrice.size()) {
-				if(!similarColour.contains(similarPrice.get(index))) recommendations.add(similarPrice.get(index));
+			similarCategory.removeIf(item -> item.getId() == this.getId());
+			similarBrand.removeIf(item -> item.getId() == this.getId());
+			similarColour.removeIf(item -> item.getId() == this.getId());
+			similarPrice.removeIf(item -> item.getId() == this.getId());
+			all.removeIf(item -> item.getId() == this.getId());
+			
+			while (recommendations.size() < 4) {
+				
+	            if (similarCategory.isEmpty() && similarBrand.isEmpty() && similarColour.isEmpty() && similarPrice.isEmpty()) {
+	                
+	            	for (Item item : all) {
+	            		if(item.getId() != this.getId()) {
+	            			recommendations.add(item);
+	            			if(recommendations.size() == 4) break;
+	            		}
+	    			}
+	            	
+	            	break;
+	            }
+	            
+	            if (!similarCategory.isEmpty()) {
+	                Item item = similarCategory.remove(0);
+	                if (!recommendations.contains(item)) {
+	                    recommendations.add(item);
+	                }
+	            }
+	            if (!similarBrand.isEmpty()) {
+	                Item item = similarBrand.remove(0);
+	                if (!recommendations.contains(item)) {
+	                    recommendations.add(item);
+	                }
+	            }
+	            if (!similarColour.isEmpty()) {
+	                Item item = similarColour.remove(0);
+	                if (!recommendations.contains(item)) {
+	                    recommendations.add(item);
+	                }
+	            }
+	            if (!similarPrice.isEmpty()) {
+	                Item item = similarPrice.remove(0);
+	                if (!recommendations.contains(item)) {
+	                    recommendations.add(item);
+	                }
+	            }
+	            
 			}
 			
-			//If needed fill up recommendations with additional items
-			index = 0;
-			while(recommendations.size() < 4 && index<all.size()) {
-				if(!recommendations.contains(all.get(index))) recommendations.add(all.get(index));
-			}
+			
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
