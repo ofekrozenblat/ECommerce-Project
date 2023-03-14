@@ -18,6 +18,10 @@
         <jsp:include page="listed-item.jsp" >
           <jsp:param name="name" value="<%= item.getName() %>" />
           <jsp:param name="price" value="<%= item.getPrice() %>" />
+          <jsp:param name="category" value="<%= item.getCategory() %>" />
+          <jsp:param name="brand" value="<%= item.getBrand() %>" />
+          <jsp:param name="color" value="<%= item.getColor() %>" />
+          <jsp:param name="rating" value="<%= item.getRating() %>" />
           <jsp:param name="description" value="<%= item.getDescription() %>" />
            <jsp:param name="item_id" value="<%= item.getId() %>" />
         </jsp:include>

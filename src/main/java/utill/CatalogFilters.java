@@ -20,7 +20,7 @@ public class CatalogFilters {
 	    return categoryList;
 	}
 	
-	public List<String> loadBrandFilters(){
+	public List<String> getBrandFilters(){
 	    List<String> brandList = new ArrayList<>();
 	    String filterType = "brand";
 	    
@@ -32,7 +32,7 @@ public class CatalogFilters {
 	    return brandList;
 	}
 	
-	public List<String> loadColorFilters(){
+	public List<String> getColorFilters(){
 	    List<String> colorList = new ArrayList<>();
 	    String filterType = "color";
 	    
@@ -44,7 +44,7 @@ public class CatalogFilters {
 	    return colorList;
 	}
 	
-	public List<String> loadPriceFilters(){
+	public List<String> getPriceFilters(){
 	    List<String> priceList = new ArrayList<>();
 	    String filterType = "price";
 	    

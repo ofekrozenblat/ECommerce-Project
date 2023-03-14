@@ -105,7 +105,9 @@ public class ItemDao extends Dao {
 		try {
 			while (resultSet.next()) {
 				String filter = resultSet.getString(filter_type);
-				filters.add(filter);
+				if(!filters.contains(filter)) {
+					filters.add(filter);
+				}
 			}
 		} catch (SQLException e) {
 			throw new SQLException("Failed to retreive filters of the items");
@@ -132,16 +134,14 @@ public class ItemDao extends Dao {
 		
 		// Add the filters to the List
 		try {
-			int min = 0;
-			int max = 0;
-			int price = 0;
+			double min = Double.MAX_VALUE;
+			double max = 0;
+			double price = 0;
 			while (resultSet.next()) {
-				price = Integer.parseInt(resultSet.getString(filter_type));
-				if(price > max) {
-					max = price;
-				} else if(price < min) {
-					min = price;
-				}
+				String result = resultSet.getString(filter_type);
+				price = Double.parseDouble(result);
+				max = Math.max(max, price);
+				min = Math.min(min, price);
 			}
 			filters.add("" + max);
 			filters.add("" + min);
