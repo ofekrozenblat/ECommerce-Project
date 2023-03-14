@@ -15,54 +15,54 @@ import dao.ItemDao;
 public class CatalogFilters {
 	
 	public List<String> getCategoryFilters() throws ServletException, IOException{
-	    List<String> category_list = null;
-	    String filter_type = "category";
+	    List<String> categoryList = null;
+	    String filterType = "category";
 	    
 	    try {
-	    	category_list = new ItemDao().getFilters(filter_type);	
+	    	categoryList = new ItemDao().getFilters(filterType);	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    return category_list;
+	    return categoryList;
 	}
 	
 	public List<String> loadBrandFilters() throws ServletException, IOException{
-	    List<String> brand_list = null;
-	    String filter_type = "brand";
+	    List<String> brandList = null;
+	    String filterType = "brand";
 	    
 	    try {
-	    	brand_list = new ItemDao().getFilters(filter_type);	
+	    	brandList = new ItemDao().getFilters(filterType);	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    return brand_list;
+	    return brandList;
 	}
 	
 	public List<String> loadColorFilters() throws ServletException, IOException{
-	    List<String> color_list = null;
-	    String filter_type = "color";
+	    List<String> colorList = null;
+	    String filterType = "color";
 	    
 	    try {
-	    	color_list = new ItemDao().getFilters(filter_type);	
+	    	colorList = new ItemDao().getFilters(filterType);	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    return color_list;
+	    return colorList;
 	}
 	
 	public List<String> loadPriceFilters() throws ServletException, IOException{
-	    List<String> price_list = null;
-	    String filter_type = "price";
+	    List<String> priceList = null;
+	    String filterType = "price";
 	    
 	    try {
-	    	price_list = new ItemDao().getPriceFilters(filter_type);
+	    	priceList = new ItemDao().getPriceFilters(filterType);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    return price_list;
+	    return priceList;
 	}
 }

@@ -126,49 +126,49 @@ public class Item extends Model {
 		try {
 			ItemDao thisDao = (ItemDao) this.dao;
 			
-			String cat_condition =  "category=" + this.getCategory();
-			String[] cat_conditions = { cat_condition };
-			List<Item> similar_category = thisDao.getAll(cat_conditions);
+			String catCondition =  "category=" + this.getCategory();
+			String[] catConditions = { catCondition };
+			List<Item> similarCategory = thisDao.getAll(catConditions);
 			
-			String b_condition =  "brand=" + this.getBrand();
-			String[] b_conditions = { b_condition };
-			List<Item> similar_brand = thisDao.getAll(b_conditions);
+			String bCondition =  "brand=" + this.getBrand();
+			String[] bConditions = { bCondition };
+			List<Item> similarBrand = thisDao.getAll(bConditions);
 			
-			String c_condition =  "colour=" + this.getColor();
-			String[] c_conditions = { c_condition };
-			List<Item> similar_colour = thisDao.getAll(c_conditions);
+			String cCondition =  "colour=" + this.getColor();
+			String[] cConditions = { cCondition };
+			List<Item> similarColour = thisDao.getAll(cConditions);
 			
 			double price = this.getPrice();
-			String p_condition1 =  "price>" + (price - 50);
-			String p_condition2 =  "price<" + (price + 50);
-			String[] p_conditions = { p_condition1, p_condition2 };
-			List<Item> similar_price = thisDao.getAll(p_conditions);
+			String pCondition1 =  "price>" + (price - 50);
+			String pCondition2 =  "price<" + (price + 50);
+			String[] pConditions = { pCondition1, pCondition2 };
+			List<Item> similarPrice = thisDao.getAll(pConditions);
 			
 			List<Item> all = thisDao.getAll(null);
 			
 			//Do not recommend current item
-			if(similar_category.contains(this)) similar_category.remove(this);
-			if(similar_brand.contains(this)) similar_brand.remove(this);
-			if(similar_colour.contains(this)) similar_colour.remove(this);
-			if(similar_price.contains(this)) similar_price.remove(this);
+			if(similarCategory.contains(this)) similarCategory.remove(this);
+			if(similarBrand.contains(this)) similarBrand.remove(this);
+			if(similarColour.contains(this)) similarColour.remove(this);
+			if(similarPrice.contains(this)) similarPrice.remove(this);
 			if(all.contains(this)) all.remove(this);
 
 			//Add one recommended items from each category as long as it is not already recommended
 			int index = 0;
-			while(recommendations.size() < 1 && index<similar_category.size()) {
-				if(!recommendations.contains(similar_category.get(index))) recommendations.add(similar_category.get(index));
+			while(recommendations.size() < 1 && index<similarCategory.size()) {
+				if(!recommendations.contains(similarCategory.get(index))) recommendations.add(similarCategory.get(index));
 			}
 			index = 0;
-			while(recommendations.size() < 2 && index<similar_brand.size()) {
-				if(!similar_brand.contains(similar_brand.get(index))) recommendations.add(similar_brand.get(index));
+			while(recommendations.size() < 2 && index<similarBrand.size()) {
+				if(!similarBrand.contains(similarBrand.get(index))) recommendations.add(similarBrand.get(index));
 			}
 			index = 0;
-			while(recommendations.size() < 3 && index<similar_colour.size()) {
-				if(!similar_colour.contains(similar_colour.get(index))) recommendations.add(similar_colour.get(index));
+			while(recommendations.size() < 3 && index<similarColour.size()) {
+				if(!similarColour.contains(similarColour.get(index))) recommendations.add(similarColour.get(index));
 			}
 			index = 0;
-			while(recommendations.size() < 4 && index<similar_price.size()) {
-				if(!similar_colour.contains(similar_price.get(index))) recommendations.add(similar_price.get(index));
+			while(recommendations.size() < 4 && index<similarPrice.size()) {
+				if(!similarColour.contains(similarPrice.get(index))) recommendations.add(similarPrice.get(index));
 			}
 			
 			//If needed fill up recommendations with additional items
