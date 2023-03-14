@@ -1,5 +1,9 @@
+
+//varaibles
+let selectedSort = 1;
 let showing = 12;
 let max = 0;
+
 let filters = new Proxy(
   { 
     rating: 0,
@@ -19,8 +23,10 @@ let filters = new Proxy(
   }
 );
 
+
 window.onload = function(){
 	setFilterRatingFunctionality();
+	setSortFunctionality();
 	loadMore();
 }
 
@@ -46,8 +52,10 @@ function loadMore() {
 	}
 	
 	showing += 12;
+	sort(selectedSort);
 }
 
+/* FILTERS */
 function filterCatalog(){
 	
 	let load_more_button = document.getElementById('load_more');
@@ -104,10 +112,10 @@ function updateFilters(type, value){
 }
 
 function setFilterRatingFunctionality() {
-	let review_rating = document.getElementById("filter-rating");
-	review_rating.setAttribute('value', 0);
+	let div_rating = document.getElementById("filter-rating");
+	div_rating.setAttribute('value', 0);
 
-	let stars_div = review_rating.children[0];
+	let stars_div = div_rating.children[0];
 	let len = stars_div.children.length
 
 	stars_div.addEventListener("mouseleave", mouseleave = function() {
@@ -139,7 +147,7 @@ function setFilterRatingFunctionality() {
 
 		child.addEventListener("click", function() {
 			stars_div.removeEventListener("mouseleave", mouseleave);
-			review_rating.setAttribute('value', i + 1);
+			div_rating.setAttribute('value', i + 1);
 			filters.rating = i + 1;
 			for (let j = 0; j < len; j++) {
 
@@ -156,4 +164,60 @@ function setFilterRatingFunctionality() {
 	}
 }
 
+/* SROTING */
+function setSortFunctionality() {
+	const catalog_sort = document.getElementById("catalog-sort");
+	sort(1)
+	catalog_sort.addEventListener("change", function() {
+		const selectedValue = this.value;
+		selectedSort = selectedValue;
+		if (selectedValue == 1) {
+			sort(1)
+		}
+		if (selectedValue == 2) {
+			sort(2)
+		}
+		if (selectedValue == 3) {
+			sort(3)
+		}
+		if (selectedValue == 4) {
+			sort(4)
+		}
+	});
+}
 
+
+function sort(value) {
+	let catalog_lists = document.querySelector(".item-listing");
+	const items = Array.from(catalog_lists.children);
+
+
+	items.sort((a, b) => {
+		// featured sorts by rating
+		if(value == 1){
+			const A = a.getAttribute("data-rating");
+			const B = b.getAttribute("data-rating");
+			return B - A;
+		}
+		// price high to low
+		if(value == 2){
+			const A = a.getAttribute("data-price");
+			const B = b.getAttribute("data-price");
+			return B - A;
+		}
+		// price low to high
+		if(value == 3){
+			const A = a.getAttribute("data-price");
+			const B = b.getAttribute("data-price");
+			return A - B;
+		}
+		// sorts by name 
+		if(value == 4){
+			const A = a.getAttribute("data-name");
+			const B = b.getAttribute("data-name");
+			return A.localeCompare(B);
+		}
+	});
+
+	items.forEach(item => catalog_lists.appendChild(item));
+}

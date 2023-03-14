@@ -48,11 +48,11 @@ double filterMinPrice = Double.parseDouble(priceFilters.get(1));
 		<div class="catalog-container mt-3 d-flex flex-column">
 		
 			<div class="sort ms-auto me-5 d-flex flex-row">
-				<span> Sorty By: </span> <select class="form-select">
-					<option class="sort-option" selected>Featured</option>
-					<option class="sort-option">Price: High to Low</option>
-					<option class="sort-option">Price: Low to High</option>
-					<option class="sort-option" value="1">Name</option>
+				<span> Sorty By: </span> <select id="catalog-sort" class="form-select">
+					<option class="sort-option" value="1" selected>Featured</option>
+					<option class="sort-option" value="2">Price: High to Low</option>
+					<option class="sort-option" value="3">Price: Low to High</option>
+					<option class="sort-option" value="4">Name</option>
 				</select>
 			</div>
 			
