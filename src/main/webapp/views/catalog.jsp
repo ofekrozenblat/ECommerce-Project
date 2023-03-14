@@ -1,4 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="utill.CatalogFilters" %>
 <!DOCTYPE html>
+<% 
+
+//set filters
+CatalogFilters filters = new CatalogFilters();
+List<String> filterCategories = filters.getCategoryFilters();
+List<String> filterBrands = filters.getBrandFilters();
+List<String> filterColors = filters.getColorFilters();
+%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -30,17 +43,68 @@
 		<div class="catalog-container mt-3 d-flex flex-column">
 		
 			<div class="sort ms-auto me-5 d-flex flex-row">
-				<span> Sorty By: </span> <select class="form-select">
-					<option class="sort-option" selected>Featured</option>
-					<option class="sort-option">Price: High to Low</option>
-					<option class="sort-option">Price: Low to High</option>
-					<option class="sort-option" value="1">Name</option>
+				<span> Sorty By: </span> <select id="catalog-sort" class="form-select">
+					<option class="sort-option" value="1" selected>Featured</option>
+					<option class="sort-option" value="2">Price: High to Low</option>
+					<option class="sort-option" value="3">Price: Low to High</option>
+					<option class="sort-option" value="4">Name</option>
 				</select>
 			</div>
 			
-			<div class="d-flex flex-row w-100">
-				<div class="w-25 ms-5 me-3 d-flex flex-column text-start">
+			<div class="d-flex flex-row w-100 overflow-auto">
+				<div class="w-25 ms-5 me-3 d-flex flex-column text-start mb-3">
 					<h3 class="filter-title">Filters</h3>
+					<hr>
+					<h4 class="filter-title">Price</h4>
+					 <div class="d-flex flex-row justify-content-between me-2">
+						  <input id="filter-minPrice" placeholder="$Min" type="number" id="filter-min">
+						  <input id="filter-maxPrice" placeholder="$Max" type="number" id="filter-max">
+						  <button onclick="filterPrice()" class="btn btn-custom-round">Go</button>
+					 </div>
+					 <hr>
+					 <h4 class="filter-title">Minimum Rating</h4>
+					  <div id="filter-rating">
+						<jsp:include page="item/star-rating.jsp">
+							<jsp:param name="rating" value="0" />
+						</jsp:include>
+					  </div>
+					 <hr>
+					<h4 class="filter-title">Categories</h4>
+					<% for(String value: filterCategories){
+						%>
+							<div class="form-check category-filter">
+							  <input onclick="updateFilters('categories', '<%= value %>')" class="form-check-input" type="checkbox" >
+							  <label class="form-check-label" for="flexCheckDefault">
+							    <%= value %>
+							  </label>
+							</div>
+						<%
+					}%>
+					<hr>
+					<h4 class="filter-title">Brands</h4>
+					<% for(String value: filterBrands){
+						%>
+							<div class="form-check brand-filter">
+							  <input onclick="updateFilters('brands', '<%= value %>')" class="form-check-input" type="checkbox" >
+							  <label class="form-check-label" for="flexCheckDefault">
+							    <%= value %>
+							  </label>
+							</div>
+						<%
+					}%>
+					<hr>
+					<h4 class="filter-title">Colors</h4>
+					<% for(String value: filterColors){
+						%>
+							<div class="form-check color-filter">
+							  <input onclick="updateFilters('colors', '<%= value %>')" class="form-check-input" type="checkbox" >
+							  <label class="form-check-label" for="flexCheckDefault">
+							    <%= value %>
+							  </label>
+							</div>
+						<%
+					}%>
+				<button class="btn btn-custom mt-3" onclick="clearFilters()">Clear Filters</button>
 				</div>
 				<div class="w-75 me-5 ms-auto text-center">
 					<div id="catalog_list">

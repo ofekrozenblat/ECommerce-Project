@@ -124,34 +124,34 @@ public class Item extends Model {
 	public List<Item> getRecommendations() {
 		List<Item> recommendations = new ArrayList<Item>();
 		try {
-			ItemDao thisDao = (ItemDao) this.dao;
+			ItemDao itemDao = new ItemDao();
 			
-			String catCondition =  "category=" + this.getCategory();
+			String catCondition =  "category=\"" + this.getCategory() + "\"";
 			String[] catConditions = { catCondition };
-			List<Item> similarCategory = thisDao.getAll(catConditions);
+			List<Item> similarCategory = itemDao.getAll(catConditions);
 			
-			String bCondition =  "brand=" + this.getBrand();
+			String bCondition =  "brand=\"" + this.getBrand() + "\"";;
 			String[] bConditions = { bCondition };
-			List<Item> similarBrand = thisDao.getAll(bConditions);
+			List<Item> similarBrand = itemDao.getAll(bConditions);
 			
-			String cCondition =  "colour=" + this.getColor();
+			String cCondition =  "color=\"" + this.getColor() + "\"";;
 			String[] cConditions = { cCondition };
-			List<Item> similarColour = thisDao.getAll(cConditions);
+			List<Item> similarColour = itemDao.getAll(cConditions);
 			
 			double price = this.getPrice();
 			String pCondition1 =  "price>" + (price - 50);
 			String pCondition2 =  "price<" + (price + 50);
 			String[] pConditions = { pCondition1, pCondition2 };
-			List<Item> similarPrice = thisDao.getAll(pConditions);
+			List<Item> similarPrice = itemDao.getAll(pConditions);
 			
-			List<Item> all = thisDao.getAll(null);
+			List<Item> all = itemDao.getAll(null);
 			
 			//Do not recommend current item
-			similarCategory.removeIf(item -> item.getId() == this.getId());
-			similarBrand.removeIf(item -> item.getId() == this.getId());
-			similarColour.removeIf(item -> item.getId() == this.getId());
-			similarPrice.removeIf(item -> item.getId() == this.getId());
-			all.removeIf(item -> item.getId() == this.getId());
+			similarCategory.remove(this);
+			similarBrand.remove(this);
+			similarColour.remove(this);
+			similarPrice.remove(this);
+			all.remove(this);
 			
 			while (recommendations.size() < 4) {
 				
@@ -171,38 +171,51 @@ public class Item extends Model {
 	                Item item = similarCategory.remove(0);
 	                if (!recommendations.contains(item)) {
 	                    recommendations.add(item);
+	                    if(recommendations.size() == 4) break;
 	                }
 	            }
 	            if (!similarBrand.isEmpty()) {
 	                Item item = similarBrand.remove(0);
 	                if (!recommendations.contains(item)) {
 	                    recommendations.add(item);
+	                    if(recommendations.size() == 4) break;
 	                }
 	            }
 	            if (!similarColour.isEmpty()) {
 	                Item item = similarColour.remove(0);
 	                if (!recommendations.contains(item)) {
 	                    recommendations.add(item);
+	                    if(recommendations.size() == 4) break;
 	                }
 	            }
 	            if (!similarPrice.isEmpty()) {
 	                Item item = similarPrice.remove(0);
 	                if (!recommendations.contains(item)) {
 	                    recommendations.add(item);
+	                    if(recommendations.size() == 4) break;
 	                }
 	            }
 	            
 			}
-			
-			
-			
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Failed to retrieve recommendations: " + e.getMessage());
+			return recommendations;
 		}
 
 		return recommendations;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (obj == this) {
+	        return true;
+	    }
+	    if (!(obj instanceof Item)) {
+	        return false;
+	    }
+	    Item otherItem = (Item) obj;
+	    return otherItem.getId() == this.getId();
 	}
 
 }

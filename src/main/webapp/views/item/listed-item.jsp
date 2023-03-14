@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<div class="listed-item card mx-1 my-1 text-center" style="width: 18rem;" onclick="redirect('Item_detail?item_id=${param.item_id}')">
+<div class="listed-item card mx-1 my-1 text-center" style="width: 18rem;" onclick="redirect('Item_detail?item_id=${param.item_id}')"
+data-rating="${param.rating}" data-brand="${param.brand}" data-color="${param.color}" data-category="${param.category}" data-price="${param.price}" data-name="${param.name}">
   <img src="res/img/glasses-default.png" class="card-img-top" alt="">
   <div class="card-body">
     <div class="card-title">

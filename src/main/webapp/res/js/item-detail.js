@@ -94,9 +94,9 @@ function sortRatingLowToHigh() {
 
 
 	reviews.sort((a, b) => {
-		const dateA = new Date(a.getAttribute("data-rating"));
-		const dateB = new Date(b.getAttribute("data-rating"));
-		return dateA - dateB;
+		const A = a.getAttribute("data-rating");
+		const B = b.getAttribute("data-rating");
+		return A - B;
 	});
 
 	reviews.forEach(review => review_list.appendChild(review));
@@ -108,9 +108,9 @@ function sortRatingHighToLow() {
 
 
 	reviews.sort((a, b) => {
-		const dateA = new Date(a.getAttribute("data-rating"));
-		const dateB = new Date(b.getAttribute("data-rating"));
-		return dateB - dateA;
+		const A = a.getAttribute("data-rating");
+		const B = b.getAttribute("data-rating");
+		return B - A;
 	});
 
 	reviews.forEach(review => review_list.appendChild(review));
