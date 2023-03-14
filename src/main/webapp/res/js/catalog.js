@@ -33,10 +33,10 @@ function loadMore() {
 
 	const list = Array.from(catalog_lists.children);
 		list.forEach(function(item, index){
-			if(index >= showing){
-				item.classList.add('hide');
-			}else{
+			if(index < showing){
 				item.classList.remove('hide');
+			}else{
+				item.classList.add('hide');
 			}
 		});
 	
@@ -46,11 +46,13 @@ function loadMore() {
 	}
 	
 	showing += 12;
-	
 }
 
 function filterCatalog(){
-	console.log(filters);
+	
+	let load_more_button = document.getElementById('load_more');
+	load_more_button.style.display = "none";
+	
 	let catalog_lists = document.querySelector(".item-listing");
 	
 	const list = Array.from(catalog_lists.children);
@@ -74,10 +76,10 @@ function filterCatalog(){
 			hide = true;
 		}
 		
-		if(hide === true){
-			item.classList.add('hide');
-		}else{
+		if(hide === false){
 			item.classList.remove('hide');
+		}else{
+			item.classList.add('hide');
 		}
 	});
 }
