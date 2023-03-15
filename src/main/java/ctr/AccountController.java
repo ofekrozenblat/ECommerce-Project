@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.UserDao;
 import dao.OrderDao;
 import model.User;
+import security.Sanitizer;
 import model.Order;
 import utill.SessionManager;
 import java.util.Collections;
@@ -96,9 +98,10 @@ public class AccountController extends HttpServlet {
 		int user_id = sm.getUserId();
 
 		if (request.getParameter("updateAccountInfo") != null) {
-			String firstname = request.getParameter("firstname");
-			String lastname = request.getParameter("lastname");
-			String email = request.getParameter("email");
+			Map<String, String> sanatizedParams = Sanitizer.cleanRequestParameters(request);
+			String firstname = sanatizedParams.get("firstname");
+			String lastname = sanatizedParams.get("lastname");
+			String email = sanatizedParams.get("email");
 
 			try {
 				// User information

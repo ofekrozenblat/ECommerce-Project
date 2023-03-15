@@ -3,6 +3,7 @@ package ctr;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ import model.Item;
 import model.ItemVisit;
 import model.Review;
 import utill.SessionManager;
-
+import security.Sanitizer;
 /**
  * Servlet implementation class ItemController
  */
@@ -88,9 +89,12 @@ public class ItemDetailController extends HttpServlet {
 		
 		// New review created
 		if(request.getParameter("new-review") != null) {
-			String title = (String) request.getParameter("title");
-			String description = (String) request.getParameter("description");
-			int rating = Integer.parseInt((String) request.getParameter("rating"));
+			
+
+			Map<String, String> sanatizedParams = Sanitizer.cleanRequestParameters(request);
+			String title = (sanatizedParams.get("title"));
+			String description = (sanatizedParams.get("description"));
+			int rating = Integer.parseInt(sanatizedParams.get("rating"));
 			
 			try {
 				SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
