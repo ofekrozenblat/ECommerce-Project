@@ -192,18 +192,7 @@ function setSortFunctionality() {
 	catalog_sort.addEventListener("change", function() {
 		const selectedValue = this.value;
 		selectedSort = selectedValue;
-		if (selectedValue == 1) {
-			sort(1)
-		}
-		if (selectedValue == 2) {
-			sort(2)
-		}
-		if (selectedValue == 3) {
-			sort(3)
-		}
-		if (selectedValue == 4) {
-			sort(4)
-		}
+		sort(selectedValue)
 	});
 }
 

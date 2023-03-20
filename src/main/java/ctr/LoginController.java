@@ -2,6 +2,7 @@ package ctr;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import dao.UserDao;
 import factories.ModelFactory;
 import model.User;
 import security.Authenticator;
+import security.Sanitizer;
 import utill.SessionManager;
 
 /**
@@ -47,9 +49,10 @@ public class LoginController extends HttpServlet {
 		SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
 		
 		//login user
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-
+		Map<String, String> sanatizedParams = Sanitizer.cleanRequestParameters(request);
+		String email = sanatizedParams.get("email");
+		String password = sanatizedParams.get("password");
+		
 		User user;
 		try {
 			
