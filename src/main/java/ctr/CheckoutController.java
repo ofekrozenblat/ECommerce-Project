@@ -19,6 +19,7 @@ import model.BillingAddress;
 import model.Item;
 import model.Order;
 import model.Payment;
+import security.Sanitizer;
 
 /**
  * Servlet implementation class CheckoutController
@@ -82,25 +83,26 @@ public class CheckoutController extends HttpServlet {
 	
 	private void processOrder(HttpServletRequest request) throws SQLException {
 		SessionManager sm = (SessionManager) request.getSession().getAttribute(SessionManager.SESSION_MANAGER);
+		Map<String, String> sanatizedParams = Sanitizer.cleanRequestParameters(request);
 		int userId = sm.getUserId();
 		
 		//Get billing address information
-		String address = request.getParameter("address");
-		String address2 = request.getParameter("address2");
-		String country = request.getParameter("country");
-		String postal_code = request.getParameter("postal_code").strip().replaceAll(" ", "");
-		String province = request.getParameter("province");
+		String address = sanatizedParams.get("address");
+		String address2 = sanatizedParams.get("address2");
+		String country = sanatizedParams.get("country");
+		String postal_code = sanatizedParams.get("postal_code").strip().replaceAll(" ", "");
+		String province = sanatizedParams.get("province");
 		
 		if(address2 != null && !address2.isEmpty()) {
 			address += ", Suite " + address2;
 		}
 		
 		//Get payment information
-		String cc_name = request.getParameter("cc-name");
-		String cc_number = request.getParameter("cc-number");
-		String cc_cvv = request.getParameter("cc-cvv");
-		String cc_expiration = request.getParameter("cc-expiration");
-		String paymentMethod = request.getParameter("paymentMethod");
+		String cc_name = sanatizedParams.get("cc-name");
+		String cc_number = sanatizedParams.get("cc-number");
+		String cc_cvv = sanatizedParams.get("cc-cvv");
+		String cc_expiration = sanatizedParams.get("cc-expiration");
+		String paymentMethod = sanatizedParams.get("paymentMethod");
 		
 		Order order = ModelFactory.createOrder();
 		
