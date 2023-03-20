@@ -22,7 +22,7 @@ class VisitsReportTest extends AdminReportTest{
 		AdminReports report = new AdminReports();
 		ItemVisitDao visitDao = new ItemVisitDao();
 		try {
-			List<String> visitsReport = report.getOrders();
+			List<String> visitsReport = report.getItemVisits();
 			List<ItemVisit> visit = visitDao.getAll(null);
 			
 			assertTrue(visitsReport.size() == visit.size());
