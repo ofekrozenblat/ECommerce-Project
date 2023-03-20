@@ -14,7 +14,7 @@ import factories.ModelFactory;
 import hthurow.tomcatjndi.TomcatJNDI;
 import model.ItemVisit;
 
-class VisitEventTestTest {
+class VisitEventTest {
 	private static TomcatJNDI tomcatJNDI;
 	
 	@BeforeAll
