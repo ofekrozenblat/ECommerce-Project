@@ -23,11 +23,12 @@
 			
 						
 				<div class="chat-message cursor-pointer float-start bg-light mb-3 text-wrap px-3 py-2 mt-2 mb-1"
-					onclick="addChatBotServerMessage('You can view your order history under your account page')">
+					onclick="addChatBotMessage('You can view your order history under your account page.')">
 					<span class="text-danger" >Order History</span> 
 				</div>
 				
-				<div class="chat-message cursor-pointer float-start bg-light mb-3 text-wrap px-3 py-2 mb-1">
+				<div class="chat-message cursor-pointer float-start bg-light mb-3 text-wrap px-3 py-2 mb-1"
+				onclick="addChatBotMessage('You can return your glasses within 30 days of delivery for a refund or exchange.')">
 					<span class="text-danger"> Return Policy</span> 
 				</div>
 		</div>

@@ -23,7 +23,7 @@ function closeChatBot(){
 	chatBot.style.width = "0px";
 }
 
-function addChatBotServerMessage(message){
+function addChatBotMessage(message){
 	let chatBox = document.getElementById("chatbot-box");
 	let chatBoxBody = document.getElementById("chatbot-body");
 	
