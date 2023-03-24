@@ -147,7 +147,7 @@ public class OrderDao extends Dao {
 		
 		// Save the items related to this order in the order_items table
 		Order order = (Order) model;
-		String orderItemTable = order.orderItemsTable;
+		String orderItemTable = Order.orderItemsTable;
 		String primaryKeyColumn = "id"; // primarykey column name of order_items table
 		
 		for(Item item : order.getItems()) {
