@@ -29,7 +29,7 @@ class AuthenticatorTest {
     }
 
 	@Test
-	void testRegister() {
+	void testRegisterAndValidate() {
 		try {
 			String password = "hello123";
 			String falsePassword = "heLlo123";
