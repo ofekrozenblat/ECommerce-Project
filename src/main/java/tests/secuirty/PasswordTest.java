@@ -29,7 +29,7 @@ class PasswordTest {
 			e.printStackTrace();
 		}
 		
-		fail("Not yet implemented");
+		fail("Only used for generation testing, no assertions needed");
 	}
 
 }
