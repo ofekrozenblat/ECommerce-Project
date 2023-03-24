@@ -44,3 +44,19 @@ In case the project may not run due to dependency issues, try the following:
 2. Select: Run As -> Maven install
 3. Wait for the Maven installation to finish
 4. Re-attempt Step 5
+
+### How to make a user an Admin
+If you would like to test our Admin features, follow these steps:
+1. Run the project
+2. Click `Sign Up`
+3. Enter the fields as neccessary and click `Sign Up`
+4. You should now be logged in as a registered user
+5. Go to Eclipse and stop the running project
+6. Go to your MySQL workbench application, open the `reagail` schema
+7. Go to the table called `users`. You should see a row with the credentials of your newly created account
+8. There is a column name `is_admin`, this controls whether the account is an admin (is_admin=1) or not an admin (is_admin=0). Create the SQL statement
+`UPDATE reagail.users SET is_admin=1 WHERE id=[YOUR ACCOUNT ID HERE]`, where [YOUR ACCOUNT IS HERE] is the `id` column of your account row in the users table.
+9. Execute the SQL statement, your account should now have `is_admin` set to 1
+10. Re-run the project
+11. Login with the same account, once looged in your account should now be an Admin
+12. In the browser, on the top right next to the cart you should see your account name. Clicking it will provide a drop down menu which should show an `Admin` option. Clicking it will navigate you to our admin page where you can test our admin features.
