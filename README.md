@@ -19,18 +19,18 @@ These instructions are copied from the labs in case you do not have Tomcat 9 ins
 5. Click Finish, the project should now be imported
 
 ### Step 3: Setting up the database
-You will need to have set up the MySQL Workbench application as that is what we used to set up our local database. If you do not have it installed
-you can install it from here: https://dev.mysql.com/downloads/workbench/. When installing **make sure to install the MYSQL server**.
+You will need to have set up the MySQL Workbench application as that is what we used to set up our local database. If you do not have it installed,
+you can install it from here: https://dev.mysql.com/downloads/workbench/. When installing **make sure to install the MySQL server**.
 Once you have a local instance of MySQL running, you can setup the database as such:
 1. Create a schema called `reagail`
-2. Open the SQL file located in the project directory of: `EECS4413-project/src/main/sql/regail_schema.sql`
+2. Open the SQL file located in the project directory at `EECS4413-project/src/main/sql/regail_schema.sql`
 3. Run this SQL file in MySQL workbench
-4. In the same folder you will find another file called `dummy_combined_data.sql`, run this file in MySQL workbench as well. This will populate the database with dummy data.
+4. In the same folder you will find another file called `dummy_combined_data.sql`, run this file in MySQL workbench as well. This will populate the database with dummy data
 
 ### Step 4: Setting up the database connection
 1. In Eclipse, go to `context.xml` file located at `EECS4413-project\src\main\webapp\META-INF\context.xml`
 2. Open the context.xml file
-3. Under the Resource named `jdbc/reagailDB`, you should see the attributes `username` and `password`, these correspond to your local MySQL workbench account that you created. Edit these fields and input your MySQL workbench credentials for your local instance. Once done, save the file.
+3. Under the Resource named `jdbc/reagailDB`, you should see the attributes `username` and `password`, these correspond to your local MySQL workbench account that you created. Edit these fields and input your MySQL workbench credentials for your local instance. Once done, save the file
 
 ### Step 5: Running the application
 1. Right click the project in Eclipse explorer
