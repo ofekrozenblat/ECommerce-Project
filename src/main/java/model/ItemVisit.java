@@ -8,7 +8,7 @@ import dao.ItemVisitDao;
 import dao.ItemDao;
 
 public class ItemVisit extends Model{
-	public static final String table = "item_vists";
+	public static final String table = "item_visits";
 	public static final String primaryKeyColumnName = "id";
 	
 	public ItemVisit(Dao dao) {

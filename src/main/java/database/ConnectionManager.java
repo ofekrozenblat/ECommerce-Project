@@ -20,10 +20,21 @@ import javax.sql.DataSource;
  *
  */
 public class ConnectionManager {
-	private DataSource ds; // TODO: look into pooledconnections
+	
+	private static ConnectionManager instance;
+	
+	private DataSource ds;
 	private QueryBuilder queryBuilder;
 	
-	public ConnectionManager() {
+	public static ConnectionManager getInstance() {
+		if (instance == null) {
+			instance = new ConnectionManager();
+		}
+		
+		return instance;
+	}
+	
+	private ConnectionManager() {
 		try {
 			// TODO: Change lookup path if working on development or production environments
 			ds = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/reagailDB");
