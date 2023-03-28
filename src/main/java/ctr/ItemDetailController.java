@@ -108,7 +108,6 @@ public class ItemDetailController extends HttpServlet {
 				
 				review.save();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				response.setHeader("error", "something went wrong");
 				return;
 			}
