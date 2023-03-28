@@ -9,15 +9,7 @@ import org.junit.jupiter.api.Test;
 import security.Password;
 
 class PasswordTest {
-
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
+	
 	@Test
 	void testGeneratingPassword() {
 		String rawPassword = "kilodgy12kd";
@@ -29,7 +21,7 @@ class PasswordTest {
 			e.printStackTrace();
 		}
 		
-		fail("Not yet implemented");
+		fail("Only used for generation testing, no assertions needed");
 	}
 
 }

@@ -170,4 +170,18 @@ public abstract class Model {
         
         return json.toString();
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (obj == this) {
+	        return true;
+	    }
+	    
+	    if (!(obj instanceof Model)) {
+	        return false;
+	    }
+	    
+	    Model otherItem = (Model) obj;
+	    return otherItem.getId() == this.getId();
+	}
 }
