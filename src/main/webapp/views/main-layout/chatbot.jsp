@@ -28,8 +28,13 @@
 				</div>
 				
 				<div class="chat-message cursor-pointer float-start bg-light mb-3 text-wrap px-3 py-2 mb-1"
-				onclick="addChatBotMessage('You can return your glasses within 30 days of delivery for a refund or exchange.')">
-					<span class="text-danger"> Return Policy</span> 
+					onclick="addChatBotMessage('The shipping costs for your order will be 5% of the total purchase amount.')">
+					<span class="text-danger" >Shipping Costs</span> 
+				</div>
+				
+				<div class="chat-message cursor-pointer float-start bg-light mb-3 text-wrap px-3 py-2 mb-1"
+				onclick="addChatBotMessage('To add an item to your cart, simply click on the Add to Cart button located next to the product you wish to purchase.')">
+					<span class="text-danger"> Adding item to cart</span> 
 				</div>
 		</div>
 	</div>

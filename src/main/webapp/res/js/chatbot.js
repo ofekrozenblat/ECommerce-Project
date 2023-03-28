@@ -1,23 +1,19 @@
 const HEIGHT = "400px";
 const WIDTH = "350px";
 
-var chatBot = null;
-var chatBotShowButton = null;
-var chatBox = null;
-
-window.onload = function(){
-	chatBot = document.getElementById("chatbot");
-	chatBox = document.getElementById("chatbot-box");
-	chatBotShowButton = document.getElementById("chatbot-show-button");
-}
-
 function showChatBot(){
+	let chatBot = document.getElementById("chatbot");
+	let chatBotShowButton = document.getElementById("chatbot-show-button");
+	
 	chatBotShowButton.style.display = "none"
 	chatBot.style.height = HEIGHT;
 	chatBot.style.width = WIDTH;
 }
 
 function closeChatBot(){
+	let chatBot = document.getElementById("chatbot");
+	let chatBotShowButton = document.getElementById("chatbot-show-button");
+	
 	chatBotShowButton.style.display = "flex"
 	chatBot.style.height = "0px";
 	chatBot.style.width = "0px";
