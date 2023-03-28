@@ -25,7 +25,7 @@ Once you have a local instance of MySQL running, you can setup the database as s
 1. Create a schema called `reagail`
 2. Open the SQL file located in the project directory at `EECS4413-project/src/main/sql/regail_schema.sql`
 3. Run this SQL file in MySQL workbench
-4. In the same folder you will find another file called `dummy_combined_data.sql`, run this file in MySQL workbench as well. This will populate the database with dummy data
+4. In the same folder you will find another file called `dummy_glasses_data.sql`, run this file in MySQL workbench as well. This will populate the database with dummy data
 
 ### Step 4: Setting up the database connection
 1. In Eclipse, go to `context.xml` file located at `EECS4413-project\src\main\webapp\META-INF\context.xml`
@@ -55,7 +55,7 @@ If you would like to test our Admin features, follow these steps:
 6. Go to your MySQL workbench application, open the `reagail` schema
 7. Go to the table called `users`. You should see a row with the credentials of your newly created account
 8. There is a column name `is_admin`, this controls whether the account is an admin (is_admin=1) or not an admin (is_admin=0). Create the SQL statement
-`UPDATE reagail.users SET is_admin=1 WHERE id=[YOUR ACCOUNT ID HERE]`, where [YOUR ACCOUNT IS HERE] is the `id` column of your account row in the users table.
+`UPDATE reagail.users SET is_admin=1 WHERE id=[YOUR ACCOUNT ID HERE]`, where [YOUR ACCOUNT ID HERE] is the `id` column of your account row in the users table.
 9. Execute the SQL statement, your account should now have `is_admin` set to 1
 10. Re-run the project
 11. Login with the same account, once looged in your account should now be an Admin
