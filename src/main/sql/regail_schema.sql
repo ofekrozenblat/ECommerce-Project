@@ -79,7 +79,7 @@ FOREIGN KEY (user_id) REFERENCES users (id)
 
 CREATE TABLE item_visits(
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-item_id INT NOT NULL,
 visits INT NOT NULL,
+item_id INT NOT NULL UNIQUE,
 FOREIGN KEY (item_id) REFERENCES items (id)
 );
