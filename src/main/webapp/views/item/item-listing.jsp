@@ -23,7 +23,8 @@
           <jsp:param name="color" value="<%= item.getColor() %>" />
           <jsp:param name="rating" value="<%= item.getRating() %>" />
           <jsp:param name="description" value="<%= item.getDescription() %>" />
-           <jsp:param name="item_id" value="<%= item.getId() %>" />
+          <jsp:param name="item_id" value="<%= item.getId() %>" />
+           <jsp:param name="img" value="<%= item.getImg() %>" />
         </jsp:include>
 <%
     }

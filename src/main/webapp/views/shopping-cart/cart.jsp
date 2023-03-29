@@ -40,8 +40,9 @@ ArrayList<Integer> cart_item_quantities = (ArrayList<Integer>) request.getAttrib
 		          <jsp:param name="name" value="<%= item.getName() %>" />
 		          <jsp:param name="price" value="<%= item.getPrice() %>" />
 		          <jsp:param name="description" value="<%= item.getDescription() %>" />
-		           <jsp:param name="item_id" value="<%= item.getId() %>" />
-		            <jsp:param name="quantity" value="<%= cart_item_quantities.get(i) %>" />
+		          <jsp:param name="item_id" value="<%= item.getId() %>" />
+		           <jsp:param name="img" value="<%= item.getImg() %>" />
+		          <jsp:param name="quantity" value="<%= cart_item_quantities.get(i) %>" />
 		        </jsp:include>
 			<%}
 		%>

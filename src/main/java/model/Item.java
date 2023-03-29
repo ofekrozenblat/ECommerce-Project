@@ -119,6 +119,10 @@ public class Item extends Model {
 		rating = (rating / Math.max(1, reviews.size()));
 		return rating;
 	}
+	
+	public String getImg() {
+		return "res/img/glasses/" + this.getId() + ".jpg";
+	}
 
 	// Dummy method for now, need to implement proper logic for recommendations
 	public List<Item> getRecommendations() {

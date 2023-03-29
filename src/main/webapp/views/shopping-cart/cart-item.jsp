@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <div class="cart-item">
 	<div class="cart-item-img cursor-pointer" onclick="redirect('Item_detail?item_id=${param.item_id}')">
-		<img src="res/img/glasses-default.png" class="img-fluid" alt="">
+		<img src="${param.img}" class="item-cart-img" alt="">
 	</div>
 	<div class="cart-item-body">
 		<div class="w-100 d-flex flex-row justify-content-between mb-1">
