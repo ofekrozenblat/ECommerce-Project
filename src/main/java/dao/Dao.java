@@ -24,7 +24,7 @@ public abstract class Dao {
 	/**
 	 * Initializes the dao object.
 	 */
-	protected Dao() {
+	public Dao() {
 		connection = ConnectionManager.getInstance();
 	}
 	
