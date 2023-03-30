@@ -1,5 +1,8 @@
 # EECS4413-project
-Project for eCommerce.
+EECS 4413 Team E project
+- Ofek Rozenblat - 216141079
+- Shachak Rozenblat - 216141459
+- Syyed Fatmi - 217180050
 
 ## Instructions for TA: How to run the application locally
 
