@@ -74,6 +74,7 @@ public class ItemDetailController extends HttpServlet {
 		request.setAttribute("reviews", itemReviews);
 		request.setAttribute("userReviewed", userReviewed);
 		request.setAttribute("quantity", item.getQuantity());
+		request.setAttribute("img", item.getImg());
 		
 		String target = "/views/item/item-detail.jsp";
 		request.getRequestDispatcher(target).forward(request, response);

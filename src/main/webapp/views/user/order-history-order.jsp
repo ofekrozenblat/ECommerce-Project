@@ -34,6 +34,7 @@
 	 	<jsp:param name="price" value="<%= item.getPrice() %>" />
 	 	<jsp:param name="quantity" value="<%= order.getItemQuantity(item) %>" />
 	 	<jsp:param name="item_id" value="<%= item.getId() %>" />
+	 	<jsp:param name="img" value="<%= item.getImg() %>" />
 	</jsp:include>
 	<hr class="mb-3">
 	<%}

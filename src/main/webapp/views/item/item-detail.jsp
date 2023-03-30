@@ -24,7 +24,7 @@
 			
 				<!--DETAIL SECTION -->
 				<div class="info-container">
-					<img src="res/img/glasses-default.png" class="img-fluid" alt="">
+					<img src="${img}" class="item-detail-img" alt="">
 					<div class="col">
 						<div class="card-block px-3 py-3 d-flex flex-column">
 							<h4 class="card-title mb-1 fw-bold">${name}</h4>
