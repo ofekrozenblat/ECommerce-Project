@@ -56,6 +56,15 @@
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.3</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>src/main/ebextensions</directory>
+							<targetPath>.ebextensions</targetPath>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
