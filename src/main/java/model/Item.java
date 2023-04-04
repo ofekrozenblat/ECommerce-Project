@@ -3,6 +3,8 @@ package model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import dao.ItemDao;
 
 public class Item extends Model {
@@ -123,8 +125,22 @@ public class Item extends Model {
 	public String getImg() {
 		return "res/img/glasses/" + this.getId() + ".jpg";
 	}
-
-	// Dummy method for now, need to implement proper logic for recommendations
+	
+	/**
+	 * Converts Model to JSON object.
+	 * Used for search functionality therefore only required data is included. 
+	 */
+	public String toJson() {
+		StringBuilder json = new StringBuilder();
+        json.append("{");
+        json.append("\"name\":").append("\"").append(this.getName()).append("\",");
+        json.append("\"price\":").append(this.getPrice()).append(",");
+        json.append("\"id\":").append(this.getId());
+        json.append("}");
+        
+        return json.toString();
+	}
+	
 	public List<Item> getRecommendations() {
 		List<Item> recommendations = new ArrayList<Item>();
 		try {
