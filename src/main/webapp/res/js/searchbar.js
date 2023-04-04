@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	searchbar.addEventListener('blur', function() {
+		// Need to set timeout here because a user might try to click a link 
+		// in the search results, so set a delay before removing the results.
 		setTimeout(function() {
 			let searchResults = document.getElementById("searchResults");
 			searchResults.innerHTML = "";
