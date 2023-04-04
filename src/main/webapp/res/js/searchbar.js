@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	searchbar.addEventListener('blur', function() {
+		setTimeout(function() {
+			let searchResults = document.getElementById("searchResults");
+			searchResults.innerHTML = "";
+		}, 100);
 		removeBlur();
 	});
 
