@@ -10,14 +10,17 @@ public class Searcher {
 	
 	public static List<String> searchItems(String input){
 		List<String> result = new ArrayList<String>();
+		List<String> conditions = new ArrayList<String>();
 		
-		String condition = "name LIKE \"%" + input + "%\" or description LIKE \"%" + input + 
-				"%\" or category LIKE \"%" + input + "%\" or brand LIKE \"%" + input + "%\" or color LIKE \"%" + input + "%\"";
+		for(String s: input.split("\\s+")) {
+			conditions.add("(name LIKE \"%" + s + "%\" or description LIKE \"%" + s + 
+					"%\" or category LIKE \"%" + s + "%\" or brand LIKE \"%" + s + "%\" or color LIKE \"%" + s + "%\")");
+		}
 		
-		String [] conditions = {condition};
+		String [] conditionsArray = new String[conditions.size()];
 		
 		try {
-			List<Item> items = new ItemDao().getAll(conditions);
+			List<Item> items = new ItemDao().getAll(conditions.toArray(conditionsArray));
 			for(Item item: items) {
 				result.add(item.toJson());
 				if(result.size() >= 10) {
