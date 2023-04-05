@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	searchbar.addEventListener('focus', function() {
+		let input = searchbar.value;
+		if (input != "") {
+			search(input);
+		}
+
 		blurPage();
 	});
 
@@ -21,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		setTimeout(function() {
 			let searchResults = document.getElementById("searchResults");
 			searchResults.innerHTML = "";
-		}, 100);
+		}, 200);
 		removeBlur();
 	});
 
@@ -47,7 +52,7 @@ function search(input) {
 		if (response.getResponseHeader("success")) {
 			let results = JSON.parse(response.responseText);
 
-			if (results.length <= 0){
+			if (results.length <= 0) {
 				searchResults.innerHTML = "No results";
 				return;
 			}
@@ -60,13 +65,13 @@ function search(input) {
 				onclick="redirect('Item_detail?item_id=${result.id}')"
 				>
 				
-				${result.name}</li>`;
+				${result.name} $${result.price}</li>`;
 			});
 
 			htmlContent += "</ul>";
 			searchResults.style.textAlign = "left";
 			searchResults.innerHTML = htmlContent;
-		}else{
+		} else {
 			searchResults.innerHTML = "No results";
 		}
 	});
