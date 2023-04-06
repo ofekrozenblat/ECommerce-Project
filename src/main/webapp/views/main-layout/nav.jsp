@@ -29,9 +29,10 @@ int cart_size = sm.getCart().getSize();
 					href="Catalog">Shop</a></li>
 			</ul>
 			<div class="input-group search-bar">
-				<input type="text" class="form-control" type="search"
+				<input id="searchbar" type="text" class="form-control" type="search"
 					placeholder="Search" aria-label="Search"> <span
 					class="input-group-text material-symbols-outlined text-light">search</span>
+					<div id="searchResults"></div>
 			</div>
 			<ul class="navbar-nav ms-auto d-flex">
 				<li class="nav-item"><a
