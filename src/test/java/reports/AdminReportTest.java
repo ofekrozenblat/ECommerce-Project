@@ -1,4 +1,4 @@
-package tests.reports;
+package reports;
 
 import java.io.File;
 

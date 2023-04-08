@@ -1,4 +1,4 @@
-package tests.filters;
+package filters;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
