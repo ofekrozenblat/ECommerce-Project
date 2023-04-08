@@ -1,4 +1,4 @@
-package tests.secuirty;
+package secuirty;
 
 import static org.junit.jupiter.api.Assertions.*;
 

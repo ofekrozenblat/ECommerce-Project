@@ -1,4 +1,4 @@
-package tests.dao;
+package dao;
 
 import java.io.File;
 import java.util.Random;

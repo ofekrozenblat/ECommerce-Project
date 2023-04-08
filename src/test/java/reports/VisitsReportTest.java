@@ -1,4 +1,4 @@
-package tests.reports;
+package reports;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
